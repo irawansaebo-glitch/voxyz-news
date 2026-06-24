@@ -21,232 +21,6 @@
     </script>
     <style type="text/tailwindcss">
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-        .breaking-scroll { animation: scroll 22s linear infinite; }
-        @keyframes scroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
-        .isi-berita p { margin: 1.2rem 0; line-height: 1.8; font-size: 1.05rem; color: #333; text-align: justify; }
-        .halaman { display: none; }
-        .halaman.aktif { display: block; }
-    </style>
-</head>
-<body class="bg-voxy-gray text-voxy-text">
-
-<!-- Header -->
-<header class="bg-white shadow sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-        <a href="#" onclick="tampilkanHalaman('beranda')" class="text-2xl md:text-3xl font-black text-voxy-red">VOXYZ<span class="text-voxy-dark">NEWS</span></a>
-        <nav class="hidden md:flex gap-6 text-sm font-medium">
-            <a href="#" onclick="tampilkanHalaman('beranda')" class="hover:text-voxy-red">TERKINI</a>
-            <a href="#" class="hover:text-voxy-red">NASIONAL</a>
-            <a href="#" class="hover:text-voxy-red">EKONOMI</a>
-            <a href="#" class="hover:text-voxy-red">TEKNOLOGI</a>
-            <a href="#" class="hover:text-voxy-red">OLAHRAGA</a>
-        </nav>
-        <div class="flex gap-4 items-center">
-            <i class="fa fa-search text-lg cursor-pointer hover:text-voxy-red"></i>
-            <button id="menuBtn" class="md:hidden"><i class="fa fa-bars text-xl"></i></button>
-        </div>
-    </div>
-
-    <!-- Breaking News Berjalan -->
-    <div class="bg-voxy-red text-white py-2 overflow-hidden">
-        <div class="container mx-auto flex items-center gap-3">
-            <span class="bg-white text-voxy-red font-bold px-2 py-0.5 text-xs">LIVE</span>
-            <div id="breakingNews" class="whitespace-nowrap breaking-scroll text-sm">Memuat berita terbaru...</div>
-        </div>
-    </div>
-</header>
-
-<!-- Konten Beranda -->
-<div id="halaman-beranda" class="halaman aktif">
-    <main class="container mx-auto px-4 py-6">
-        <div class="grid lg:grid-cols-3 gap-6">
-            <div class="lg:col-span-2 space-y-8">
-                <!-- Berita Utama -->
-                <section>
-                    <h2 class="text-xl font-bold border-l-4 border-voxy-red pl-3 mb-4">BERITA UTAMA</h2>
-                    <div id="beritaUtama"></div>
-                </section>
-                <!-- Berita Terbaru -->
-                <section>
-                    <h2 class="text-xl font-bold border-l-4 border-voxy-red pl-3 mb-4">BERITA TERBARU</h2>
-                    <div id="daftarBerita" class="space-y-5"></div>
-                </section>
-            </div>
-            <!-- Sidebar -->
-            <aside class="space-y-6">
-                <div class="bg-white p-4 rounded shadow">
-                    <h3 class="font-bold text-lg border-b pb-2 mb-3">PALING POPULER</h3>
-                    <ol id="beritaPopuler" class="space-y-3 list-decimal pl-5"></ol>
-                </div>
-            </aside>
-        </div>
-    </main>
-</div>
-
-<!-- Konten Detail Berita -->
-<div id="halaman-detail" class="halaman">
-    <main class="container mx-auto px-4 py-8 max-w-3xl">
-        <div id="kontenBerita" class="bg-white p-5 md:p-8 rounded shadow-md"></div>
-    </main>
-</div>
-
-<!-- Footer -->
-<footer class="bg-voxy-dark text-gray-300 py-6 mt-8">
-    <div class="container mx-auto px-4 text-center">
-        <p>© 2026 VOXYZ NEWS | Telinga, Mata, dan Hati Rakyat</p>
-    </div>
-</footer>
-
-<!-- DATA BERITA & FUNGSI -->
-<script>
-// Data Berita - Cukup ubah/tambah di sini saja
-const dataBerita = [
-    {
-        "id": 1,
-        "kategori": "Nasional",
-        "judul": "Pemerintah Luncurkan Program Kesejahteraan Merata ke Seluruh Daerah",
-        "ringkasan": "Program ini mencakup pembangunan infrastruktur, kesehatan, dan pendidikan hingga ke pelosok negeri.",
-        "gambar": "https://picsum.photos/id/1065/1200/700",
-        "penulis": "Tim Redaksi VOXYZ",
-        "waktu": "25 Juni 2026 • 08.30 WIB",
-        "isi": "<p>JAKARTA – Pemerintah secara resmi meluncurkan program peningkatan kesejahteraan masyarakat yang menyasar seluruh wilayah Indonesia, termasuk daerah terpencil dan perbatasan.</p><p>Menteri Koordinator Pembangunan Manusia menyatakan program ini disusun selama dua tahun dengan melibatkan pemangku kepentingan dari berbagai daerah. “Tujuannya agar hasil pembangunan benar-benar dirasakan oleh semua lapisan masyarakat tanpa terkecuali,” ujarnya dalam konferensi pers, Kamis (25/6).</p><p>Anggaran sebesar Rp45 triliun dialokasikan untuk tahun pertama. Dana ini akan digunakan untuk membangun jalan desa, puskesmas, serta memberikan beasiswa pendidikan bagi siswa dari keluarga kurang mampu.</p><p>Pemantauan dan evaluasi akan dilakukan setiap tiga bulan sekali agar pelaksanaannya berjalan sesuai rencana dan tepat sasaran.</p><p>Warga di daerah pedesaan menyambut baik program ini. Mereka berharap akses fasilitas umum makin mudah dan kehidupan ekonomi masyarakat makin membaik ke depannya.</p>"
-    },
-    {
-        "id": 2,
-        "kategori": "Ekonomi",
-        "judul": "Harga Komoditas Diprediksi Stabil Hingga Akhir Tahun",
-        "ringkasan": "Badan Pangan Nasional memastikan stok cukup dan harga terjaga di tingkat konsumen.",
-        "gambar": "https://picsum.photos/id/1080/800/500",
-        "penulis": "Redaksi Ekonomi",
-        "waktu": "25 Juni 2026 • 09.15 WIB",
-        "isi": "<p>JAKARTA – Harga kebutuhan pokok dan komoditas utama diprediksi tetap stabil hingga akhir tahun 2026.</p><p>Kepala Badan Pangan Nasional menyatakan ketersediaan stok di seluruh gudang logistik masih aman dan cukup untuk memenuhi kebutuhan konsumsi nasional selama enam bulan ke depan.</p><p>“Kami terus memantau pergerakan harga di pasar induk dan pasar tradisional. Jika ada kenaikan yang tidak wajar, akan segera dilakukan intervensi pasar untuk menstabilkan harga,” tegasnya.</p><p>Beberapa faktor yang mendukung stabilitas harga antara lain panen raya yang berjalan lancar dan distribusi barang yang makin merata ke seluruh wilayah Indonesia.</p>"
-    },
-    {
-        "id": 3,
-        "kategori": "Teknologi",
-        "judul": "AI Generatif Bantu Pekerjaan Lebih Cepat dan Efisien",
-        "ringkasan": "Teknologi kecerdasan buatan makin banyak diterapkan di berbagai sektor pekerjaan.",
-        "gambar": "https://picsum.photos/id/1071/800/500",
-        "penulis": "Redaksi Teknologi",
-        "waktu": "25 Juni 2026 • 10.00 WIB",
-        "isi": "<p>JAKARTA – Perkembangan kecerdasan buatan atau AI generatif makin pesat dan mulai diterapkan secara luas di berbagai sektor pekerjaan di Indonesia.</p><p>Menurut penelitian terbaru dari lembaga riset teknologi, penggunaan AI mampu memangkas waktu pengerjaan tugas administratif hingga 40% serta meningkatkan akurasi pengolahan data.</p><p>“Teknologi ini bukan menggantikan peran manusia, melainkan membantu pekerjaan menjadi lebih ringan, cepat, dan hasilnya lebih baik,” ujar pengamat teknologi.</p><p>Berbagai perusahaan besar maupun instansi pemerintah sudah mulai mengadopsi teknologi ini untuk meningkatkan produktivitas kerja sehari-hari.</p>"
-    },
-    {
-        "id": 4,
-        "kategori": "Olahraga",
-        "judul": "Timnas Indonesia Siap Hadapi Laga Penting Pekan Ini",
-        "ringkasan": "Skuad Garuda telah menjalani pemusatan latihan dan memantapkan strategi.",
-        "gambar": "https://picsum.photos/id/1079/800/500",
-        "penulis": "Redaksi Olahraga",
-        "waktu": "25 Juni 2026 • 11.20 WIB",
-        "isi": "<p>JAKARTA – Tim Nasional Indonesia dikabarkan dalam kondisi siap menghadapi laga penting yang akan digelar akhir pekan ini.</p><p>Pelatih kepala menyatakan seluruh pemain telah menjalani pemusatan latihan selama dua minggu dan memantapkan strategi menghadapi lawan.</p><p>“Semua pemain dalam kondisi fisik dan mental yang baik. Kami berusaha memberikan penampilan terbaik dan meraih hasil maksimal untuk mengharumkan nama bangsa,” ujarnya dalam sesi latihan terbuka.</p><p>Para pendukung diharapkan memberikan dukungan penuh agar tim dapat bermain dengan percaya diri dan penuh semangat.</p>"
-    }
-];
-
-// Fungsi ganti halaman
-function tampilkanHalaman(nama) {
-    document.querySelectorAll('.halaman').forEach(el => el.classList.remove('aktif'));
-    document.getElementById('halaman-' + nama).classList.add('aktif');
-    if(nama === 'beranda') tampilkanSemuaBerita();
-}
-
-// Fungsi buka detail berita
-function bukaBerita(id) {
-    const artikel = dataBerita.find(b => b.id === id);
-    if(!artikel) return;
-    document.getElementById('kontenBerita').innerHTML = `
-        <span class="text-sm text-voxy-red font-semibold">${artikel.kategori}</span>
-        <h1 class="text-3xl md:text-4xl font-bold my-4 text-gray-900">${artikel.judul}</h1>
-        <div class="flex items-center text-sm text-gray-500 gap-3 mb-6">
-            <span>Oleh: ${artikel.penulis}</span>
-            <span>•</span>
-            <span>${artikel.waktu}</span>
-        </div>
-        <img src="${artikel.gambar}" alt="${artikel.judul}" class="w-full h-auto rounded mb-6">
-        <div class="isi-berita">${artikel.isi}</div>
-        <div class="border-t mt-8 pt-4 flex gap-4 text-xl">
-            <span class="text-gray-600">Bagikan:</span>
-            <a href="#" class="text-blue-600 hover:text-blue-800"><i class="fa fa-facebook"></i></a>
-            <a href="#" class="text-sky-500 hover:text-sky-700"><i class="fa fa-twitter"></i></a>
-            <a href="#" class="text-green-600 hover:text-green-800"><i class="fa fa-whatsapp"></i></a>
-        </div>
-        <div class="mt-8 pt-4 border-t">
-            <h4 class="font-bold text-lg mb-3">Baca Juga</h4>
-            <div class="space-y-2">
-                ${dataBerita.slice(0,3).map(b => `<a href="#" onclick="bukaBerita(${b.id})" class="block text-voxy-red hover:underline">${b.judul}</a>`).join('')}
-            </div>
-        </div>
-        <div class="mt-6">
-            <button onclick="tampilkanHalaman('beranda')" class="text-voxy-red font-medium">← Kembali ke Beranda</button>
-        </div>
-    `;
-    tampilkanHalaman('detail');
-}
-
-// Tampilkan semua berita di halaman utama
-function tampilkanSemuaBerita() {
-    const utama = dataBerita[0];
-    document.getElementById('beritaUtama').innerHTML = `
-        <a href="#" onclick="bukaBerita(${utama.id})" class="block bg-white rounded shadow overflow-hidden hover:shadow-lg transition-shadow">
-            <img src="${utama.gambar}" alt="${utama.judul}" class="w-full h-72 object-cover">
-            <div class="p-5">
-                <span class="text-xs text-voxy-red font-semibold">${utama.kategori} • ${utama.waktu}</span>
-                <h3 class="text-2xl font-bold my-3 hover:text-voxy-red">${utama.judul}</h3>
-                <p class="text-gray-600 line-clamp-2">${utama.ringkasan}</p>
-            </div>
-        </a>
-    `;
-
-    document.getElementById('daftarBerita').innerHTML = dataBerita.slice(1,7).map(b => `
-        <a href="#" onclick="bukaBerita(${b.id})" class="flex gap-3 bg-white rounded shadow-sm p-3 hover:shadow-md transition-shadow">
-            <img src="${b.gambar}" class="w-28 h-20 object-cover rounded" alt="${b.judul}">
-            <div class="flex-1">
-                <span class="text-xs text-voxy-red">${b.kategori}</span>
-                <h4 class="font-semibold line-clamp-2 hover:text-voxy-red">${b.judul}</h4>
-                <p class="text-xs text-gray-500 mt-1">${b.waktu}</p>
-            </div>
-        </a>
-    `).join('');
-
-    document.getElementById('breakingNews').textContent = dataBerita.map(b => `${b.judul} • `).join('');
-
-    document.getElementById('beritaPopuler').innerHTML = dataBerita.slice(0,5).map(b => `
-        <li><a href="#" onclick="bukaBerita(${b.id})" class="text-sm hover:text-voxy-red">${b.judul}</a></li>
-    `).join('');
-}
-
-// Jalankan otomatis saat halaman dibuka
-tampilkanSemuaBerita();
-setInterval(tampilkanSemuaBerita, 30000); // Update otomatis setiap 30 detik = REAL-TIME
-</script>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="id-ID">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOXYZ NEWS - Breaking News Terkini & Terpercaya</title>
-    <meta name="description" content="Berita cepat, akurat, dan berimbang. Sumber berita terkini Indonesia dan dunia.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        voxy: { red: '#E62129', dark: '#111827', gray: '#F8FAFC', text: '#1E293B' }
-                    },
-                    fontFamily: { sans: ['Inter', 'sans-serif'] }
-                }
-            }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .breaking-scroll { animation: scroll 22s linear infinite; }
         @keyframes scroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
         .isi-berita p { margin: 1.2rem 0; line-height: 1.8; font-size: 1.05rem; color: #333; text-align: justify; }
@@ -297,45 +71,41 @@ setInterval(tampilkanSemuaBerita, 30000); // Update otomatis setiap 30 detik = R
 
 <footer class="bg-voxy-dark text-gray-300 py-6 mt-8 text-center text-sm">© 2026 VOXYZ NEWS | Real-Time Breaking News</footer>
 
-<!-- DATA BERITA + SISTEM REAL-TIME -->
+<!-- SISTEM AMBIL BERITA OTOMATIS DARI SUMBER LUAR -->
 <script>
-// 👇 CUKUP EDIT BAGIAN INI SAJA UNTUK TAMBAH/UBAH BERITA
-let dataBerita = [
-    {
-        "id": 1,
-        "kategori": "Nasional",
-        "judul": "Pemerintah Luncurkan Program Kesejahteraan Merata ke Seluruh Daerah",
-        "ringkasan": "Program ini mencakup pembangunan infrastruktur, kesehatan, dan pendidikan hingga ke pelosok negeri.",
-        "gambar": "https://picsum.photos/id/1065/1200/700",
-        "penulis": "Tim Redaksi VOXYZ",
-        "waktu": "25 Juni 2026 • 08.30 WIB",
-        "isi": "<p>JAKARTA – Pemerintah secara resmi meluncurkan program peningkatan kesejahteraan masyarakat yang menyasar seluruh wilayah Indonesia, termasuk daerah terpencil dan perbatasan.</p><p>Menteri Koordinator Pembangunan Manusia menyatakan program ini disusun selama dua tahun dengan melibatkan pemangku kepentingan dari berbagai daerah. “Tujuannya agar hasil pembangunan benar-benar dirasakan oleh semua lapisan masyarakat tanpa terkecuali,” ujarnya dalam konferensi pers.</p><p>Anggaran sebesar Rp45 triliun dialokasikan untuk tahun pertama guna membangun jalan desa, puskesmas, serta memberikan beasiswa pendidikan bagi siswa kurang mampu.</p>"
-    },
-    {
-        "id": 2,
-        "kategori": "Ekonomi",
-        "judul": "Harga Komoditas Diprediksi Stabil Hingga Akhir Tahun",
-        "ringkasan": "Badan Pangan Nasional memastikan stok cukup dan harga terjaga di tingkat konsumen.",
-        "gambar": "https://picsum.photos/id/1080/800/500",
-        "penulis": "Redaksi Ekonomi",
-        "waktu": "25 Juni 2026 • 09.15 WIB",
-        "isi": "<p>JAKARTA – Harga kebutuhan pokok dan komoditas utama diprediksi tetap stabil hingga akhir tahun 2026.</p><p>Kepala Badan Pangan Nasional menyatakan ketersediaan stok di seluruh gudang logistik masih aman dan cukup untuk memenuhi kebutuhan nasional selama enam bulan ke depan.</p><p>“Kami terus memantau pergerakan harga di pasar induk dan pasar tradisional. Jika ada kenaikan tidak wajar, akan segera dilakukan intervensi pasar,” tegasnya.</p>"
-    },
-    {
-        "id": 3,
-        "kategori": "Teknologi",
-        "judul": "AI Generatif Bantu Pekerjaan Lebih Cepat dan Efisien",
-        "ringkasan": "Teknologi kecerdasan buatan makin banyak diterapkan di berbagai sektor pekerjaan.",
-        "gambar": "https://picsum.photos/id/1071/800/500",
-        "penulis": "Redaksi Teknologi",
-        "waktu": "25 Juni 2026 • 10.00 WIB",
-        "isi": "<p>JAKARTA – Perkembangan kecerdasan buatan atau AI generatif makin pesat dan mulai diterapkan secara luas di berbagai sektor pekerjaan di Indonesia.</p><p>Menurut penelitian terbaru, penggunaan AI mampu memangkas waktu pengerjaan tugas administratif hingga 40% serta meningkatkan akurasi pengolahan data.</p><p>“Teknologi ini bukan menggantikan manusia, melainkan membantu pekerjaan menjadi lebih ringan dan hasilnya lebih baik,” ujar pengamat teknologi.</p>"
-    }
-];
+let semuaBerita = [];
 
-// 🕒 FUNGSI REAL-TIME: Update otomatis setiap 30 detik
+// 🚀 Ambil berita TERBARU secara otomatis dari sumber publik
+async function ambilBeritaOtomatis() {
+    try {
+        // Mengambil berita dari API publik (gratis & sah untuk keperluan percobaan)
+        const res = await fetch('https://api-berita-indonesia.vercel.app/antara/terbaru/');
+        const data = await res.json();
+        
+        // Olah data agar sesuai format situs kita
+        semuaBerita = data.data.posts.map((item, index) => ({
+            id: index + 1,
+            kategori: "Nasional",
+            judul: item.title,
+            ringkasan: item.description.substring(0, 120) + "...",
+            gambar: item.thumbnail || "https://picsum.photos/id/1065/1200/700",
+            penulis: "Redaksi VOXYZ",
+            waktu: new Date(item.pubDate).toLocaleString('id-ID'),
+            isi: `<p>${item.description}</p><p>Baca selengkapnya di sumber asli: <a href="${item.link}" target="_blank" class="text-voxy-red">Klik di sini</a></p>`
+        }));
+
+        tampilkanSemuaBerita();
+    } catch (error) {
+        console.log("Gagal memuat berita, menunggu percobaan ulang...", error);
+        document.getElementById('breakingNews').textContent = "Memuat berita terbaru...";
+    }
+}
+
+// Tampilkan ke halaman
 function tampilkanSemuaBerita() {
-    const utama = dataBerita[0];
+    if (semuaBerita.length === 0) return;
+
+    const utama = semuaBerita[0];
     document.getElementById('beritaUtama').innerHTML = `
         <a href="#" onclick="bukaBerita(${utama.id})" class="block bg-white rounded shadow overflow-hidden hover:shadow-lg transition-shadow">
             <img src="${utama.gambar}" alt="${utama.judul}" class="w-full h-72 object-cover">
@@ -346,7 +116,7 @@ function tampilkanSemuaBerita() {
             </div>
         </a>`;
 
-    document.getElementById('daftarBerita').innerHTML = dataBerita.slice(1,7).map(b => `
+    document.getElementById('daftarBerita').innerHTML = semuaBerita.slice(1,7).map(b => `
         <a href="#" onclick="bukaBerita(${b.id})" class="flex gap-3 bg-white rounded shadow-sm p-3 hover:shadow-md transition-shadow">
             <img src="${b.gambar}" class="w-28 h-20 object-cover rounded" alt="${b.judul}">
             <div class="flex-1">
@@ -356,13 +126,13 @@ function tampilkanSemuaBerita() {
             </div>
         </a>`).join('');
 
-    document.getElementById('breakingNews').textContent = dataBerita.map(b => `${b.judul} • `).join('');
-    document.getElementById('beritaPopuler').innerHTML = dataBerita.slice(0,5).map(b => `<li><a href="#" onclick="bukaBerita(${b.id})" class="text-sm hover:text-voxy-red">${b.judul}</a></li>`).join('');
+    document.getElementById('breakingNews').textContent = semuaBerita.map(b => `${b.judul} • `).join('');
+    document.getElementById('beritaPopuler').innerHTML = semuaBerita.slice(0,5).map(b => `<li><a href="#" onclick="bukaBerita(${b.id})" class="text-sm hover:text-voxy-red">${b.judul}</a></li>`).join('');
     document.getElementById('waktuUpdate').textContent = new Date().toLocaleTimeString('id-ID');
 }
 
 function bukaBerita(id) {
-    const artikel = dataBerita.find(b => b.id === id);
+    const artikel = semuaBerita.find(b => b.id === id);
     if(!artikel) return;
     document.getElementById('kontenBerita').innerHTML = `
         <span class="text-sm text-voxy-red font-semibold">${artikel.kategori}</span>
@@ -391,10 +161,9 @@ function tampilkanHalaman(nama) {
     document.getElementById('halaman-'+nama).classList.add('aktif');
 }
 
-// 🚀 JALANKAN SISTEM REAL-TIME
-tampilkanSemuaBerita();
-setInterval(tampilkanSemuaBerita, 30000); // Update otomatis setiap 30 detik
+// ⚡ JALANKAN SISTEM OTOMATIS
+ambilBeritaOtomatis();
+setInterval(ambilBeritaOtomatis, 60000); // Cek & update berita baru setiap 1 menit
 </script>
 </body>
-    </html>
-                                                                                                                   
+</html>
