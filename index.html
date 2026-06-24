@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voxyz News - Berita Terkini & Terpercaya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .hero-bg {
+      background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://picsum.photos/id/1015/1920/1080');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+  <!-- Navbar -->
+  <nav class="bg-red-600 text-white sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-3">
+          <i class="fas fa-newspaper text-3xl"></i>
+          <h1 class="text-2xl font-bold">VOXYZ NEWS</h1>
+        </div>
+        
+        <div class="hidden md:flex items-center gap-6">
+          <a href="#" class="hover:bg-red-700 px-4 py-2 rounded">Beranda</a>
+          <a href="#" class="hover:bg-red-700 px-4 py-2 rounded">Politik</a>
+          <a href="#" class="hover:bg-red-700 px-4 py-2 rounded">Ekonomi</a>
+          <a href="#" class="hover:bg-red-700 px-4 py-2 rounded">Teknologi</a>
+          <a href="#" class="hover:bg-red-700 px-4 py-2 rounded">Olahraga</a>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="relative">
+            <input type="text" id="search" 
+                   class="bg-white text-black px-4 py-2 rounded-full w-64 focus:outline-none"
+                   placeholder="Cari berita...">
+          </div>
+          <button class="bg-white text-red-600 px-5 py-2 rounded-full font-medium hover:bg-gray-100">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-bg h-screen flex items-center text-white">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <span class="bg-red-600 px-4 py-1 rounded text-sm font-medium">BERITA UTAMA</span>
+      <h2 class="text-5xl md:text-6xl font-bold mt-6 leading-tight">
+        Pemerintah Umumkan Kebijakan Baru Ekonomi Digital 2026
+      </h2>
+      <p class="mt-6 text-xl">Langkah strategis untuk mempercepat transformasi digital nasional</p>
+      <div class="mt-8 flex items-center justify-center gap-4 text-sm">
+        <span>By Admin • 25 Juni 2026</span>
+        <span class="bg-white/20 px-3 py-1 rounded">5 menit baca</span>
+      </div>
+      <button onclick="alert('Fitur baca selengkapnya akan ditambahkan')" 
+              class="mt-10 bg-red-600 hover:bg-red-700 px-8 py-4 rounded-full text-lg font-semibold transition">
+        Baca Selengkapnya →
+      </button>
+    </div>
+  </section>
+
+  <!-- Latest News -->
+  <section class="max-w-7xl mx-auto px-6 py-12">
+    <h2 class="text-3xl font-bold mb-8">Berita Terbaru</h2>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- News Card 1 -->
+      <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-xl transition">
+        <img src="https://picsum.photos/id/237/600/400" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <span class="text-red-600 text-sm font-medium">TEKNOLOGI</span>
+          <h3 class="font-semibold text-xl mt-3 leading-tight">AI Mulai Menggantikan Pekerjaan di Sektor Manufaktur</h3>
+          <p class="text-gray-600 mt-3 text-sm line-clamp-3">Perusahaan-perusahaan besar mulai mengadopsi kecerdasan buatan...</p>
+          <div class="mt-6 text-xs text-gray-500">25 Juni 2026 • 8 menit lalu</div>
+        </div>
+      </div>
+
+      <!-- News Card 2 -->
+      <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-xl transition">
+        <img src="https://picsum.photos/id/201/600/400" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <span class="text-red-600 text-sm font-medium">OLAHRAGA</span>
+          <h3 class="font-semibold text-xl mt-3 leading-tight">Timnas Indonesia Lolos ke Babak 16 Besar Piala AFF</h3>
+          <p class="text-gray-600 mt-3 text-sm line-clamp-3">Kemenangan dramatis atas Thailand membuat Garuda lolos...</p>
+          <div class="mt-6 text-xs text-gray-500">25 Juni 2026 • 2 jam lalu</div>
+        </div>
+      </div>
+
+      <!-- News Card 3 -->
+      <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-xl transition">
+        <img src="https://picsum.photos/id/180/600/400" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <span class="text-red-600 text-sm font-medium">EKONOMI</span>
+          <h3 class="font-semibold text-xl mt-3 leading-tight">Harga Emas Dunia Tembus Rekor Tertinggi Sepanjang Masa</h3>
+          <p class="text-gray-600 mt-3 text-sm line-clamp-3">Investor berbondong-bondong membeli emas di tengah ketidakpastian global...</p>
+          <div class="mt-6 text-xs text-gray-500">24 Juni 2026 • 1 hari lalu</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="flex items-center gap-3 text-white mb-6 md:mb-0">
+          <i class="fas fa-newspaper text-4xl"></i>
+          <h2 class="text-2xl font-bold">VOXYZ NEWS</h2>
+        </div>
+        <p class="text-sm">© 2026 Voxyz News. Semua hak dilindungi.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+          </html>
