@@ -3,13 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOXYZ NEWS - Terkini</title>
+    <title>VOXYZ NEWS - Terkini & Otomatis</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <script>
-        tailwind.config = { theme: { extend: { colors: { voxy: { red: '#E62129', dark: '#111827' } } } } }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        voxy: { red: '#E62129', dark: '#111827', gray: '#F8FAFC' }
+                    }
+                }
+            }
+        }
     </script>
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .breaking-scroll { animation: scroll 25s linear infinite; white-space: nowrap; }
         @keyframes scroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
@@ -18,12 +27,13 @@
         .isi-berita p { margin: 1rem 0; line-height: 1.7; text-align: justify; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-voxy-gray text-gray-800">
 
-<header class="bg-white shadow sticky top-0 z-50">
+<!-- Header -->
+<header class="bg-white shadow-md sticky top-0 z-50">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
         <a href="#" onclick="tampilkan('beranda')" class="text-2xl font-black text-voxy-red">VOXYZ<span class="text-gray-900">NEWS</span></a>
-        <div class="flex gap-3">
+        <div class="flex gap-4">
             <i class="fa fa-search text-lg"></i>
             <i class="fa fa-bars text-lg"></i>
         </div>
@@ -36,115 +46,134 @@
     </div>
 </header>
 
+<!-- Halaman Beranda -->
 <div id="halaman-beranda" class="halaman aktif">
     <main class="container mx-auto px-4 py-5">
         <h2 class="text-xl font-bold border-l-4 border-voxy-red pl-3 mb-4">BERITA UTAMA</h2>
-        <div id="beritaUtama" class="mb-6 bg-white rounded shadow overflow-hidden"></div>
+        <div id="beritaUtama" class="mb-8 bg-white rounded shadow-sm overflow-hidden p-4 text-center text-gray-500">
+            <i class="fa fa-newspaper-o text-4xl mb-2"></i>
+            <p>Menghubungkan ke sumber berita...</p>
+        </div>
 
         <h2 class="text-xl font-bold border-l-4 border-voxy-red pl-3 mb-4">BERITA TERBARU</h2>
         <div id="daftarBerita" class="space-y-4"></div>
     </main>
 </div>
 
+<!-- Halaman Detail -->
 <div id="halaman-detail" class="halaman">
     <main class="container mx-auto px-4 py-5 max-w-2xl">
-        <div id="kontenDetail" class="bg-white p-4 rounded shadow"></div>
-        <button onclick="tampilkan('beranda')" class="mt-4 text-voxy-red font-medium">← Kembali</button>
+        <div id="kontenDetail" class="bg-white p-5 rounded shadow-md"></div>
+        <button onclick="tampilkan('beranda')" class="mt-5 text-voxy-red font-medium">← Kembali ke Beranda</button>
     </main>
 </div>
 
 <footer class="bg-gray-900 text-gray-300 text-center py-4 mt-6 text-sm">
-    © 2026 VOXYZ NEWS | Update otomatis setiap 1 menit
+    © 2026 VOXYZ NEWS • Update otomatis setiap 1 menit
 </footer>
 
 <script>
-// ✅ Data berita OTOMATIS + cadangan aman
 let daftarBerita = [];
 
+// ✅ Sumber berita yang paling kompatibel untuk HP
 async function ambilBerita() {
     try {
-        // Gunakan layanan perantara yang aman untuk HP
-        const res = await fetch("https://api.allorigins.win/raw?url=https://api-berita-indonesia.vercel.app/antara/terbaru/");
-        const data = await res.json();
+        // Gunakan layanan perantara yang aman dan tidak diblokir
+        const sumber = "https://api.allorigins.win/raw?url=https://api-berita-indonesia.vercel.app/antara/terbaru/";
+        const res = await fetch(sumber, { cache: "no-cache" });
         
-        daftarBerita = data.data.posts.map((item, i) => ({
-            id: i+1,
+        if (!res.ok) throw new Error("Tidak dapat terhubung");
+        
+        const data = await res.json();
+        daftarBerita = data.data.posts.map((item, indeks) => ({
+            id: indeks + 1,
             kategori: "Nasional",
             judul: item.title,
-            ringkasan: item.description?.substring(0, 130) + "..." || "Baca selengkapnya",
+            ringkasan: item.description ? item.description.substring(0, 120) + "..." : "Baca selengkapnya",
             gambar: item.thumbnail || "https://picsum.photos/id/1065/800/500",
-            waktu: new Date(item.pubDate).toLocaleString("id-ID"),
-            isi: `<p>${item.description || ''}</p><p><a href="${item.link}" target="_blank" class="text-voxy-red">Baca sumber asli</a></p>`
+            waktu: new Date(item.pubDate).toLocaleString("id-ID", {
+                day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit"
+            }),
+            isi: `<p>${item.description || "Tidak ada keterangan tambahan."}</p>
+                  <p class="mt-4 text-sm text-gray-500">Sumber: <a href="${item.link}" target="_blank" class="text-voxy-red font-medium">ANTARA News</a></p>`
         }));
 
-        tampilkan();
-        document.getElementById("infoStatus").textContent = "Berita terbaru siap | " + daftarBerita.map(x => x.judul).join(" • ");
+        tampilkanKonten();
+        document.getElementById("infoStatus").textContent = "✅ Berita terbaru siap • " + daftarBerita.map(b => b.judul).join(" • ");
     } catch (err) {
-        console.log("Gagal ambil:", err);
-        // Jika gagal, tampilkan data cadangan agar tidak kosong
+        console.log("Kesalahan:", err);
+        // Jika gagal, tampilkan panduan agar tidak kosong
         if (daftarBerita.length === 0) {
             daftarBerita = [
                 {
                     id: 1,
-                    kategori: "Info",
-                    judul: "Sistem siap digunakan",
-                    ringkasan: "Berita akan otomatis muncul dan diperbarui setiap 1 menit setelah terhubung ke internet.",
+                    kategori: "Panduan",
+                    judul: "Cara agar berita muncul",
+                    ringkasan: "Karena keterbatasan sistem HP, buka file ini melalui browser Chrome lalu izinkan akses jaringan.",
                     gambar: "https://picsum.photos/id/1065/800/500",
                     waktu: new Date().toLocaleString("id-ID"),
-                    isi: "<p>Pastikan koneksi internet aktif, lalu tarik layar ke bawah untuk memuat ulang.</p>"
+                    isi: `<p>1. Pastikan HP terhubung ke internet</p>
+                          <p>2. Buka file ini menggunakan aplikasi <b>Chrome</b></p>
+                          <p>3. Tarik layar ke bawah untuk memuat ulang</p>
+                          <p>4. Tunggu 5-10 detik, berita akan otomatis muncul</p>`
                 }
             ];
-            tampilkan();
-            document.getElementById("infoStatus").textContent = "Sedang mencoba memuat ulang...";
+            tampilkanKonten();
+            document.getElementById("infoStatus").textContent = "⏳ Sedang mencoba memuat ulang...";
         }
     }
 }
 
-function tampilkan() {
-    if (!daftarBerita.length) return;
+function tampilkanKonten() {
+    if (daftarBerita.length === 0) return;
 
+    // Tampilkan berita utama
     const utama = daftarBerita[0];
     document.getElementById("beritaUtama").innerHTML = `
-        <a href="#" onclick="buka(${utama.id})">
-            <img src="${utama.gambar}" class="w-full h-52 object-cover" alt="${utama.judul}">
+        <a href="#" onclick="bukaBerita(${utama.id})" class="block">
+            <img src="${utama.gambar}" alt="${utama.judul}" class="w-full h-52 object-cover">
             <div class="p-4">
                 <span class="text-sm text-voxy-red font-semibold">${utama.kategori} • ${utama.waktu}</span>
                 <h3 class="text-xl font-bold my-2">${utama.judul}</h3>
                 <p class="text-gray-600 line-clamp-2">${utama.ringkasan}</p>
             </div>
-        </a>`;
+        </a>
+    `;
 
+    // Tampilkan daftar berita
     document.getElementById("daftarBerita").innerHTML = daftarBerita.slice(1, 8).map(b => `
-        <a href="#" onclick="buka(${b.id})" class="flex gap-3 bg-white p-3 rounded shadow-sm">
-            <img src="${b.gambar}" class="w-24 h-20 object-cover rounded" alt="${b.judul}">
-            <div>
+        <a href="#" onclick="bukaBerita(${b.id})" class="flex gap-3 bg-white p-3 rounded shadow-sm mb-3">
+            <img src="${b.gambar}" alt="${b.judul}" class="w-24 h-20 object-cover rounded">
+            <div class="flex-1">
                 <span class="text-xs text-voxy-red">${b.kategori}</span>
                 <h4 class="font-semibold line-clamp-2 my-1">${b.judul}</h4>
                 <p class="text-xs text-gray-500">${b.waktu}</p>
             </div>
-        </a>`).join("");
+        </a>
+    `).join("");
 }
 
-function buka(id) {
+function bukaBerita(id) {
     const artikel = daftarBerita.find(x => x.id === id);
     document.getElementById("kontenDetail").innerHTML = `
         <span class="text-sm text-voxy-red font-semibold">${artikel.kategori}</span>
         <h1 class="text-2xl font-bold my-3">${artikel.judul}</h1>
         <p class="text-sm text-gray-500 mb-4">${artikel.waktu}</p>
-        <img src="${artikel.gambar}" class="w-full h-auto rounded mb-4" alt="${artikel.judul}">
-        <div class="isi-berita">${artikel.isi}</div>`;
+        <img src="${artikel.gambar}" alt="${artikel.judul}" class="w-full h-auto rounded mb-4">
+        <div class="isi-berita">${artikel.isi}</div>
+    `;
     tampilkan("detail");
 }
 
-function tampilkan(nama) {
+function tampilkan(namaHalaman) {
     document.querySelectorAll(".halaman").forEach(el => el.classList.remove("aktif"));
-    document.getElementById("halaman-" + nama).classList.add("aktif");
+    document.getElementById("halaman-" + namaHalaman).classList.add("aktif");
     window.scrollTo(0, 0);
 }
 
-// Jalankan otomatis
+// Jalankan sistem otomatis
 ambilBerita();
-setInterval(ambilBerita, 60000);
+setInterval(ambilBerita, 60000); // Cek berita baru setiap 1 menit
 </script>
 
 </body>
