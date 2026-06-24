@@ -3,441 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NokosKu - Layanan Nokos & Nomor Virtual</title>
+    <title>VOXYZ NEWS - Berita Terkini & Terpercaya</title>
+    <meta name="description" content="VOXYZ NEWS menyajikan berita terbaru, terkini, dan terpercaya seputar peristiwa dalam negeri dan internasional.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#2563eb',
-                        dark: '#0f172a',
-                        success: '#10b981',
-                        warning: '#f59e0b',
-                        danger: '#ef4444'
+                        voxy: {
+                            red: '#E62129',
+                            dark: '#121217',
+                            gray: '#F5F5F7',
+                            text: '#222222'
+                        },
+                        fontFamily: {
+                            sans: ['Inter', 'system-ui', 'sans-serif'],
+                        },
                     }
                 }
             }
         }
     </script>
-    <style>.hidden-section{display:none;}</style>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .line-clamp-2 {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .breaking-scroll {
+                animation: scroll 25s linear infinite;
+            }
+            @keyframes scroll {
+                from { transform: translateX(100%); }
+                to { transform: translateX(-100%); }
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-voxy-gray text-voxy-text">
 
-<!-- Navigasi -->
+<!-- Header & Navigasi -->
 <header class="bg-white shadow-md sticky top-0 z-50">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-        <a href="#" onclick="tampil('beranda')" class="text-xl font-bold text-primary">NokosKu</a>
-        <nav class="hidden md:flex gap-6 items-center" id="nav">
-            <a href="#" onclick="tampil('beranda')">Layanan</a>
-            <a href="#" onclick="tampil('masuk')">Masuk</a>
-            <a href="#" onclick="tampil('daftar')" class="bg-primary text-white px-3 py-1 rounded">Daftar</a>
-            <a href="#" onclick="tampil('admin-login')" class="text-red-600 border border-red-500 px-2 py-1 rounded">Admin</a>
+        <a href="#" class="text-2xl md:text-3xl font-extrabold text-voxy-red">VOXYZ<span class="text-voxy-dark">NEWS</span></a>
+
+        <!-- Menu Desktop -->
+        <nav class="hidden md:flex space-x-6 text-sm font-medium">
+            <a href="#" class="hover:text-voxy-red transition">BERANDA</a>
+            <a href="#" class="hover:text-voxy-red transition">NASIONAL</a>
+            <a href="#" class="hover:text-voxy-red transition">INTERNASIONAL</a>
+            <a href="#" class="hover:text-voxy-red transition">EKONOMI</a>
+            <a href="#" class="hover:text-voxy-red transition">TEKNOLOGI</a>
+            <a href="#" class="hover:text-voxy-red transition">OLAHRAGA</a>
         </nav>
+
+        <!-- Pencarian & Menu HP -->
+        <div class="flex items-center gap-4">
+            <button class="text-xl hover:text-voxy-red"><i class="fa fa-search"></i></button>
+            <button class="md:hidden text-xl hover:text-voxy-red" id="menuToggle"><i class="fa fa-bars"></i></button>
+        </div>
+    </div>
+
+    <!-- Berita Berjalan -->
+    <div class="bg-voxy-red text-white py-2 overflow-hidden">
+        <div class="container mx-auto flex items-center">
+            <span class="font-bold px-3 bg-white text-voxy-red text-sm">BREAKING</span>
+            <div class="whitespace-nowrap breaking-scroll pl-4">
+                Gempa bumi magnitudo 5,2 guncang Malang | Harga BBM naik per hari ini | Timnas Indonesia lolos ke babak berikutnya
+            </div>
+        </div>
     </div>
 </header>
 
-<!-- Notifikasi -->
-<div id="notif" class="fixed top-20 right-4 z-50 p-3 rounded shadow hidden max-w-xs"></div>
-
-<div class="container mx-auto px-4 py-6">
-
-<!-- BERANDA -->
-<section id="hal-beranda" class="halaman">
-    <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-12 rounded-xl text-center mb-8">
-        <h1 class="text-3xl font-bold">Layanan Nokos & Nomor Virtual</h1>
-        <p class="mt-2">Jasa OTP, Nomor Virtual & OTP WA</p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-5">
-        <div class="bg-white p-5 rounded shadow">
-            <h3 class="font-semibold text-lg">Nokos WA</h3>
-            <p class="text-gray-600">Verifikasi WhatsApp</p>
-            <p class="text-xl font-bold text-primary mt-2">Rp 8.000</p>
-            <button onclick="pesan(1)" class="w-full mt-3 bg-primary text-white py-2 rounded hover:bg-primary/90">Pesan Sekarang</button>
+<!-- Menu Mobile -->
+<div id="mobileMenu" class="fixed inset-0 bg-black/70 z-40 hidden">
+    <div class="bg-white w-4/5 h-full p-5">
+        <div class="flex justify-between items-center mb-6">
+            <span class="text-xl font-bold text-voxy-red">VOXYZ NEWS</span>
+            <button id="closeMenu"><i class="fa fa-times text-xl"></i></button>
         </div>
-        <div class="bg-white p-5 rounded shadow">
-            <h3 class="font-semibold text-lg">Nomor Virtual Indonesia</h3>
-            <p class="text-gray-600">Terima SMS OTP</p>
-            <p class="text-xl font-bold text-primary mt-2">Rp 5.000</p>
-            <button onclick="pesan(2)" class="w-full mt-3 bg-primary text-white py-2 rounded hover:bg-primary/90">Pesan Sekarang</button>
-        </div>
-        <div class="bg-white p-5 rounded shadow">
-            <h3 class="font-semibold text-lg">Jasa OTP</h3>
-            <p class="text-gray-600">Verifikasi Aplikasi Lain</p>
-            <p class="text-xl font-bold text-primary mt-2">Rp 6.000</p>
-            <button onclick="pesan(3)" class="w-full mt-3 bg-primary text-white py-2 rounded hover:bg-primary/90">Pesan Sekarang</button>
-        </div>
+        <nav class="flex flex-col gap-4 font-medium">
+            <a href="#">BERANDA</a>
+            <a href="#">NASIONAL</a>
+            <a href="#">INTERNASIONAL</a>
+            <a href="#">EKONOMI</a>
+            <a href="#">TEKNOLOGI</a>
+            <a href="#">OLAHRAGA</a>
+        </nav>
     </div>
-</section>
-
-<!-- MASUK PENGGUNA -->
-<section id="hal-masuk" class="halaman hidden-section max-w-md mx-auto">
-    <div class="bg-white p-6 rounded shadow">
-        <h2 class="text-xl font-bold mb-4">Masuk Akun</h2>
-        <input type="email" id="emailM" placeholder="Email" class="w-full border p-2 rounded mb-3">
-        <input type="password" id="passM" placeholder="Kata Sandi" class="w-full border p-2 rounded mb-3">
-        <button onclick="masukAkun()" class="w-full bg-primary text-white py-2 rounded">Masuk</button>
-        <p class="text-center mt-3 text-sm">Belum punya akun? <a href="#" onclick="tampil('daftar')" class="text-primary">Daftar</a></p>
-    </div>
-</section>
-
-<!-- DAFTAR -->
-<section id="hal-daftar" class="halaman hidden-section max-w-md mx-auto">
-    <div class="bg-white p-6 rounded shadow">
-        <h2 class="text-xl font-bold mb-4">Daftar Akun Baru</h2>
-        <input type="text" id="namaD" placeholder="Nama Lengkap" class="w-full border p-2 rounded mb-3">
-        <input type="email" id="emailD" placeholder="Email" class="w-full border p-2 rounded mb-3">
-        <input type="password" id="passD" placeholder="Kata Sandi" class="w-full border p-2 rounded mb-3">
-        <button onclick="daftarAkun()" class="w-full bg-primary text-white py-2 rounded">Daftar Sekarang</button>
-    </div>
-</section>
-
-<!-- DASHBOARD PENGGUNA -->
-<section id="hal-dashboard" class="halaman hidden-section">
-    <h2 class="text-xl font-bold mb-4">Dashboard Saya</h2>
-    <div class="bg-white p-4 rounded shadow mb-4 flex flex-wrap justify-between items-center">
-        <div>
-            Saldo Anda: <span class="text-green-600 font-bold text-lg">Rp <span id="saldo"></span></span>
-        </div>
-        <div class="mt-2 md:mt-0">
-            <button onclick="tambahSaldo()" class="bg-primary text-white px-3 py-1 rounded mr-2">+ Rp 50.000</button>
-            <button onclick="keluar()" class="text-red-500">Keluar</button>
-        </div>
-    </div>
-    <div class="bg-white p-4 rounded shadow">
-        <h3 class="font-semibold mb-3">Riwayat & Detail Pesanan</h3>
-        <div id="riwayat"></div>
-    </div>
-</section>
-
-<!-- LOGIN ADMIN -->
-<section id="hal-admin-login" class="halaman hidden-section max-w-md mx-auto">
-    <div class="bg-white p-6 rounded shadow">
-        <h2 class="text-xl font-bold mb-4">Masuk Panel Admin</h2>
-        <input type="text" id="adminUser" placeholder="Username" class="w-full border p-2 rounded mb-3" value="admin">
-        <input type="password" id="adminPass" placeholder="Kata Sandi" class="w-full border p-2 rounded mb-3" value="admin123">
-        <button onclick="masukAdmin()" class="w-full bg-red-600 text-white py-2 rounded">Masuk Admin</button>
-    </div>
-</section>
-
-<!-- PANEL ADMIN -->
-<section id="hal-admin" class="halaman hidden-section">
-    <div class="flex flex-wrap justify-between items-center mb-4">
-        <h2 class="text-xl font-bold">📋 Kelola Pesanan & API</h2>
-        <div>
-            <button onclick="bukaPengaturanAPI()" class="bg-blue-600 text-white px-3 py-1 rounded mr-2">Pengaturan API</button>
-            <button onclick="keluarAdmin()" class="text-red-500">Keluar Admin</button>
-        </div>
-    </div>
-
-    <!-- Form Pengaturan API -->
-    <div id="formAPI" class="bg-white p-4 rounded shadow mb-6 hidden">
-        <h4 class="font-semibold mb-2">Pengaturan API Penyedia Nomor</h4>
-        <input type="text" id="apiKey" placeholder="Masukkan API Key Anda" class="w-full border p-2 rounded mb-2">
-        <input type="text" id="apiUrl" placeholder="URL API Penyedia" class="w-full border p-2 rounded mb-2" value="https://contoh-api.com/stubs/get-number">
-        <button onclick="simpanAPI()" class="bg-green-600 text-white px-3 py-1 rounded">Simpan Pengaturan</button>
-    </div>
-
-    <div class="bg-white p-4 rounded shadow overflow-x-auto">
-        <table class="w-full text-sm">
-            <thead>
-                <tr class="border-b">
-                    <th class="p-2 text-left">ID</th>
-                    <th class="p-2 text-left">Pengguna</th>
-                    <th class="p-2 text-left">Layanan</th>
-                    <th class="p-2 text-left">Harga</th>
-                    <th class="p-2 text-left">Status</th>
-                    <th class="p-2 text-left">Nomor / OTP</th>
-                    <th class="p-2 text-left">Aksi</th>
-                </tr>
-            </thead>
-            <tbody id="semuaPesanan"></tbody>
-        </table>
-    </div>
-</section>
-
 </div>
 
-<footer class="bg-dark text-white text-center py-4 mt-8">© 2026 NokosKu | Gunakan sesuai hukum yang berlaku</footer>
+<!-- Konten Utama -->
+<main class="container mx-auto px-4 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Kolom Kiri & Tengah -->
+        <div class="lg:col-span-2 space-y-8">
+
+            <!-- Berita Utama -->
+            <section>
+                <h2 class="text-xl font-bold border-l-4 border-voxy-red pl-3 mb-4">BERITA UTAMA</h2>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://picsum.photos/id/1065/1200/600" alt="Berita Utama" class="w-full h-72 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs text-voxy-red font-semibold">NASIONAL • 25 Juni 2026</span>
+                        <h3 class="text-2xl font-bold my-3 hover:text-voxy-red cursor-pointer">Pemerintah Luncurkan Program Baru untuk Meningkatkan Kesejahteraan Masyarakat di Seluruh Daerah</h3>
+                        <p class="text-gray-600 line-clamp-2">Program ini mencakup pembangunan infrastruktur, akses kesehatan, dan pendidikan yang merata hingga ke pelosok negeri.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Berita Terbaru -->
+            <section>
+                <h2 class="text-xl font-bold border-l-4 border-voxy-red pl-3 mb-4">BERITA TERBARU</h2>
+                <div class="space-y-5">
+                    <!-- Item Berita -->
+                    <div class="flex bg-white rounded-lg shadow-sm overflow-hidden">
+                        <img src="https://picsum.photos/id/1080/150/120" alt="Berita" class="w-28 h-24 object-cover">
+                        <div class="p-3 flex-1">
+                            <span class="text-xs text-voxy-red">EKONOMI</span>
+                            <h4 class="font-semibold hover:text-voxy-red line-clamp-2">Harga komoditas utama diprediksi stabil hingga akhir tahun ini</h4>
+                            <p class="text-xs text-gray-500 mt-1">10 menit yang lalu</p>
+                        </div>
+                    </div>
+                    <div class="flex bg-white rounded-lg shadow-sm overflow-hidden">
+                        <img src="https://picsum.photos/id/1071/150/120" alt="Berita" class="w-28 h-24 object-cover">
+                        <div class="p-3 flex-1">
+                            <span class="text-xs text-voxy-red">TEKNOLOGI</span>
+                            <h4 class="font-semibold hover:text-voxy-red line-clamp-2">Perkembangan AI baru bisa mempermudah pekerjaan sehari-hari</h4>
+                            <p class="text-xs text-gray-500 mt-1">30 menit yang lalu</p>
+                        </div>
+                    </div>
+                    <div class="flex bg-white rounded-lg shadow-sm overflow-hidden">
+                        <img src="https://picsum.photos/id/1079/150/120" alt="Berita" class="w-28 h-24 object-cover">
+                        <div class="p-3 flex-1">
+                            <span class="text-xs text-voxy-red">OLAHRAGA</span>
+                            <h4 class="font-semibold hover:text-voxy-red line-clamp-2">Jadwal pertandingan tim nasional untuk pekan ini telah dirilis</h4>
+                            <p class="text-xs text-gray-500 mt-1">1 jam yang lalu</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Sidebar Kanan -->
+        <aside class="space-y-8">
+            <!-- Berita Populer -->
+            <section class="bg-white p-4 rounded-lg shadow-md">
+                <h3 class="text-lg font-bold border-b pb-2 mb-4">BERITA POPULER</h3>
+                <ol class="space-y-3">
+                    <li class="flex gap-3">
+                        <span class="text-voxy-red font-bold text-xl">1</span>
+                        <a href="#" class="text-sm hover:text-voxy-red">Cuaca ekstrem diperkirakan melanda sejumlah wilayah dalam minggu ini</a>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="text-voxy-red font-bold text-xl">2</span>
+                        <a href="#" class="text-sm hover:text-voxy-red">Biaya hidup di kota besar mulai terasa lebih ringan bagi warga</a>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="text-voxy-red font-bold text-xl">3</span>
+                        <a href="#" class="text-sm hover:text-voxy-red">Penemuan baru di bidang kesehatan memberi harapan baru bagi pasien</a>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="text-voxy-red font-bold text-xl">4</span>
+                        <a href="#" class="text-sm hover:text-voxy-red">Peraturan baru tentang transportasi umum mulai berlaku bulan depan</a>
+                    </li>
+                </ol>
+            </section>
+
+            <!-- Ikuti Kami -->
+            <section class="bg-white p-4 rounded-lg shadow-md">
+                <h3 class="text-lg font-bold border-b pb-2 mb-4">IKUTI KAMI</h3>
+                <div class="flex gap-4 text-2xl">
+                    <a href="#" class="text-blue-600 hover:text-blue-800"><i class="fa fa-facebook"></i></a>
+                    <a href="#" class="text-sky-500 hover:text-sky-700"><i class="fa fa-twitter"></i></a>
+                    <a href="#" class="text-red-600 hover:text-red-800"><i class="fa fa-youtube-play"></i></a>
+                    <a href="#" class="text-pink-600 hover:text-pink-800"><i class="fa fa-instagram"></i></a>
+                </div>
+            </section>
+        </aside>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-voxy-dark text-white py-8 mt-10">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div>
+                <h4 class="text-xl font-bold text-voxy-red mb-3">VOXYZ NEWS</h4>
+                <p class="text-gray-300 text-sm">Sumber berita terpercaya yang menyajikan informasi akurat, cepat, dan berimbang untuk masyarakat Indonesia.</p>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">KATEGORI</h5>
+                <ul class="text-gray-300 text-sm space-y-2">
+                    <li><a href="#" class="hover:text-voxy-red">Nasional</a></li>
+                    <li><a href="#" class="hover:text-voxy-red">Internasional</a></li>
+                    <li><a href="#" class="hover:text-voxy-red">Ekonomi</a></li>
+                    <li><a href="#" class="hover:text-voxy-red">Teknologi</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">TAUTAN</h5>
+                <ul class="text-gray-300 text-sm space-y-2">
+                    <li><a href="#" class="hover:text-voxy-red">Tentang Kami</a></li>
+                    <li><a href="#" class="hover:text-voxy-red">Kebijakan Privasi</a></li>
+                    <li><a href="#" class="hover:text-voxy-red">Kode Etik</a></li>
+                    <li><a href="#" class="hover:text-voxy-red">Hubungi Kami</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">HUBUNGI KAMI</h5>
+                <p class="text-gray-300 text-sm">Email: redaksi@voxynews.id<br>
+                Telepon: (031) 1234567<br>
+                Surabaya, Jawa Timur</p>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-6 pt-4 text-center text-gray-400 text-sm">
+            © 2026 VOXYZ NEWS. Seluruh hak cipta dilindungi undang-undang.
+        </div>
+    </div>
+</footer>
 
 <script>
-// ---------------- KONFIGURASI AWAL ----------------
-const layanan = [
-    {id:1, nama:"Nokos WA", harga:8000, kodeAPI:"whatsapp"},
-    {id:2, nama:"Nomor Virtual Indonesia", harga:5000, kodeAPI:"indonesia"},
-    {id:3, nama:"Jasa OTP", harga:6000, kodeAPI:"general"}
-];
-let akunAktif = null;
-let pengguna = JSON.parse(localStorage.getItem('pengguna')) || [];
-let pengaturanAPI = JSON.parse(localStorage.getItem('pengaturanAPI')) || {apiKey:"", apiUrl:""};
+// Menu Mobile
+const menuToggle = document.getElementById('menuToggle');
+const closeMenu = document.getElementById('closeMenu');
+const mobileMenu = document.getElementById('mobileMenu');
 
-// ---------------- FUNGSI UMUM ----------------
-function tampil(nama){
-    document.querySelectorAll('.halaman').forEach(h=>h.classList.add('hidden-section'));
-    document.getElementById('hal-'+nama).classList.remove('hidden-section');
-}
-
-function notif(teks, tipe='success'){
-    const el = document.getElementById('notif');
-    el.textContent = teks;
-    el.className = `fixed top-20 right-4 z-50 p-3 rounded shadow text-white ${tipe==='success'?'bg-green-600':'bg-red-600'}`;
-    el.classList.remove('hidden');
-    setTimeout(()=>el.classList.add('hidden'), 3500);
-}
-
-function simpanData(){
-    localStorage.setItem('pengguna', JSON.stringify(pengguna));
-    localStorage.setItem('akunAktif', JSON.stringify(akunAktif));
-}
-
-// ---------------- FUNGSI PENGGUNA ----------------
-function daftarAkun(){
-    const nama = document.getElementById('namaD').value.trim();
-    const email = document.getElementById('emailD').value.trim();
-    const sandi = document.getElementById('passD').value.trim();
-    if(!nama || !email || !sandi) return notif('Isi semua data!', 'error');
-    if(pengguna.some(p=>p.email===email)) return notif('Email sudah terdaftar!', 'error');
-    const baru = {id:Date.now(), nama, email, sandi, saldo:0, pesanan:[]};
-    pengguna.push(baru); akunAktif = baru; simpanData();
-    notif('Daftar berhasil!'); tampil('dashboard'); muatDashboard();
-}
-
-function masukAkun(){
-    const email = document.getElementById('emailM').value.trim();
-    const sandi = document.getElementById('passM').value.trim();
-    const ketemu = pengguna.find(p=>p.email===email && p.sandi===sandi);
-    if(!ketemu) return notif('Email atau sandi salah!', 'error');
-    akunAktif = ketemu; simpanData();
-    notif('Berhasil masuk!'); tampil('dashboard'); muatDashboard();
-}
-
-async function pesan(id){
-    if(!akunAktif) {notif('Silakan masuk terlebih dahulu!', 'error'); tampil('masuk'); return;}
-    const l = layanan.find(x=>x.id===id);
-    if(akunAktif.saldo < l.harga) return notif('Saldo tidak cukup!', 'error');
-
-    // Kurangi saldo
-    akunAktif.saldo -= l.harga;
-
-    // Buat pesanan baru
-    const pesananBaru = {
-        id: Date.now(),
-        layanan: l.nama,
-        kodeAPI: l.kodeAPI,
-        harga: l.harga,
-        tgl: new Date().toLocaleString('id-ID'),
-        status: 'Memproses',
-        nomor: '',
-        otp: ''
-    };
-
-    akunAktif.pesanan.unshift(pesananBaru);
-    simpanData();
-    muatDashboard();
-    muatPesananAdmin();
-
-    // Ambil nomor otomatis via API
-    notif('Memproses permintaan nomor...');
-    const hasil = await ambilNomorDariAPI(pesananBaru.id, l.kodeAPI);
-    if(hasil){
-        pesananBaru.nomor = hasil.nomor;
-        pesananBaru.status = 'Menunggu Kode OTP';
-        simpanData();
-        muatDashboard();
-        muatPesananAdmin();
-        notif('Nomor berhasil didapatkan!');
-        // Cek OTP setiap 10 detik
-        cekOTPBerjalan(pesananBaru.id);
-    } else {
-        pesananBaru.status = 'Gagal';
-        akunAktif.saldo += l.harga; // Kembalikan saldo jika gagal
-        simpanData();
-        muatDashboard();
-        muatPesananAdmin();
-        notif('Gagal mendapatkan nomor, saldo dikembalikan.', 'error');
-    }
-}
-
-function muatDashboard(){
-    document.getElementById('saldo').textContent = akunAktif.saldo.toLocaleString('id-ID');
-    const el = document.getElementById('riwayat');
-    if(!akunAktif.pesanan.length){
-        el.innerHTML = '<p class="text-gray-500 italic">Belum ada pesanan yang dibuat.</p>';
-        return;
-    }
-    el.innerHTML = akunAktif.pesanan.map(p=>`
-    <div class="border-b py-3">
-        <p><b>${p.layanan}</b> - Rp ${p.harga.toLocaleString()}</p>
-        <p>Tanggal: ${p.tgl}</p>
-        <p>Status: <span class="font-semibold ${
-            p.status==='Selesai'?'text-green-600':
-            p.status==='Gagal'?'text-red-600':'text-yellow-600'
-        }">${p.status}</span></p>
-        ${p.nomor ? `<p>Nomor: <span class="font-mono">${p.nomor}</span></p>` : ''}
-        ${p.otp ? `<p>Kode OTP: <span class="font-mono text-lg font-bold text-blue-700">${p.otp}</span></p>` : ''}
-    </div>`).join('');
-}
-
-function tambahSaldo(){
-    akunAktif.saldo += 50000;
-    simpanData();
-    muatDashboard();
-    notif('Saldo berhasil ditambahkan Rp 50.000');
-}
-
-function keluar(){
-    akunAktif = null;
-    simpanData();
-    tampil('beranda');
-}
-
-// ---------------- FUNGSI ADMIN & API ----------------
-function masukAdmin(){
-    const u = document.getElementById('adminUser').value;
-    const p = document.getElementById('adminPass').value;
-    if(u==='admin' && p==='admin123'){
-        notif('Berhasil masuk ke panel admin');
-        tampil('admin');
-        muatPesananAdmin();
-    } else {
-        notif('Username atau sandi salah!', 'error');
-    }
-}
-
-function bukaPengaturanAPI(){
-    const el = document.getElementById('formAPI');
-    el.classList.toggle('hidden');
-    if(!el.classList.contains('hidden')){
-        document.getElementById('apiKey').value = pengaturanAPI.apiKey;
-        document.getElementById('apiUrl').value = pengaturanAPI.apiUrl;
-    }
-}
-
-function simpanAPI(){
-    pengaturanAPI.apiKey = document.getElementById('apiKey').value.trim();
-    pengaturanAPI.apiUrl = document.getElementById('apiUrl').value.trim();
-    localStorage.setItem('pengaturanAPI', JSON.stringify(pengaturanAPI));
-    notif('Pengaturan API tersimpan!');
-}
-
-// Fungsi ambil nomor dari API
-async function ambilNomorDariAPI(idPesanan, kodeLayanan){
-    if(!pengaturanAPI.apiKey){
-        notif('API Key belum diatur di pengaturan admin!', 'error');
-        return null;
-    }
-    try {
-        // Contoh permintaan API (sesuaikan dengan format penyedia Anda)
-        const res = await fetch(`${pengaturanAPI.apiUrl}?api_key=${pengaturanAPI.apiKey}&service=${kodeLayanan}`);
-        const data = await res.json();
-        // Jika API berhasil mengembalikan nomor
-        if(data.success && data.number){
-            return {nomor: data.number, idPesanan: idPesanan};
-        }
-        // Jika hanya contoh, kembalikan nomor acak untuk tes
-        return {nomor: `+628${Math.floor(Math.random()*900000000 + 100000000)}`};
-    } catch (err) {
-        console.log('API Error:', err);
-        return null;
-    }
-}
-
-// Cek kode OTP secara berkala
-async function cekOTPBerjalan(idPesanan){
-    const cek = setInterval(async () => {
-        let pesanan = null;
-        let pemilik = null;
-        pengguna.forEach(p=>{
-            const ps = p.pesanan.find(x=>x.id === idPesanan);
-            if(ps){ pesanan = ps; pemilik = p; }
-        });
-        if(!pesanan || pesanan.status !== 'Menunggu Kode OTP'){
-            clearInterval(cek);
-            return;
-        }
-
-        // Cek OTP ke API
-        try {
-            const res = await fetch(`${pengaturanAPI.apiUrl}/get-sms?api_key=${pengaturanAPI.apiKey}&id=${idPesanan}`);
-            const data = await res.json();
-            if(data.success && data.code){
-                pesanan.otp = data.code;
-                pesanan.status = 'Selesai';
-                simpanData();
-                muatDashboard();
-                muatPesananAdmin();
-                notif(`Kode OTP masuk: ${data.code}`);
-                clearInterval(cek);
-            }
-        } catch (err) {
-            // Jika API belum terhubung, masukkan contoh OTP otomatis setelah 15 detik
-            setTimeout(()=>{
-                if(pesanan.status === 'Menunggu Kode OTP'){
-                    pesanan.otp = Math.floor(100000 + Math.random()*900000);
-                    pesanan.status = 'Selesai';
-                    simpanData();
-                    muatDashboard();
-                    muatPesananAdmin();
-                    notif('Kode OTP diterima!');
-                    clearInterval(cek);
-                }
-            }, 15000);
-        }
-    }, 8000); // Cek setiap 8 detik
-}
-
-function muatPesananAdmin(){
-    const el = document.getElementById('semuaPesanan');
-    let semua = [];
-    pengguna.forEach(p=>{
-        p.pesanan.forEach(ps=>{
-            semua.push({...ps, namaPengguna:p.nama, email:p.email});
-        });
-    });
-    if(!semua.length){
-        el.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-gray-500">Belum ada pesanan masuk</td></tr>';
-        return;
-    }
-    el.innerHTML = semua.map(ps=>`
-    <tr class="border-b hover:bg-gray-50">
-        <td class="p-2">${ps.id}</td>
-        <td class="p-2">${ps.namaPengguna}<br><small class="text-gray-500">${ps.email}</small></td>
-        <td class="p-2">${ps.layanan}</td>
-        <td class="p-2">Rp ${ps.harga.toLocaleString()}</td>
-        <td class="p-2"><span class="px-2 py-1 rounded text-xs ${
-            ps.status==='Selesai'?'bg-green-100 text-green-700':
-            ps.status==='Gagal'?'bg-red-100 text-red-700':'bg-yellow-100 text-yellow-700'
-        }">${ps.status}</span></td>
-        <td class="p-2 font-mono text-sm">
-            ${ps.nomor || '-'}<br>
-            ${ps.otp ? `OTP: ${ps.otp}` : ''}
-        </td>
-        <td class="p-2">
-            <button onclick="batalkanPesanan(${ps.id})" class="text-xs bg-red-500 text-white px-2 py-1 rounded">Batalkan</button>
-        </td>
-    </tr>`).join('');
-}
-
-function batalkanPesanan(idPesanan){
-    if(!confirm('Yakin ingin membatalkan? Saldo akan dikembalikan.')) return;
-    pengguna.forEach(p=>{
-        const idx = p.pesanan.findIndex(x=>x.id === idPesanan);
-        if(idx !== -1){
-            p.saldo += p.pesanan[idx].harga;
-            p.pesanan.splice(idx, 1);
-        }
-    });
-    simpanData();
-    muatPesananAdmin();
-    if(akunAktif) muatDashboard();
-    notif('Pesanan dibatalkan, saldo dikembalikan.');
-}
-
-function keluarAdmin(){
-    tampil('beranda');
-}
-
+menuToggle.addEventListener('click', () => mobileMenu.classList.remove('hidden'));
+closeMenu.addEventListener('click', () => mobileMenu.classList.add('hidden'));
 </script>
 
 </body>
