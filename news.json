@@ -1,0 +1,49 @@
+{
+  "news": [
+    {
+      "id": 1,
+      "title": "Kecelakaan Flyover Tomang: Besi 30 Ton Masih Berserakan",
+      "category": "NASIONAL",
+      "image": "https://picsum.photos/id/1015/600/400",
+      "excerpt": "Lalu lintas macet parah di sekitar area Tomang. Beberapa ruas tol ditutup sementara.",
+      "time": "1 jam lalu",
+      "readTime": "5 menit"
+    },
+    {
+      "id": 2,
+      "title": "Taufik Hidayat Diduga Aniaya Pacar Setelah Tenggak Miras",
+      "category": "HUKUM",
+      "image": "https://picsum.photos/id/201/600/400",
+      "excerpt": "Timeline penyekapan wanita selama 3 tahun terungkap. Polisi terus mendalami kasus ini.",
+      "time": "3 jam lalu",
+      "readTime": "8 menit"
+    },
+    {
+      "id": 3,
+      "title": "KPR Subsidi Tenor Diperpanjang Jadi 40 Tahun",
+      "category": "EKONOMI",
+      "image": "https://picsum.photos/id/180/600/400",
+      "excerpt": "Pemerintah dorong akses perumahan bagi masyarakat berpenghasilan rendah.",
+      "time": "5 jam lalu",
+      "readTime": "4 menit"
+    },
+    {
+      "id": 4,
+      "title": "Prabowo Kunjungi Gorontalo, Disambut Antusias Warga",
+      "category": "POLITIK",
+      "image": "https://picsum.photos/id/237/600/400",
+      "excerpt": "Presiden sebut nama beberapa tokoh lokal dalam pidatonya.",
+      "time": "7 jam lalu",
+      "readTime": "6 menit"
+    },
+    {
+      "id": 5,
+      "title": "Timnas Indonesia Lolos ke Babak 16 Besar Piala AFF",
+      "category": "OLAHRAGA",
+      "image": "https://picsum.photos/id/870/600/400",
+      "excerpt": "Kemenangan dramatis atas Thailand membuat Garuda melaju.",
+      "time": "12 jam lalu",
+      "readTime": "7 menit"
+    }
+  ]
+}
