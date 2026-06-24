@@ -16,382 +16,266 @@
                         success: '#10b981',
                         warning: '#f59e0b',
                         danger: '#ef4444'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto { content-visibility: auto; }
-            .text-shadow { text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-            .hidden-section { display: none; }
-        }
-    </style>
+    <style>.hidden-section{display:none;}</style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body class="bg-gray-50 text-gray-800">
 
-    <!-- Navigasi -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#" onclick="tampilkanHalaman('beranda')" class="text-xl font-bold text-primary">NokosKu</a>
-            <nav class="hidden md:flex gap-6 items-center" id="navMenu">
-                <a href="#layanan" onclick="tampilkanHalaman('beranda')" class="hover:text-primary transition">Layanan</a>
-                <a href="#tentang" onclick="tampilkanHalaman('beranda')" class="hover:text-primary transition">Tentang</a>
-                <a href="#faq" onclick="tampilkanHalaman('beranda')" class="hover:text-primary transition">FAQ</a>
-                <span id="menuMasuk">
-                    <button onclick="tampilkanHalaman('masuk')" class="hover:text-primary mr-2">Masuk</button>
-                    <button onclick="tampilkanHalaman('daftar')" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition">Daftar</button>
-                </span>
-                <span id="menuPengguna" class="hidden">
-                    <button onclick="tampilkanHalaman('dashboard')" class="bg-primary text-white px-4 py-2 rounded-lg mr-2">Dashboard</button>
-                    <button onclick="keluarAkun()" class="text-danger hover:text-danger/80">Keluar</button>
-                </span>
-            </nav>
-            <button class="md:hidden text-xl" id="menuToggle">
-                <i class="fa fa-bars"></i>
-            </button>
-        </div>
-    </header>
-
-    <!-- Notifikasi -->
-    <div id="notifikasi" class="fixed top-20 right-4 z-50 max-w-xs hidden"></div>
-
-    <div class="container mx-auto px-4 py-6">
-
-        <!-- Halaman Beranda -->
-        <section id="halaman-beranda" class="halaman">
-            <!-- Judul Utama -->
-            <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-12 md:py-16 rounded-xl mb-10 text-center">
-                <h1 class="text-3xl md:text-4xl font-bold mb-4 text-shadow">Layanan Nokos & Nomor Virtual</h1>
-                <p class="text-lg md:text-xl max-w-3xl mx-auto">Jasa OTP, Nomor Virtual, OTP WA & Beli Nomor WA untuk verifikasi akun digital secara praktis</p>
-            </div>
-
-            <!-- Pengantar -->
-            <div class="bg-white p-6 rounded-lg shadow mb-10">
-                <p class="text-gray-700 leading-relaxed">
-                    NokosKu adalah platform layanan nomor virtual, jasa OTP, OTP WA, beli nomor, nomor WA, dan nokos WA untuk kebutuhan verifikasi akun digital secara praktis. Layanan ini cocok digunakan untuk kebutuhan aktivasi akun, testing aplikasi, operasional bisnis online, dan verifikasi digital sesuai aturan yang berlaku.
-                </p>
-                <p class="text-gray-700 leading-relaxed mt-4">
-                    Melalui NokosKu, Anda dapat memilih layanan seperti beli nomor virtual, beli nomor WA, nomor virtual WhatsApp, jasa OTP, OTP WA, nomor sementara, nomor kosong WA, dan nomor verifikasi WhatsApp sesuai kebutuhan akun digital.
-                </p>
-            </div>
-
-            <!-- Layanan Utama -->
-            <div id="layanan" class="mb-12">
-                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Layanan Utama Kami</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-                        <i class="fa fa-whatsapp text-3xl text-green-500 mb-4"></i>
-                        <h3 class="text-xl font-semibold mb-2">Nokos WA</h3>
-                        <p class="text-gray-600 mb-4">Nomor khusus verifikasi dan aktivasi akun WhatsApp</p>
-                        <p class="text-lg font-bold text-primary">Rp 8.000</p>
-                        <button onclick="pesanLayanan(1)" class="w-full mt-3 bg-primary text-white py-2 rounded hover:bg-primary/90">Pesan Sekarang</button>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-                        <i class="fa fa-mobile text-3xl text-blue-500 mb-4"></i>
-                        <h3 class="text-xl font-semibold mb-2">Nomor Virtual</h3>
-                        <p class="text-gray-600 mb-4">Nomor digital tanpa kartu fisik untuk terima kode OTP</p>
-                        <p class="text-lg font-bold text-primary">Rp 5.000</p>
-                        <button onclick="pesanLayanan(2)" class="w-full mt-3 bg-primary text-white py-2 rounded hover:bg-primary/90">Pesan Sekarang</button>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-                        <i class="fa fa-shield text-3xl text-indigo-500 mb-4"></i>
-                        <h3 class="text-xl font-semibold mb-2">Jasa OTP</h3>
-                        <p class="text-gray-600 mb-4">Bantu terima kode verifikasi berbagai aplikasi</p>
-                        <p class="text-lg font-bold text-primary">Rp 6.000</p>
-                        <button onclick="pesanLayanan(3)" class="w-full mt-3 bg-primary text-white py-2 rounded hover:bg-primary/90">Pesan Sekarang</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ -->
-            <div id="faq" class="bg-white p-6 rounded-lg shadow">
-                <h2 class="text-2xl font-bold text-center mb-6">Pertanyaan Umum</h2>
-                <div class="space-y-4">
-                    <div class="border-b pb-3">
-                        <h4 class="font-semibold">Apa itu Nokos?</h4>
-                        <p class="text-gray-600 mt-1">Nokos adalah istilah untuk nomor kosong atau nomor virtual yang digunakan menerima kode OTP dan memudahkan verifikasi akun digital.</p>
-                    </div>
-                    <div class="border-b pb-3">
-                        <h4 class="font-semibold">Apakah aman digunakan?</h4>
-                        <p class="text-gray-600 mt-1">Aman jika dipakai untuk kebutuhan sah, wajar, sesuai aturan layanan dan hukum yang berlaku di Indonesia.</p>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold">Bisa untuk verifikasi WhatsApp?</h4>
-                        <p class="text-gray-600 mt-1">Ya, tersedia layanan khusus Nokos WA untuk kebutuhan aktivasi akun WhatsApp.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Halaman Masuk -->
-        <section id="halaman-masuk" class="halaman hidden-section max-w-md mx-auto">
-            <div class="bg-white p-8 rounded-lg shadow-md">
-                <h2 class="text-2xl font-bold text-center mb-6">Masuk ke Akun</h2>
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-1">Email</label>
-                    <input type="email" id="emailMasuk" class="w-full border p-3 rounded-lg" placeholder="email@anda.com">
-                </div>
-                <div class="mb-6">
-                    <label class="block text-gray-700 mb-1">Kata Sandi</label>
-                    <input type="password" id="sandiMasuk" class="w-full border p-3 rounded-lg" placeholder="Masukkan kata sandi">
-                </div>
-                <button onclick="prosesMasuk()" class="w-full bg-primary text-white py-3 rounded-lg hover:bg-primary/90 font-semibold">Masuk Sekarang</button>
-                <p class="text-center mt-4 text-gray-600">Belum punya akun? <a href="#" onclick="tampilkanHalaman('daftar')" class="text-primary">Daftar di sini</a></p>
-            </div>
-        </section>
-
-        <!-- Halaman Daftar -->
-        <section id="halaman-daftar" class="halaman hidden-section max-w-md mx-auto">
-            <div class="bg-white p-8 rounded-lg shadow-md">
-                <h2 class="text-2xl font-bold text-center mb-6">Daftar Akun Baru</h2>
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-1">Nama Lengkap</label>
-                    <input type="text" id="namaDaftar" class="w-full border p-3 rounded-lg" placeholder="Nama Anda">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-1">Email</label>
-                    <input type="email" id="emailDaftar" class="w-full border p-3 rounded-lg" placeholder="email@anda.com">
-                </div>
-                <div class="mb-6">
-                    <label class="block text-gray-700 mb-1">Kata Sandi</label>
-                    <input type="password" id="sandiDaftar" class="w-full border p-3 rounded-lg" placeholder="Buat kata sandi">
-                </div>
-                <button onclick="prosesDaftar()" class="w-full bg-primary text-white py-3 rounded-lg hover:bg-primary/90 font-semibold">Daftar Sekarang</button>
-                <p class="text-center mt-4 text-gray-600">Sudah punya akun? <a href="#" onclick="tampilkanHalaman('masuk')" class="text-primary">Masuk di sini</a></p>
-            </div>
-        </section>
-
-        <!-- Halaman Dashboard -->
-        <section id="halaman-dashboard" class="halaman hidden-section">
-            <h2 class="text-2xl font-bold mb-6">Dashboard Pengguna</h2>
-            <div class="grid md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-white p-5 rounded-lg shadow border-l-4 border-primary">
-                    <h3 class="text-lg font-semibold text-gray-700">Saldo Akun</h3>
-                    <p class="text-2xl font-bold text-success mt-2" id="saldoTampil">Rp 0</p>
-                    <button onclick="tambahSaldo()" class="mt-3 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90">Isi Saldo</button>
-                </div>
-                <div class="bg-white p-5 rounded-lg shadow border-l-4 border-warning">
-                    <h3 class="text-lg font-semibold text-gray-700">Total Pesanan</h3>
-                    <p class="text-2xl font-bold text-warning mt-2" id="jumlahPesanan">0</p>
-                </div>
-                <div class="bg-white p-5 rounded-lg shadow border-l-4 border-success">
-                    <h3 class="text-lg font-semibold text-gray-700">Status Akun</h3>
-                    <p class="text-lg font-medium text-success mt-2">Aktif</p>
-                </div>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow">
-                <h3 class="text-xl font-semibold mb-4">Riwayat Pesanan</h3>
-                <div id="daftarPesanan">
-                    <p class="text-gray-500 italic">Belum ada pesanan yang dibuat.</p>
-                </div>
-            </div>
-        </section>
-
+<!-- Navigasi -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <a href="#" onclick="tampil('beranda')" class="text-xl font-bold text-primary">NokosKu</a>
+        <nav class="hidden md:flex gap-6 items-center" id="nav">
+            <a href="#" onclick="tampil('beranda')">Layanan</a>
+            <a href="#" onclick="tampil('masuk')">Masuk</a>
+            <a href="#" onclick="tampil('daftar')" class="bg-primary text-white px-3 py-1 rounded">Daftar</a>
+            <a href="#" onclick="tampil('admin-login')" class="text-red-600 border border-red-500 px-2 py-1 rounded">Admin</a>
+        </nav>
     </div>
+</header>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-6 mt-8">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2026 NokosKu - Layanan Nomor Virtual & Jasa OTP</p>
-            <p class="text-gray-400 text-sm mt-2">Gunakan layanan secara bijak, legal, dan bertanggung jawab</p>
+<!-- Notifikasi -->
+<div id="notif" class="fixed top-20 right-4 z-50 p-3 rounded shadow hidden"></div>
+
+<div class="container mx-auto px-4 py-6">
+
+<!-- BERANDA -->
+<section id="hal-beranda" class="halaman">
+    <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-12 rounded-xl text-center mb-8">
+        <h1 class="text-3xl font-bold">Layanan Nokos & Nomor Virtual</h1>
+        <p class="mt-2">Jasa OTP, Nomor Virtual & OTP WA</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5">
+        <div class="bg-white p-5 rounded shadow">
+            <h3 class="font-semibold text-lg">Nokos WA</h3>
+            <p class="text-gray-600">Verifikasi WhatsApp</p>
+            <p class="text-xl font-bold text-primary mt-2">Rp 8.000</p>
+            <button onclick="pesan(1)" class="w-full mt-3 bg-primary text-white py-2 rounded">Pesan</button>
         </div>
-    </footer>
+        <div class="bg-white p-5 rounded shadow">
+            <h3 class="font-semibold text-lg">Nomor Virtual</h3>
+            <p class="text-gray-600">Terima SMS OTP</p>
+            <p class="text-xl font-bold text-primary mt-2">Rp 5.000</p>
+            <button onclick="pesan(2)" class="w-full mt-3 bg-primary text-white py-2 rounded">Pesan</button>
+        </div>
+        <div class="bg-white p-5 rounded shadow">
+            <h3 class="font-semibold text-lg">Jasa OTP</h3>
+            <p class="text-gray-600">Verifikasi Aplikasi</p>
+            <p class="text-xl font-bold text-primary mt-2">Rp 6.000</p>
+            <button onclick="pesan(3)" class="w-full mt-3 bg-primary text-white py-2 rounded">Pesan</button>
+        </div>
+    </div>
+</section>
 
-    <script>
-        // Data layanan
-        const daftarLayanan = [
-            { id: 1, nama: "Nokos WA", harga: 8000 },
-            { id: 2, nama: "Nomor Virtual", harga: 5000 },
-            { id: 3, nama: "Jasa OTP", harga: 6000 }
-        ];
+<!-- MASUK PENGGUNA -->
+<section id="hal-masuk" class="halaman hidden-section max-w-md mx-auto">
+    <div class="bg-white p-6 rounded shadow">
+        <h2 class="text-xl font-bold mb-4">Masuk Akun</h2>
+        <input type="email" id="emailM" placeholder="Email" class="w-full border p-2 rounded mb-3">
+        <input type="password" id="passM" placeholder="Sandi" class="w-full border p-2 rounded mb-3">
+        <button onclick="masukAkun()" class="w-full bg-primary text-white py-2 rounded">Masuk</button>
+    </div>
+</section>
 
-        // Cek status login saat halaman dibuka
-        cekLogin();
+<!-- DAFTAR -->
+<section id="hal-daftar" class="halaman hidden-section max-w-md mx-auto">
+    <div class="bg-white p-6 rounded shadow">
+        <h2 class="text-xl font-bold mb-4">Daftar Akun</h2>
+        <input type="text" id="namaD" placeholder="Nama" class="w-full border p-2 rounded mb-3">
+        <input type="email" id="emailD" placeholder="Email" class="w-full border p-2 rounded mb-3">
+        <input type="password" id="passD" placeholder="Sandi" class="w-full border p-2 rounded mb-3">
+        <button onclick="daftarAkun()" class="w-full bg-primary text-white py-2 rounded">Daftar</button>
+    </div>
+</section>
 
-        // Tampilkan halaman yang dipilih
-        function tampilkanHalaman(nama) {
-            document.querySelectorAll('.halaman').forEach(el => el.classList.add('hidden-section'));
-            document.getElementById('halaman-' + nama).classList.remove('hidden-section');
-            window.scrollTo(0, 0);
-        }
+<!-- DASHBOARD PENGGUNA -->
+<section id="hal-dashboard" class="halaman hidden-section">
+    <h2 class="text-xl font-bold mb-4">Dashboard Saya</h2>
+    <div class="bg-white p-4 rounded shadow mb-4">
+        Saldo: <span class="text-green-600 font-bold">Rp <span id="saldo"></span></span>
+        <button onclick="tambahSaldo()" class="ml-4 bg-primary text-white px-3 py-1 rounded">+50.000</button>
+        <button onclick="keluar()" class="float-right text-red-500">Keluar</button>
+    </div>
+    <div class="bg-white p-4 rounded shadow">
+        <h3 class="font-semibold mb-3">Riwayat Pesanan</h3>
+        <div id="riwayat"></div>
+    </div>
+</section>
 
-        // Tampilkan notifikasi
-        function tampilNotifikasi(teks, jenis = 'success') {
-            const el = document.getElementById('notifikasi');
-            el.textContent = teks;
-            el.className = `fixed top-20 right-4 z-50 p-3 rounded-lg shadow-lg text-white ${jenis === 'success' ? 'bg-green-600' : 'bg-red-600'}`;
-            el.classList.remove('hidden');
-            setTimeout(() => el.classList.add('hidden'), 3000);
-        }
+<!-- LOGIN ADMIN -->
+<section id="hal-admin-login" class="halaman hidden-section max-w-md mx-auto">
+    <div class="bg-white p-6 rounded shadow">
+        <h2 class="text-xl font-bold mb-4">Masuk Admin</h2>
+        <input type="text" id="adminUser" placeholder="Username" class="w-full border p-2 rounded mb-3" value="admin">
+        <input type="password" id="adminPass" placeholder="Kata Sandi" class="w-full border p-2 rounded mb-3" value="admin123">
+        <button onclick="masukAdmin()" class="w-full bg-red-600 text-white py-2 rounded">Masuk Admin</button>
+    </div>
+</section>
 
-        // Proses daftar akun
-        function prosesDaftar() {
-            const nama = document.getElementById('namaDaftar').value.trim();
-            const email = document.getElementById('emailDaftar').value.trim();
-            const sandi = document.getElementById('sandiDaftar').value.trim();
+<!-- PANEL ADMIN - LIHAT & PROSES PESANAN -->
+<section id="hal-admin" class="halaman hidden-section">
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold">📋 Semua Pesanan Pengguna</h2>
+        <button onclick="keluarAdmin()" class="text-red-500">Keluar Admin</button>
+    </div>
+    <div class="bg-white p-4 rounded shadow overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="border-b">
+                    <th class="p-2 text-left">ID</th>
+                    <th class="p-2 text-left">Pengguna</th>
+                    <th class="p-2 text-left">Layanan</th>
+                    <th class="p-2 text-left">Harga</th>
+                    <th class="p-2 text-left">Status</th>
+                    <th class="p-2 text-left">Nomor/OTP</th>
+                    <th class="p-2 text-left">Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="semuaPesanan"></tbody>
+        </table>
+    </div>
+</section>
 
-            if (!nama || !email || !sandi) return tampilNotifikasi('Semua kolom harus diisi!', 'error');
+</div>
 
-            const pengguna = JSON.parse(localStorage.getItem('pengguna')) || [];
-            if (pengguna.some(p => p.email === email)) return tampilNotifikasi('Email sudah terdaftar!', 'error');
+<footer class="bg-dark text-white text-center py-4 mt-8">© 2026 NokosKu</footer>
 
-            const akunBaru = { id: Date.now(), nama, email, sandi, saldo: 0, pesanan: [] };
-            pengguna.push(akunBaru);
-            localStorage.setItem('pengguna', JSON.stringify(pengguna));
-            localStorage.setItem('akunAktif', JSON.stringify(akunBaru));
+<script>
+const layanan = [{id:1,nama:"Nokos WA",harga:8000},{id:2,nama:"Nomor Virtual",harga:5000},{id:3,nama:"Jasa OTP",harga:6000}];
+let akunAktif=null;
 
-            tampilNotifikasi('Daftar berhasil!');
-            updateMenuAkun();
-            tampilkanHalaman('dashboard');
-        }
+// Tampil halaman
+function tampil(nama){
+    document.querySelectorAll('.halaman').forEach(h=>h.classList.add('hidden-section'));
+    document.getElementById('hal-'+nama).classList.remove('hidden-section');
+}
 
-        // Proses masuk akun
-        function prosesMasuk() {
-            const email = document.getElementById('emailMasuk').value.trim();
-            const sandi = document.getElementById('sandiMasuk').value.trim();
+// Notifikasi
+function notif(teks,tipe='success'){
+    const el=document.getElementById('notif');
+    el.textContent=teks;
+    el.className=`fixed top-20 right-4 z-50 p-3 rounded shadow text-white ${tipe==='success'?'bg-green-600':'bg-red-600'}`;
+    el.classList.remove('hidden');
+    setTimeout(()=>el.classList.add('hidden'),3000);
+}
 
-            const pengguna = JSON.parse(localStorage.getItem('pengguna')) || [];
-            const ditemukan = pengguna.find(p => p.email === email && p.sandi === sandi);
+// Simpan semua data
+function simpanData(){
+    localStorage.setItem('pengguna',JSON.stringify(pengguna));
+    localStorage.setItem('akunAktif',JSON.stringify(akunAktif));
+}
+let pengguna=JSON.parse(localStorage.getItem('pengguna'))||[];
 
-            if (!ditemukan) return tampilNotifikasi('Email atau sandi salah!', 'error');
+// Daftar
+function daftarAkun(){
+    const nama=document.getElementById('namaD').value.trim();
+    const email=document.getElementById('emailD').value.trim();
+    const sandi=document.getElementById('passD').value.trim();
+    if(!nama||!email||!sandi)return notif('Isi semua data!','error');
+    if(pengguna.some(p=>p.email===email))return notif('Email sudah ada!','error');
+    const baru={id:Date.now(),nama,email,sandi,saldo:0,pesanan:[]};
+    pengguna.push(baru); akunAktif=baru; simpanData();
+    notif('Daftar berhasil!'); tampil('dashboard'); muatDashboard();
+}
 
-            localStorage.setItem('akunAktif', JSON.stringify(ditemukan));
-            tampilNotifikasi('Berhasil masuk!');
-            updateMenuAkun();
-            tampilkanHalaman('dashboard');
-            muatDataDashboard();
-        }
+// Masuk pengguna
+function masukAkun(){
+    const email=document.getElementById('emailM').value.trim();
+    const sandi=document.getElementById('passM').value.trim();
+    const ketemu=pengguna.find(p=>p.email===email&&p.sandi===sandi);
+    if(!ketemu)return notif('Email/sandi salah!','error');
+    akunAktif=ketemu; simpanData();
+    notif('Berhasil masuk!'); tampil('dashboard'); muatDashboard();
+}
 
-        // Cek status login
-        function cekLogin() {
-            const aktif = localStorage.getItem('akunAktif');
-            if (aktif) updateMenuAkun();
-        }
+// Pesan layanan
+function pesan(id){
+    if(!akunAktif){notif('Silakan masuk dulu!','error');tampil('masuk');return;}
+    const l=layanan.find(x=>x.id===id);
+    if(akunAktif.saldo<l.harga)return notif('Saldo kurang!','error');
+    akunAktif.saldo-=l.harga;
+    akunAktif.pesanan.unshift({
+        id:Date.now(), layanan:l.nama, harga:l.harga,
+        tgl:new Date().toLocaleString('id-ID'), status:'Menunggu', nomor:'', otp:''
+    });
+    simpanData(); muatDashboard(); muatPesananAdmin();
+    notif('Pesanan dibuat, tunggu admin proses!');
+}
 
-        // Update tampilan menu akun
-        function updateMenuAkun() {
-            const aktif = localStorage.getItem('akunAktif');
-            document.getElementById('menuMasuk').classList.toggle('hidden', aktif);
-            document.getElementById('menuPengguna').classList.toggle('hidden', !aktif);
-            if (aktif) muatDataDashboard();
-        }
+// Muat dashboard pengguna
+function muatDashboard(){
+    document.getElementById('saldo').textContent=akunAktif.saldo.toLocaleString('id-ID');
+    const el=document.getElementById('riwayat');
+    if(!akunAktif.pesanan.length){el.innerHTML='<p class="text-gray-500">Belum ada pesanan</p>';return;}
+    el.innerHTML=akunAktif.pesanan.map(p=>`
+    <div class="border-b py-2">
+        <b>${p.layanan}</b> - Rp ${p.harga.toLocaleString()}<br>
+        Status: <span class="font-semibold ${p.status==='Selesai'?'text-green-600':'text-yellow-600'}">${p.status}</span><br>
+        ${p.nomor?'Nomor: '+p.nomor+'<br>':''} ${p.otp?'Kode OTP: '+p.otp:''}
+    </div>`).join('');
+}
 
-        // Keluar dari akun
-        function keluarAkun() {
-            localStorage.removeItem('akunAktif');
-            tampilNotifikasi('Berhasil keluar!');
-            updateMenuAkun();
-            tampilkanHalaman('beranda');
-        }
+// ---------------- ADMIN ----------------
+function masukAdmin(){
+    const u=document.getElementById('adminUser').value;
+    const p=document.getElementById('adminPass').value;
+    if(u==='admin'&&p==='admin123'){
+        notif('Masuk ke panel admin');
+        tampil('admin'); muatPesananAdmin();
+    }else notif('Akses ditolak!','error');
+}
 
-        // Pesan layanan
-        function pesanLayanan(id) {
-            const aktif = JSON.parse(localStorage.getItem('akunAktif'));
-            if (!aktif) {
-                tampilNotifikasi('Silakan masuk terlebih dahulu!', 'error');
-                tampilkanHalaman('masuk');
-                return;
-            }
-
-            const layanan = daftarLayanan.find(l => l.id == id);
-            if (aktif.saldo < layanan.harga) return tampilNotifikasi('Saldo tidak cukup!', 'error');
-
-            // Kurangi saldo
-            aktif.saldo -= layanan.harga;
-            // Simpan pesanan
-            aktif.pesanan.unshift({
-                id: Date.now(),
-                nama: layanan.nama,
-                harga: layanan.harga,
-                tanggal: new Date().toLocaleString('id-ID'),
-                status: 'Menunggu'
-            });
-
-            // Perbarui data
-            simpanDataPengguna(aktif);
-            tampilNotifikasi(`Pesanan ${layanan.nama} berhasil dibuat!`);
-            muatDataDashboard();
-            tampilkanHalaman('dashboard');
-        }
-
-        // Simpan data pengguna ke penyimpanan lokal
-        function simpanDataPengguna(data) {
-            const semua = JSON.parse(localStorage.getItem('pengguna')) || [];
-            const indeks = semua.findIndex(p => p.id === data.id);
-            if (indeks !== -1) semua[indeks] = data;
-            localStorage.setItem('pengguna', JSON.stringify(semua));
-            localStorage.setItem('akunAktif', JSON.stringify(data));
-        }
-
-        // Muat data ke dashboard
-        function muatDataDashboard() {
-            const aktif = JSON.parse(localStorage.getItem('akunAktif'));
-            if (!aktif) return;
-
-            document.getElementById('saldoTampil').textContent = `Rp ${aktif.saldo.toLocaleString('id-ID')}`;
-            document.getElementById('jumlahPesanan').textContent = aktif.pesanan.length;
-
-            const daftarEl = document.getElementById('daftarPesanan');
-            if (aktif.pesanan.length === 0) {
-                daftarEl.innerHTML = '<p class="text-gray-500 italic">Belum ada pesanan yang dibuat.</p>';
-                return;
-            }
-
-            daftarEl.innerHTML = `
-                <table class="w-full text-sm">
-                    <thead>
-                        <tr class="border-b text-left">
-                            <th class="p-2">Layanan</th>
-                            <th class="p-2">Harga</th>
-                            <th class="p-2">Tanggal</th>
-                            <th class="p-2">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${aktif.pesanan.map(p => `
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="p-2">${p.nama}</td>
-                                <td class="p-2">Rp ${p.harga.toLocaleString('id-ID')}</td>
-                                <td class="p-2">${p.tanggal}</td>
-                                <td class="p-2"><span class="px-2 py-1 rounded bg-yellow-100 text-yellow-800">${p.status}</span></td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-            `;
-        }
-
-        // Tambah saldo contoh
-        function tambahSaldo() {
-            const aktif = JSON.parse(localStorage.getItem('akunAktif'));
-            if (!aktif) return;
-            aktif.saldo += 50000;
-            simpanDataPengguna(aktif);
-            tampilNotifikasi('Saldo berhasil ditambahkan Rp 50.000!');
-            muatDataDashboard();
-        }
-
-        // Menu mobile
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            const nav = document.getElementById('navMenu');
-            nav.classList.toggle('hidden');
-            nav.classList.toggle('flex');
-            nav.classList.toggle('flex-col');
-            nav.classList.toggle('absolute');
-            nav.classList.toggle('top-16');
-            nav.classList.toggle('left-0');
-            nav.classList.toggle('right-0');
-            nav.classList.toggle('bg-white');
-            nav.classList.toggle('p-4');
-            nav.classList.toggle('shadow-lg');
+// Muat SEMUA pesanan untuk dilihat admin
+function muatPesananAdmin(){
+    const el=document.getElementById('semuaPesanan');
+    let semua=[];
+    pengguna.forEach(p=>{
+        p.pesanan.forEach(ps=>{
+            semua.push({...ps, namaPengguna:p.nama, email:p.email});
         });
-    </script>
+    });
+    if(!semua.length){el.innerHTML='<tr><td colspan="7" class="p-3 text-center text-gray-500">Belum ada pesanan masuk</td></tr>';return;}
+    el.innerHTML=semua.map(ps=>`
+    <tr class="border-b hover:bg-gray-50">
+        <td class="p-2">${ps.id}</td>
+        <td class="p-2">${ps.namaPengguna}<br><small>${ps.email}</small></td>
+        <td class="p-2">${ps.layanan}</td>
+        <td class="p-2">Rp ${ps.harga.toLocaleString()}</td>
+        <td class="p-2"><span class="px-2 py-1 rounded ${ps.status==='Selesai'?'bg-green-100 text-green-700':'bg-yellow-100 text-yellow-700'}">${ps.status}</span></td>
+        <td class="p-2">${ps.nomor||'-'}<br>${ps.otp?'OTP: '+ps.otp:''}</td>
+        <td class="p-2">
+            <input type="text" id="nomor-${ps.id}" placeholder="Masukkan nomor" class="w-full border p-1 rounded mb-1">
+            <input type="text" id="otp-${ps.id}" placeholder="Masukkan kode OTP" class="w-full border p-1 rounded mb-1">
+            <button onclick="prosesPesanan(${ps.id})" class="w-full bg-green-600 text-white p-1 rounded">Proses & Selesai</button>
+        </td>
+    </tr>`).join('');
+}
+
+// Admin proses pesanan
+function prosesPesanan(idPesanan){
+    const nomor=document.getElementById(`nomor-${idPesanan}`).value.trim();
+    const otp=document.getElementById(`otp-${idPesanan}`).value.trim();
+    if(!nomor)return notif('Masukkan nomor dulu!','error');
+    pengguna.forEach(p=>{
+        const ps=p.pesanan.find(x=>x.id===idPesanan);
+        if(ps){ps.nomor=nomor; ps.otp=otp; ps.status='Selesai';}
+    });
+    simpanData(); muatPesananAdmin();
+    if(akunAktif)muatDashboard();
+    notif('Pesanan berhasil diproses!');
+}
+
+// Tambah saldo contoh
+function tambahSaldo(){akunAktif.saldo+=50000; simpanData(); muatDashboard(); notif('+Rp 50.000');}
+
+// Keluar
+function keluar(){akunAktif=null; simpanData(); tampil('beranda');}
+function keluarAdmin(){tampil('beranda');}
+</script>
 
 </body>
 </html>
