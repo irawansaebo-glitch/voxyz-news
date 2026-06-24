@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id-ID">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOXYZ NOKOS | Layanan Nomor Virtual & Jasa OTP</title>
+    <title>Layanan Nokos & Nomor Virtual - NokosKu</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
@@ -11,346 +11,211 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#00B42A',
-                        secondary: '#0F172A',
-                        dark: '#111827',
-                        light: '#F9FAFB',
-                        grayText: '#4B5563',
+                        primary: '#2563eb',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
                     },
                     fontFamily: {
-                        inter: ['Inter', 'sans-serif'],
-                    }
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
                 }
             }
+        }
     </script>
     <style type="text/tailwindcss">
         @layer utilities {
-            .card-hover {
-                transition: all 0.3s ease;
-            }
-            .card-hover:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 12px 24px rgba(0, 180, 42, 0.15);
-            }
-            .bg-pattern {
-                background-color: #F9FAFB;
-                background-image: radial-gradient(#E5E7EB 1px, transparent 1px);
-                background-size: 20px 20px;
-            }
+            .content-auto { content-visibility: auto; }
+            .text-shadow { text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
         }
     </style>
 </head>
-<body class="bg-pattern font-inter text-gray-800">
-
-    <!-- Header / Navigasi -->
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- Navigasi -->
     <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-bold text-lg">VN</div>
-                <h1 class="text-xl md:text-2xl font-bold text-primary">VOXYZ NOKOS</h1>
-            </div>
-            <nav class="hidden md:flex gap-6 font-medium">
-                <a href="#beranda" class="hover:text-primary transition">Beranda</a>
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-primary">NokosKu</a>
+            <nav class="hidden md:flex gap-6">
                 <a href="#layanan" class="hover:text-primary transition">Layanan</a>
-                <a href="#cara-pakai" class="hover:text-primary transition">Cara Pakai</a>
+                <a href="#tentang" class="hover:text-primary transition">Tentang</a>
                 <a href="#faq" class="hover:text-primary transition">FAQ</a>
                 <a href="#kontak" class="hover:text-primary transition">Kontak</a>
             </nav>
-            <button class="md:hidden text-2xl" id="menuToggle">
+            <button class="md:hidden text-xl" id="menuToggle">
                 <i class="fa fa-bars"></i>
             </button>
         </div>
-        <!-- Menu Mobile -->
-        <div id="mobileMenu" class="hidden bg-white border-t">
-            <div class="container mx-auto px-4 py-3 flex flex-col gap-3 font-medium">
-                <a href="#beranda" class="hover:text-primary py-2">Beranda</a>
-                <a href="#layanan" class="hover:text-primary py-2">Layanan</a>
-                <a href="#cara-pakai" class="hover:text-primary py-2">Cara Pakai</a>
-                <a href="#faq" class="hover:text-primary py-2">FAQ</a>
-                <a href="#kontak" class="hover:text-primary py-2">Kontak</a>
-            </div>
-        </div>
     </header>
 
-    <!-- Bagian Utama / Hero -->
-    <section id="beranda" class="bg-gradient-to-br from-primary/90 via-primary to-primary/80 text-white py-16">
+    <!-- Judul Utama -->
+    <section class="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-12 md:py-16">
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Layanan Nomor Virtual & Jasa OTP</h2>
-            <p class="text-lg md:text-xl opacity-95 max-w-3xl mx-auto mb-8">
-                Solusi praktis untuk verifikasi akun digital. Nokos, Nomor Virtual, OTP WA, dan Nomor Sementara untuk kebutuhan aktivasi, testing, dan operasional bisnis Anda.
+            <h1 class="text-3xl md:text-4xl font-bold mb-4 text-shadow">Layanan Nokos & Nomor Virtual</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto">Jasa OTP, Nomor Virtual, OTP WA & Beli Nomor WA untuk verifikasi akun digital secara praktis</p>
+        </div>
+    </section>
+
+    <!-- Pengantar -->
+    <section class="py-10 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <p class="text-gray-700 leading-relaxed text-justify">
+                NokosKu adalah platform layanan nomor virtual, jasa OTP, OTP WA, beli nomor, nomor WA, dan nokos WA untuk kebutuhan verifikasi akun digital secara praktis. Layanan ini cocok digunakan untuk kebutuhan aktivasi akun, testing aplikasi, operasional bisnis online, dan verifikasi digital sesuai aturan yang berlaku.
             </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#layanan" class="bg-white text-primary font-semibold px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition">Lihat Layanan</a>
-                <a href="#kontak" class="bg-transparent border-2 border-white font-semibold px-8 py-3 rounded-lg hover:bg-white/10 transition">Hubungi Kami</a>
-            </div>
+            <p class="text-gray-700 leading-relaxed mt-4 text-justify">
+                Melalui NokosKu, Anda dapat memilih layanan seperti beli nomor virtual, beli nomor WA, nomor virtual WhatsApp, jasa OTP, OTP WA, nomor sementara, nomor kosong WA, dan nomor verifikasi WhatsApp sesuai kebutuhan akun digital.
+            </p>
         </div>
     </section>
 
-    <!-- Tentang Layanan -->
-    <section class="py-12 bg-white">
+    <!-- Layanan Utama -->
+    <section id="layanan" class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h3 class="text-2xl md:text-3xl font-bold text-center mb-6 text-primary">Apa Itu VOXYZ NOKOS?</h3>
-            <div class="max-w-4xl mx-auto text-center text-gray-700 text-lg leading-relaxed">
-                <p>VOXYZ NOKOS adalah platform layanan nomor virtual, jasa OTP, OTP WA, dan nomor sementara untuk kebutuhan verifikasi akun digital secara praktis. Layanan ini cocok digunakan untuk aktivasi akun, pengujian aplikasi, operasional bisnis online, dan verifikasi digital sesuai aturan yang berlaku.</p>
-                <p class="mt-4">Melalui layanan kami, Anda dapat memilih solusi seperti beli nomor virtual, nomor WhatsApp sementara, jasa penerima kode OTP, dan nomor kosong untuk berbagai kebutuhan verifikasi akun digital.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Daftar Layanan -->
-    <section id="layanan" class="py-12">
-        <div class="container mx-auto px-4">
-            <h3 class="text-2xl md:text-3xl font-bold text-center mb-10 text-primary">Layanan Utama Kami</h3>
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Layanan Utama Kami</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Layanan 1 -->
-                <div class="bg-white rounded-xl shadow p-6 text-center card-hover">
-                    <div class="w-16 h-16 bg-green-100 text-primary rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
-                        <i class="fa fa-phone"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-3 text-primary">Nokos WA</h4>
-                    <p class="text-gray-600 leading-relaxed">Nomor kosong / nomor sementara untuk menerima kode verifikasi WhatsApp dan kebutuhan aktivasi akun.</p>
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+                    <i class="fa fa-whatsapp text-3xl text-green-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Nokos WA</h3>
+                    <p class="text-gray-600">Nomor kosong/virtual khusus untuk verifikasi dan aktivasi akun WhatsApp</p>
                 </div>
-
-                <!-- Layanan 2 -->
-                <div class="bg-white rounded-xl shadow p-6 text-center card-hover">
-                    <div class="w-16 h-16 bg-green-100 text-primary rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
-                        <i class="fa fa-globe"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-3 text-primary">Nomor Virtual</h4>
-                    <p class="text-gray-600 leading-relaxed">Nomor digital tanpa kartu fisik, bisa digunakan untuk menerima kode OTP dan verifikasi akun dari berbagai layanan.</p>
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+                    <i class="fa fa-mobile text-3xl text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Nomor Virtual</h3>
+                    <p class="text-gray-600">Nomor digital tanpa kartu fisik untuk menerima kode OTP berbagai layanan</p>
                 </div>
-
-                <!-- Layanan 3 -->
-                <div class="bg-white rounded-xl shadow p-6 text-center card-hover">
-                    <div class="w-16 h-16 bg-green-100 text-primary rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
-                        <i class="fa fa-key"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-3 text-primary">Jasa OTP</h4>
-                    <p class="text-gray-600 leading-relaxed">Membantu menerima kode verifikasi untuk kebutuhan pendaftaran, login, atau verifikasi akun digital dengan cepat.</p>
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+                    <i class="fa fa-shield text-3xl text-indigo-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Jasa OTP</h3>
+                    <p class="text-gray-600">Bantu terima kode verifikasi untuk aktivasi, login, atau pemulihan akun</p>
                 </div>
-
-                <!-- Layanan 4 -->
-                <div class="bg-white rounded-xl shadow p-6 text-center card-hover">
-                    <div class="w-16 h-16 bg-green-100 text-primary rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
-                        <i class="fa fa-whatsapp"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-3 text-primary">OTP WA</h4>
-                    <p class="text-gray-600 leading-relaxed">Layanan khusus untuk menerima kode verifikasi WhatsApp, cocok untuk pembuatan atau verifikasi akun WA tambahan.</p>
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+                    <i class="fa fa-code text-3xl text-teal-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">OTP WA</h3>
+                    <p class="text-gray-600">Layanan khusus menerima kode verifikasi untuk akun WhatsApp</p>
                 </div>
-
-                <!-- Layanan 5 -->
-                <div class="bg-white rounded-xl shadow p-6 text-center card-hover">
-                    <div class="w-16 h-16 bg-green-100 text-primary rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
-                        <i class="fa fa-shopping-cart"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-3 text-primary">Beli Nomor WA</h4>
-                    <p class="text-gray-600 leading-relaxed">Menyediakan nomor aktif yang bisa digunakan untuk membuat akun WhatsApp baru dengan proses mudah dan cepat.</p>
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+                    <i class="fa fa-shopping-cart text-3xl text-orange-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Beli Nomor</h3>
+                    <p class="text-gray-600">Pilihan nomor aktif sementara atau jangka panjang sesuai kebutuhan</p>
                 </div>
-
-                <!-- Layanan 6 -->
-                <div class="bg-white rounded-xl shadow p-6 text-center card-hover">
-                    <div class="w-16 h-16 bg-green-100 text-primary rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
-                        <i class="fa fa-check-circle"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-3 text-primary">Verifikasi Akun</h4>
-                    <p class="text-gray-600 leading-relaxed">Solusi untuk kebutuhan verifikasi berbagai akun digital, aplikasi, dan layanan online tanpa perlu SIM fisik.</p>
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+                    <i class="fa fa-globe text-3xl text-purple-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Nomor Virtual Global</h3>
+                    <p class="text-gray-600">Nomor dari berbagai negara untuk kebutuhan verifikasi internasional</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Keunggulan -->
-    <section class="py-12 bg-white">
-        <div class="container mx-auto px-4">
-            <h3 class="text-2xl md:text-3xl font-bold text-center mb-10 text-primary">Kenapa Memilih VOXYZ NOKOS?</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-full bg-green-100 text-primary flex items-center justify-center flex-shrink-0 mt-1">
-                        <i class="fa fa-bolt"></i>
-                    </div>
-                    <div>
-                        <h5 class="font-semibold text-lg text-primary mb-1">Proses Cepat & Praktis</h5>
-                        <p class="text-gray-600">Pemesanan dan penerimaan kode OTP diproses secepatnya, tidak perlu menunggu lama.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-full bg-green-100 text-primary flex items-center justify-center flex-shrink-0 mt-1">
-                        <i class="fa fa-mobile"></i>
-                    </div>
-                    <div>
-                        <h5 class="font-semibold text-lg text-primary mb-1">Tanpa Kartu Fisik</h5>
-                        <p class="text-gray-600">Cukup gunakan nomor virtual, tidak perlu membeli atau memasang kartu SIM tambahan.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-full bg-green-100 text-primary flex items-center justify-center flex-shrink-0 mt-1">
-                        <i class="fa fa-globe"></i>
-                    </div>
-                    <div>
-                        <h5 class="font-semibold text-lg text-primary mb-1">Berbagai Layanan</h5>
-                        <p class="text-gray-600">Mendukung verifikasi untuk WhatsApp, media sosial, aplikasi, dan berbagai layanan populer lainnya.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-full bg-green-100 text-primary flex items-center justify-center flex-shrink-0 mt-1">
-                        <i class="fa fa-lock"></i>
-                    </div>
-                    <div>
-                        <h5 class="font-semibold text-lg text-primary mb-1">Privasi Terjaga</h5>
-                        <p class="text-gray-600">Lindungi nomor pribadi Anda, gunakan nomor sementara untuk kebutuhan pendaftaran.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-full bg-green-100 text-primary flex items-center justify-center flex-shrink-0 mt-1">
-                        <i class="fa fa-clock-o"></i>
-                    </div>
-                    <div>
-                        <h5 class="font-semibold text-lg text-primary mb-1">Layanan 24 Jam</h5>
-                        <p class="text-gray-600">Bisa dipesan kapan saja, tersedia setiap hari tanpa libur untuk kebutuhan mendesak.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-full bg-green-100 text-primary flex items-center justify-center flex-shrink-0 mt-1">
-                        <i class="fa fa-headphones"></i>
-                    </div>
-                    <div>
-                        <h5 class="font-semibold text-lg text-primary mb-1">Dukungan Aktif</h5>
-                        <p class="text-gray-600">Tim siap membantu jika ada kendala atau pertanyaan seputar penggunaan layanan kami.</p>
-                    </div>
-                </div>
-            </div>
+    <section id="tentang" class="py-12 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Kenapa Memilih NokosKu?</h2>
+            <ul class="space-y-4">
+                <li class="flex items-start gap-3">
+                    <i class="fa fa-check-circle text-green-500 mt-1"></i>
+                    <span>Proses cepat, otomatis, dan praktis tanpa antre panjang</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <i class="fa fa-check-circle text-green-500 mt-1"></i>
+                    <span>Nomor virtual tersedia untuk verifikasi berbagai aplikasi dan layanan</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <i class="fa fa-check-circle text-green-500 mt-1"></i>
+                    <span>Mendukung layanan OTP WA, nomor sementara, dan nomor jangka panjang</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <i class="fa fa-check-circle text-green-500 mt-1"></i>
+                    <span>Harga terjangkau, transparan tanpa biaya tersembunyi</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <i class="fa fa-check-circle text-green-500 mt-1"></i>
+                    <span>Dukungan layanan aktif siap bantu kendala pengguna</span>
+                </li>
+            </ul>
         </div>
     </section>
 
-    <!-- Cara Pemesanan -->
-    <section id="cara-pakai" class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h3 class="text-2xl md:text-3xl font-bold text-center mb-10 text-primary">Cara Menggunakan Layanan</h3>
-            <div class="max-w-3xl mx-auto space-y-6">
-                <div class="flex gap-5 items-center">
-                    <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xl flex-shrink-0">1</div>
-                    <div>
-                        <h5 class="font-semibold text-lg text-primary">Pilih Layanan</h5>
-                        <p class="text-gray-600">Tentukan jenis layanan yang Anda butuhkan, apakah nomor virtual, jasa OTP, atau nomor WhatsApp.</p>
-                    </div>
-                </div>
-                <div class="flex gap-5 items-center">
-                    <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xl flex-shrink-0">2</div>
-                    <div>
-                        <h5 class="font-semibold text-lg text-primary">Lakukan Pembayaran</h5>
-                        <p class="text-gray-600">Pilih metode pembayaran yang tersedia dan selesaikan transaksi sesuai nominal yang tertera.</p>
-                    </div>
-                </div>
-                <div class="flex gap-5 items-center">
-                    <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xl flex-shrink-0">3</div>
-                    <div>
-                        <h5 class="font-semibold text-lg text-primary">Terima Nomor / Kode</h5>
-                        <p class="text-gray-600">Setelah pembayaran terkonfirmasi, nomor atau kode verifikasi akan segera dikirimkan kepada Anda.</p>
-                    </div>
-                </div>
-                <div class="flex gap-5 items-center">
-                    <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xl flex-shrink-0">4</div>
-                    <div>
-                        <h5 class="font-semibold text-lg text-primary">Gunakan Sesuai Kebutuhan</h5>
-                        <p class="text-gray-600">Masukkan nomor atau kode yang diterima untuk menyelesaikan proses verifikasi akun Anda.</p>
-                    </div>
-                </div>
+    <!-- Penjelasan Layanan -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4 max-w-4xl space-y-8">
+            <div>
+                <h3 class="text-xl font-semibold mb-3">Nomor Virtual untuk Verifikasi Akun</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    Nomor virtual adalah nomor digital yang dapat digunakan untuk menerima kode OTP tanpa harus memakai kartu SIM fisik secara langsung. Di NokosKu, layanan ini tersedia untuk OTP WhatsApp, verifikasi akun digital, nomor WA virtual, dan nomor sementara.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-3">Jasa OTP dan OTP WA</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    Jasa OTP membantu pengguna menerima kode verifikasi untuk kebutuhan akun digital. OTP WA adalah kode verifikasi khusus untuk proses aktivasi, login, atau verifikasi akun WhatsApp dengan tingkat keberhasilan tinggi.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-3">Beli Nomor Virtual & WA</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    Layanan ini cocok untuk kebutuhan nomor tambahan, testing aplikasi, aktivasi akun, dan operasional bisnis online. Gunakan secara bijak, legal, dan sesuai ketentuan platform serta hukum yang berlaku.
+                </p>
             </div>
         </div>
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="py-12">
-        <div class="container mx-auto px-4">
-            <h3 class="text-2xl md:text-3xl font-bold text-center mb-10 text-primary">Pertanyaan Umum (FAQ)</h3>
-            <div class="max-w-3xl mx-auto space-y-4">
-                <div class="bg-white rounded-lg shadow p-5">
-                    <h5 class="font-semibold text-lg text-primary mb-2">Apa itu Nokos?</h5>
-                    <p class="text-gray-600">Nokos adalah istilah untuk nomor kosong atau nomor virtual yang digunakan untuk menerima kode OTP dan membantu proses verifikasi akun digital tanpa memakai kartu SIM fisik.</p>
+    <section id="faq" class="py-12 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Pertanyaan Umum (FAQ)</h2>
+            <div class="space-y-5">
+                <div class="border rounded-lg p-4">
+                    <h4 class="font-semibold">Apa itu Nokos?</h4>
+                    <p class="text-gray-600 mt-2">Nokos adalah istilah untuk nomor kosong atau nomor virtual yang digunakan menerima kode OTP dan memudahkan verifikasi akun digital.</p>
                 </div>
-                <div class="bg-white rounded-lg shadow p-5">
-                    <h5 class="font-semibold text-lg text-primary mb-2">Apa itu nomor virtual?</h5>
-                    <p class="text-gray-600">Nomor virtual adalah nomor digital yang bisa digunakan secara daring untuk menerima kode verifikasi dan SMS, tidak terikat pada kartu fisik.</p>
+                <div class="border rounded-lg p-4">
+                    <h4 class="font-semibold">Apa itu nomor virtual?</h4>
+                    <p class="text-gray-600 mt-2">Nomor digital berbasis cloud, tidak butuh kartu fisik, bisa menerima SMS/kode verifikasi secara daring.</p>
                 </div>
-                <div class="bg-white rounded-lg shadow p-5">
-                    <h5 class="font-semibold text-lg text-primary mb-2">Apakah layanan ini aman?</h5>
-                    <p class="text-gray-600">Aman jika digunakan untuk kebutuhan yang wajar, legal, dan sesuai hukum serta kebijakan layanan yang Anda gunakan.</p>
+                <div class="border rounded-lg p-4">
+                    <h4 class="font-semibold">Apakah aman digunakan?</h4>
+                    <p class="text-gray-600 mt-2">Aman jika dipakai untuk kebutuhan sah, wajar, sesuai aturan layanan dan hukum yang berlaku di Indonesia.</p>
                 </div>
-                <div class="bg-white rounded-lg shadow p-5">
-                    <h5 class="font-semibold text-lg text-primary mb-2">Apakah bisa untuk verifikasi WhatsApp?</h5>
-                    <p class="text-gray-600">Ya, kami menyediakan layanan khusus OTP WA dan nomor virtual untuk kebutuhan verifikasi akun WhatsApp.</p>
-                </div>
-                <div class="bg-white rounded-lg shadow p-5">
-                    <h5 class="font-semibold text-lg text-primary mb-2">Berapa lama masa aktif nomornya?</h5>
-                    <p class="text-gray-600">Bervariasi tergantung jenis layanan, ada yang bersifat sementara untuk sekali pakai, ada juga yang bisa digunakan dalam jangka waktu tertentu.</p>
+                <div class="border rounded-lg p-4">
+                    <h4 class="font-semibold">Bisa untuk verifikasi WhatsApp?</h4>
+                    <p class="text-gray-600 mt-2">Ya, tersedia layanan khusus Nokos WA dan OTP WA untuk kebutuhan aktivasi akun WhatsApp.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Kontak -->
-    <section id="kontak" class="py-12 bg-white">
-        <div class="container mx-auto px-4">
-            <h3 class="text-2xl md:text-3xl font-bold text-center mb-8 text-primary">Hubungi Kami</h3>
-            <div class="max-w-lg mx-auto bg-gray-50 rounded-xl shadow p-6">
-                <div class="space-y-5">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-green-100 text-primary flex items-center justify-center text-xl">
-                            <i class="fa fa-whatsapp"></i>
-                        </div>
-                        <div>
-                            <h5 class="font-semibold text-lg text-primary">WhatsApp</h5>
-                            <p class="text-gray-700">+62 877-6937-0995</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-green-100 text-primary flex items-center justify-center text-xl">
-                            <i class="fa fa-envelope"></i>
-                        </div>
-                        <div>
-                            <h5 class="font-semibold text-lg text-primary">Email</h5>
-                            <p class="text-gray-700">voxyznokos@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-green-100 text-primary flex items-center justify-center text-xl">
-                            <i class="fa fa-instagram"></i>
-                        </div>
-                        <div>
-                            <h5 class="font-semibold text-lg text-primary">Instagram</h5>
-                            <p class="text-gray-700">@voxyzzz_</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-6 text-center">
-                    <a href="https://wa.me/6287769370995" target="_blank" class="inline-block w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-lg shadow transition">
-                        <i class="fa fa-whatsapp mr-2"></i> Pesan Sekarang via WhatsApp
-                    </a>
-                </div>
-            </div>
+    <!-- Catatan Penting -->
+    <section class="py-8 bg-blue-50 border-t border-b border-blue-100">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <p class="text-gray-700 italic">
+                ⚠️ Gunakan layanan ini secara bertanggung jawab, legal, dan tidak untuk aktivitas yang melanggar hukum atau ketentuan layanan pihak ketiga.
+            </p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-6">
+    <footer class="bg-dark text-white py-8">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-lg font-semibold">VOXYZ NOKOS</p>
-            <p class="text-gray-300 mt-2">Layanan Nomor Virtual, Jasa OTP & Verifikasi Akun Digital</p>
-            <p class="text-gray-400 text-sm mt-4">&copy; 2026 VOXYZ NOKOS | Semua Hak Dilindungi. Gunakan layanan dengan bijak dan sesuai hukum yang berlaku.</p>
+            <p>&copy; 2026 NokosKu - Layanan Nomor Virtual & Jasa OTP. Semua hak dilindungi.</p>
+            <p class="text-gray-400 text-sm mt-2">Untuk kebutuhan verifikasi yang sah dan bertanggung jawab</p>
         </div>
     </footer>
 
-    <!-- Script -->
+    <!-- Script Menu Mobile -->
     <script>
         const menuToggle = document.getElementById('menuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
+        const navMenu = document.querySelector('nav');
         menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            menuToggle.innerHTML = mobileMenu.classList.contains('hidden') ? 
-                '<i class="fa fa-bars"></i>' : 
-                '<i class="fa fa-times"></i>';
+            navMenu.classList.toggle('hidden');
+            navMenu.classList.toggle('flex');
+            navMenu.classList.toggle('flex-col');
+            navMenu.classList.toggle('absolute');
+            navMenu.classList.toggle('top-16');
+            navMenu.classList.toggle('left-0');
+            navMenu.classList.toggle('right-0');
+            navMenu.classList.toggle('bg-white');
+            navMenu.classList.toggle('p-4');
+            navMenu.classList.toggle('shadow-lg');
         });
     </script>
-
 </body>
 </html>
