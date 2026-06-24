@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Layanan Nokos & Nomor Virtual - NokosKu</title>
+    <title>NokosKu - Layanan Nokos & Nomor Virtual</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         primary: '#2563eb',
-                        dark: '#1e293b',
-                        light: '#f8fafc'
+                        dark: '#0f172a',
+                        success: '#10b981',
+                        warning: '#f59e0b',
+                        danger: '#ef4444'
                     },
                     fontFamily: {
                         sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
+                    }
                 }
             }
         }
@@ -26,19 +28,28 @@
         @layer utilities {
             .content-auto { content-visibility: auto; }
             .text-shadow { text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+            .hidden-section { display: none; }
         }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
+
     <!-- Navigasi -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold text-primary">NokosKu</a>
-            <nav class="hidden md:flex gap-6">
-                <a href="#layanan" class="hover:text-primary transition">Layanan</a>
-                <a href="#tentang" class="hover:text-primary transition">Tentang</a>
-                <a href="#faq" class="hover:text-primary transition">FAQ</a>
-                <a href="#kontak" class="hover:text-primary transition">Kontak</a>
+            <a href="#" onclick="tampilkanHalaman('beranda')" class="text-xl font-bold text-primary">NokosKu</a>
+            <nav class="hidden md:flex gap-6 items-center" id="navMenu">
+                <a href="#layanan" onclick="tampilkanHalaman('beranda')" class="hover:text-primary transition">Layanan</a>
+                <a href="#tentang" onclick="tampilkanHalaman('beranda')" class="hover:text-primary transition">Tentang</a>
+                <a href="#faq" onclick="tampilkanHalaman('beranda')" class="hover:text-primary transition">FAQ</a>
+                <span id="menuMasuk">
+                    <button onclick="tampilkanHalaman('masuk')" class="hover:text-primary mr-2">Masuk</button>
+                    <button onclick="tampilkanHalaman('daftar')" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition">Daftar</button>
+                </span>
+                <span id="menuPengguna" class="hidden">
+                    <button onclick="tampilkanHalaman('dashboard')" class="bg-primary text-white px-4 py-2 rounded-lg mr-2">Dashboard</button>
+                    <button onclick="keluarAkun()" class="text-danger hover:text-danger/80">Keluar</button>
+                </span>
             </nav>
             <button class="md:hidden text-xl" id="menuToggle">
                 <i class="fa fa-bars"></i>
@@ -46,176 +57,341 @@
         </div>
     </header>
 
-    <!-- Judul Utama -->
-    <section class="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-12 md:py-16">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="text-3xl md:text-4xl font-bold mb-4 text-shadow">Layanan Nokos & Nomor Virtual</h1>
-            <p class="text-lg md:text-xl max-w-3xl mx-auto">Jasa OTP, Nomor Virtual, OTP WA & Beli Nomor WA untuk verifikasi akun digital secara praktis</p>
-        </div>
-    </section>
+    <!-- Notifikasi -->
+    <div id="notifikasi" class="fixed top-20 right-4 z-50 max-w-xs hidden"></div>
 
-    <!-- Pengantar -->
-    <section class="py-10 bg-white">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <p class="text-gray-700 leading-relaxed text-justify">
-                NokosKu adalah platform layanan nomor virtual, jasa OTP, OTP WA, beli nomor, nomor WA, dan nokos WA untuk kebutuhan verifikasi akun digital secara praktis. Layanan ini cocok digunakan untuk kebutuhan aktivasi akun, testing aplikasi, operasional bisnis online, dan verifikasi digital sesuai aturan yang berlaku.
-            </p>
-            <p class="text-gray-700 leading-relaxed mt-4 text-justify">
-                Melalui NokosKu, Anda dapat memilih layanan seperti beli nomor virtual, beli nomor WA, nomor virtual WhatsApp, jasa OTP, OTP WA, nomor sementara, nomor kosong WA, dan nomor verifikasi WhatsApp sesuai kebutuhan akun digital.
-            </p>
-        </div>
-    </section>
+    <div class="container mx-auto px-4 py-6">
 
-    <!-- Layanan Utama -->
-    <section id="layanan" class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Layanan Utama Kami</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-                    <i class="fa fa-whatsapp text-3xl text-green-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">Nokos WA</h3>
-                    <p class="text-gray-600">Nomor kosong/virtual khusus untuk verifikasi dan aktivasi akun WhatsApp</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-                    <i class="fa fa-mobile text-3xl text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">Nomor Virtual</h3>
-                    <p class="text-gray-600">Nomor digital tanpa kartu fisik untuk menerima kode OTP berbagai layanan</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-                    <i class="fa fa-shield text-3xl text-indigo-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">Jasa OTP</h3>
-                    <p class="text-gray-600">Bantu terima kode verifikasi untuk aktivasi, login, atau pemulihan akun</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-                    <i class="fa fa-code text-3xl text-teal-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">OTP WA</h3>
-                    <p class="text-gray-600">Layanan khusus menerima kode verifikasi untuk akun WhatsApp</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-                    <i class="fa fa-shopping-cart text-3xl text-orange-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">Beli Nomor</h3>
-                    <p class="text-gray-600">Pilihan nomor aktif sementara atau jangka panjang sesuai kebutuhan</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-                    <i class="fa fa-globe text-3xl text-purple-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">Nomor Virtual Global</h3>
-                    <p class="text-gray-600">Nomor dari berbagai negara untuk kebutuhan verifikasi internasional</p>
-                </div>
+        <!-- Halaman Beranda -->
+        <section id="halaman-beranda" class="halaman">
+            <!-- Judul Utama -->
+            <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-12 md:py-16 rounded-xl mb-10 text-center">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 text-shadow">Layanan Nokos & Nomor Virtual</h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto">Jasa OTP, Nomor Virtual, OTP WA & Beli Nomor WA untuk verifikasi akun digital secara praktis</p>
             </div>
-        </div>
-    </section>
 
-    <!-- Keunggulan -->
-    <section id="tentang" class="py-12 bg-white">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Kenapa Memilih NokosKu?</h2>
-            <ul class="space-y-4">
-                <li class="flex items-start gap-3">
-                    <i class="fa fa-check-circle text-green-500 mt-1"></i>
-                    <span>Proses cepat, otomatis, dan praktis tanpa antre panjang</span>
-                </li>
-                <li class="flex items-start gap-3">
-                    <i class="fa fa-check-circle text-green-500 mt-1"></i>
-                    <span>Nomor virtual tersedia untuk verifikasi berbagai aplikasi dan layanan</span>
-                </li>
-                <li class="flex items-start gap-3">
-                    <i class="fa fa-check-circle text-green-500 mt-1"></i>
-                    <span>Mendukung layanan OTP WA, nomor sementara, dan nomor jangka panjang</span>
-                </li>
-                <li class="flex items-start gap-3">
-                    <i class="fa fa-check-circle text-green-500 mt-1"></i>
-                    <span>Harga terjangkau, transparan tanpa biaya tersembunyi</span>
-                </li>
-                <li class="flex items-start gap-3">
-                    <i class="fa fa-check-circle text-green-500 mt-1"></i>
-                    <span>Dukungan layanan aktif siap bantu kendala pengguna</span>
-                </li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- Penjelasan Layanan -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4 max-w-4xl space-y-8">
-            <div>
-                <h3 class="text-xl font-semibold mb-3">Nomor Virtual untuk Verifikasi Akun</h3>
+            <!-- Pengantar -->
+            <div class="bg-white p-6 rounded-lg shadow mb-10">
                 <p class="text-gray-700 leading-relaxed">
-                    Nomor virtual adalah nomor digital yang dapat digunakan untuk menerima kode OTP tanpa harus memakai kartu SIM fisik secara langsung. Di NokosKu, layanan ini tersedia untuk OTP WhatsApp, verifikasi akun digital, nomor WA virtual, dan nomor sementara.
+                    NokosKu adalah platform layanan nomor virtual, jasa OTP, OTP WA, beli nomor, nomor WA, dan nokos WA untuk kebutuhan verifikasi akun digital secara praktis. Layanan ini cocok digunakan untuk kebutuhan aktivasi akun, testing aplikasi, operasional bisnis online, dan verifikasi digital sesuai aturan yang berlaku.
+                </p>
+                <p class="text-gray-700 leading-relaxed mt-4">
+                    Melalui NokosKu, Anda dapat memilih layanan seperti beli nomor virtual, beli nomor WA, nomor virtual WhatsApp, jasa OTP, OTP WA, nomor sementara, nomor kosong WA, dan nomor verifikasi WhatsApp sesuai kebutuhan akun digital.
                 </p>
             </div>
-            <div>
-                <h3 class="text-xl font-semibold mb-3">Jasa OTP dan OTP WA</h3>
-                <p class="text-gray-700 leading-relaxed">
-                    Jasa OTP membantu pengguna menerima kode verifikasi untuk kebutuhan akun digital. OTP WA adalah kode verifikasi khusus untuk proses aktivasi, login, atau verifikasi akun WhatsApp dengan tingkat keberhasilan tinggi.
-                </p>
-            </div>
-            <div>
-                <h3 class="text-xl font-semibold mb-3">Beli Nomor Virtual & WA</h3>
-                <p class="text-gray-700 leading-relaxed">
-                    Layanan ini cocok untuk kebutuhan nomor tambahan, testing aplikasi, aktivasi akun, dan operasional bisnis online. Gunakan secara bijak, legal, dan sesuai ketentuan platform serta hukum yang berlaku.
-                </p>
-            </div>
-        </div>
-    </section>
 
-    <!-- FAQ -->
-    <section id="faq" class="py-12 bg-white">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Pertanyaan Umum (FAQ)</h2>
-            <div class="space-y-5">
-                <div class="border rounded-lg p-4">
-                    <h4 class="font-semibold">Apa itu Nokos?</h4>
-                    <p class="text-gray-600 mt-2">Nokos adalah istilah untuk nomor kosong atau nomor virtual yang digunakan menerima kode OTP dan memudahkan verifikasi akun digital.</p>
-                </div>
-                <div class="border rounded-lg p-4">
-                    <h4 class="font-semibold">Apa itu nomor virtual?</h4>
-                    <p class="text-gray-600 mt-2">Nomor digital berbasis cloud, tidak butuh kartu fisik, bisa menerima SMS/kode verifikasi secara daring.</p>
-                </div>
-                <div class="border rounded-lg p-4">
-                    <h4 class="font-semibold">Apakah aman digunakan?</h4>
-                    <p class="text-gray-600 mt-2">Aman jika dipakai untuk kebutuhan sah, wajar, sesuai aturan layanan dan hukum yang berlaku di Indonesia.</p>
-                </div>
-                <div class="border rounded-lg p-4">
-                    <h4 class="font-semibold">Bisa untuk verifikasi WhatsApp?</h4>
-                    <p class="text-gray-600 mt-2">Ya, tersedia layanan khusus Nokos WA dan OTP WA untuk kebutuhan aktivasi akun WhatsApp.</p>
+            <!-- Layanan Utama -->
+            <div id="layanan" class="mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Layanan Utama Kami</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+                        <i class="fa fa-whatsapp text-3xl text-green-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Nokos WA</h3>
+                        <p class="text-gray-600 mb-4">Nomor khusus verifikasi dan aktivasi akun WhatsApp</p>
+                        <p class="text-lg font-bold text-primary">Rp 8.000</p>
+                        <button onclick="pesanLayanan(1)" class="w-full mt-3 bg-primary text-white py-2 rounded hover:bg-primary/90">Pesan Sekarang</button>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+                        <i class="fa fa-mobile text-3xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Nomor Virtual</h3>
+                        <p class="text-gray-600 mb-4">Nomor digital tanpa kartu fisik untuk terima kode OTP</p>
+                        <p class="text-lg font-bold text-primary">Rp 5.000</p>
+                        <button onclick="pesanLayanan(2)" class="w-full mt-3 bg-primary text-white py-2 rounded hover:bg-primary/90">Pesan Sekarang</button>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+                        <i class="fa fa-shield text-3xl text-indigo-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Jasa OTP</h3>
+                        <p class="text-gray-600 mb-4">Bantu terima kode verifikasi berbagai aplikasi</p>
+                        <p class="text-lg font-bold text-primary">Rp 6.000</p>
+                        <button onclick="pesanLayanan(3)" class="w-full mt-3 bg-primary text-white py-2 rounded hover:bg-primary/90">Pesan Sekarang</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Catatan Penting -->
-    <section class="py-8 bg-blue-50 border-t border-b border-blue-100">
-        <div class="container mx-auto px-4 max-w-4xl text-center">
-            <p class="text-gray-700 italic">
-                ⚠️ Gunakan layanan ini secara bertanggung jawab, legal, dan tidak untuk aktivitas yang melanggar hukum atau ketentuan layanan pihak ketiga.
-            </p>
-        </div>
-    </section>
+            <!-- FAQ -->
+            <div id="faq" class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-2xl font-bold text-center mb-6">Pertanyaan Umum</h2>
+                <div class="space-y-4">
+                    <div class="border-b pb-3">
+                        <h4 class="font-semibold">Apa itu Nokos?</h4>
+                        <p class="text-gray-600 mt-1">Nokos adalah istilah untuk nomor kosong atau nomor virtual yang digunakan menerima kode OTP dan memudahkan verifikasi akun digital.</p>
+                    </div>
+                    <div class="border-b pb-3">
+                        <h4 class="font-semibold">Apakah aman digunakan?</h4>
+                        <p class="text-gray-600 mt-1">Aman jika dipakai untuk kebutuhan sah, wajar, sesuai aturan layanan dan hukum yang berlaku di Indonesia.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Bisa untuk verifikasi WhatsApp?</h4>
+                        <p class="text-gray-600 mt-1">Ya, tersedia layanan khusus Nokos WA untuk kebutuhan aktivasi akun WhatsApp.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Halaman Masuk -->
+        <section id="halaman-masuk" class="halaman hidden-section max-w-md mx-auto">
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-center mb-6">Masuk ke Akun</h2>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-1">Email</label>
+                    <input type="email" id="emailMasuk" class="w-full border p-3 rounded-lg" placeholder="email@anda.com">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-1">Kata Sandi</label>
+                    <input type="password" id="sandiMasuk" class="w-full border p-3 rounded-lg" placeholder="Masukkan kata sandi">
+                </div>
+                <button onclick="prosesMasuk()" class="w-full bg-primary text-white py-3 rounded-lg hover:bg-primary/90 font-semibold">Masuk Sekarang</button>
+                <p class="text-center mt-4 text-gray-600">Belum punya akun? <a href="#" onclick="tampilkanHalaman('daftar')" class="text-primary">Daftar di sini</a></p>
+            </div>
+        </section>
+
+        <!-- Halaman Daftar -->
+        <section id="halaman-daftar" class="halaman hidden-section max-w-md mx-auto">
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-center mb-6">Daftar Akun Baru</h2>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-1">Nama Lengkap</label>
+                    <input type="text" id="namaDaftar" class="w-full border p-3 rounded-lg" placeholder="Nama Anda">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-1">Email</label>
+                    <input type="email" id="emailDaftar" class="w-full border p-3 rounded-lg" placeholder="email@anda.com">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-1">Kata Sandi</label>
+                    <input type="password" id="sandiDaftar" class="w-full border p-3 rounded-lg" placeholder="Buat kata sandi">
+                </div>
+                <button onclick="prosesDaftar()" class="w-full bg-primary text-white py-3 rounded-lg hover:bg-primary/90 font-semibold">Daftar Sekarang</button>
+                <p class="text-center mt-4 text-gray-600">Sudah punya akun? <a href="#" onclick="tampilkanHalaman('masuk')" class="text-primary">Masuk di sini</a></p>
+            </div>
+        </section>
+
+        <!-- Halaman Dashboard -->
+        <section id="halaman-dashboard" class="halaman hidden-section">
+            <h2 class="text-2xl font-bold mb-6">Dashboard Pengguna</h2>
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-5 rounded-lg shadow border-l-4 border-primary">
+                    <h3 class="text-lg font-semibold text-gray-700">Saldo Akun</h3>
+                    <p class="text-2xl font-bold text-success mt-2" id="saldoTampil">Rp 0</p>
+                    <button onclick="tambahSaldo()" class="mt-3 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90">Isi Saldo</button>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow border-l-4 border-warning">
+                    <h3 class="text-lg font-semibold text-gray-700">Total Pesanan</h3>
+                    <p class="text-2xl font-bold text-warning mt-2" id="jumlahPesanan">0</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow border-l-4 border-success">
+                    <h3 class="text-lg font-semibold text-gray-700">Status Akun</h3>
+                    <p class="text-lg font-medium text-success mt-2">Aktif</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-semibold mb-4">Riwayat Pesanan</h3>
+                <div id="daftarPesanan">
+                    <p class="text-gray-500 italic">Belum ada pesanan yang dibuat.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-8">
+    <footer class="bg-dark text-white py-6 mt-8">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2026 NokosKu - Layanan Nomor Virtual & Jasa OTP. Semua hak dilindungi.</p>
-            <p class="text-gray-400 text-sm mt-2">Untuk kebutuhan verifikasi yang sah dan bertanggung jawab</p>
+            <p>&copy; 2026 NokosKu - Layanan Nomor Virtual & Jasa OTP</p>
+            <p class="text-gray-400 text-sm mt-2">Gunakan layanan secara bijak, legal, dan bertanggung jawab</p>
         </div>
     </footer>
 
-    <!-- Script Menu Mobile -->
     <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.querySelector('nav');
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('hidden');
-            navMenu.classList.toggle('flex');
-            navMenu.classList.toggle('flex-col');
-            navMenu.classList.toggle('absolute');
-            navMenu.classList.toggle('top-16');
-            navMenu.classList.toggle('left-0');
-            navMenu.classList.toggle('right-0');
-            navMenu.classList.toggle('bg-white');
-            navMenu.classList.toggle('p-4');
-            navMenu.classList.toggle('shadow-lg');
+        // Data layanan
+        const daftarLayanan = [
+            { id: 1, nama: "Nokos WA", harga: 8000 },
+            { id: 2, nama: "Nomor Virtual", harga: 5000 },
+            { id: 3, nama: "Jasa OTP", harga: 6000 }
+        ];
+
+        // Cek status login saat halaman dibuka
+        cekLogin();
+
+        // Tampilkan halaman yang dipilih
+        function tampilkanHalaman(nama) {
+            document.querySelectorAll('.halaman').forEach(el => el.classList.add('hidden-section'));
+            document.getElementById('halaman-' + nama).classList.remove('hidden-section');
+            window.scrollTo(0, 0);
+        }
+
+        // Tampilkan notifikasi
+        function tampilNotifikasi(teks, jenis = 'success') {
+            const el = document.getElementById('notifikasi');
+            el.textContent = teks;
+            el.className = `fixed top-20 right-4 z-50 p-3 rounded-lg shadow-lg text-white ${jenis === 'success' ? 'bg-green-600' : 'bg-red-600'}`;
+            el.classList.remove('hidden');
+            setTimeout(() => el.classList.add('hidden'), 3000);
+        }
+
+        // Proses daftar akun
+        function prosesDaftar() {
+            const nama = document.getElementById('namaDaftar').value.trim();
+            const email = document.getElementById('emailDaftar').value.trim();
+            const sandi = document.getElementById('sandiDaftar').value.trim();
+
+            if (!nama || !email || !sandi) return tampilNotifikasi('Semua kolom harus diisi!', 'error');
+
+            const pengguna = JSON.parse(localStorage.getItem('pengguna')) || [];
+            if (pengguna.some(p => p.email === email)) return tampilNotifikasi('Email sudah terdaftar!', 'error');
+
+            const akunBaru = { id: Date.now(), nama, email, sandi, saldo: 0, pesanan: [] };
+            pengguna.push(akunBaru);
+            localStorage.setItem('pengguna', JSON.stringify(pengguna));
+            localStorage.setItem('akunAktif', JSON.stringify(akunBaru));
+
+            tampilNotifikasi('Daftar berhasil!');
+            updateMenuAkun();
+            tampilkanHalaman('dashboard');
+        }
+
+        // Proses masuk akun
+        function prosesMasuk() {
+            const email = document.getElementById('emailMasuk').value.trim();
+            const sandi = document.getElementById('sandiMasuk').value.trim();
+
+            const pengguna = JSON.parse(localStorage.getItem('pengguna')) || [];
+            const ditemukan = pengguna.find(p => p.email === email && p.sandi === sandi);
+
+            if (!ditemukan) return tampilNotifikasi('Email atau sandi salah!', 'error');
+
+            localStorage.setItem('akunAktif', JSON.stringify(ditemukan));
+            tampilNotifikasi('Berhasil masuk!');
+            updateMenuAkun();
+            tampilkanHalaman('dashboard');
+            muatDataDashboard();
+        }
+
+        // Cek status login
+        function cekLogin() {
+            const aktif = localStorage.getItem('akunAktif');
+            if (aktif) updateMenuAkun();
+        }
+
+        // Update tampilan menu akun
+        function updateMenuAkun() {
+            const aktif = localStorage.getItem('akunAktif');
+            document.getElementById('menuMasuk').classList.toggle('hidden', aktif);
+            document.getElementById('menuPengguna').classList.toggle('hidden', !aktif);
+            if (aktif) muatDataDashboard();
+        }
+
+        // Keluar dari akun
+        function keluarAkun() {
+            localStorage.removeItem('akunAktif');
+            tampilNotifikasi('Berhasil keluar!');
+            updateMenuAkun();
+            tampilkanHalaman('beranda');
+        }
+
+        // Pesan layanan
+        function pesanLayanan(id) {
+            const aktif = JSON.parse(localStorage.getItem('akunAktif'));
+            if (!aktif) {
+                tampilNotifikasi('Silakan masuk terlebih dahulu!', 'error');
+                tampilkanHalaman('masuk');
+                return;
+            }
+
+            const layanan = daftarLayanan.find(l => l.id == id);
+            if (aktif.saldo < layanan.harga) return tampilNotifikasi('Saldo tidak cukup!', 'error');
+
+            // Kurangi saldo
+            aktif.saldo -= layanan.harga;
+            // Simpan pesanan
+            aktif.pesanan.unshift({
+                id: Date.now(),
+                nama: layanan.nama,
+                harga: layanan.harga,
+                tanggal: new Date().toLocaleString('id-ID'),
+                status: 'Menunggu'
+            });
+
+            // Perbarui data
+            simpanDataPengguna(aktif);
+            tampilNotifikasi(`Pesanan ${layanan.nama} berhasil dibuat!`);
+            muatDataDashboard();
+            tampilkanHalaman('dashboard');
+        }
+
+        // Simpan data pengguna ke penyimpanan lokal
+        function simpanDataPengguna(data) {
+            const semua = JSON.parse(localStorage.getItem('pengguna')) || [];
+            const indeks = semua.findIndex(p => p.id === data.id);
+            if (indeks !== -1) semua[indeks] = data;
+            localStorage.setItem('pengguna', JSON.stringify(semua));
+            localStorage.setItem('akunAktif', JSON.stringify(data));
+        }
+
+        // Muat data ke dashboard
+        function muatDataDashboard() {
+            const aktif = JSON.parse(localStorage.getItem('akunAktif'));
+            if (!aktif) return;
+
+            document.getElementById('saldoTampil').textContent = `Rp ${aktif.saldo.toLocaleString('id-ID')}`;
+            document.getElementById('jumlahPesanan').textContent = aktif.pesanan.length;
+
+            const daftarEl = document.getElementById('daftarPesanan');
+            if (aktif.pesanan.length === 0) {
+                daftarEl.innerHTML = '<p class="text-gray-500 italic">Belum ada pesanan yang dibuat.</p>';
+                return;
+            }
+
+            daftarEl.innerHTML = `
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b text-left">
+                            <th class="p-2">Layanan</th>
+                            <th class="p-2">Harga</th>
+                            <th class="p-2">Tanggal</th>
+                            <th class="p-2">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${aktif.pesanan.map(p => `
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="p-2">${p.nama}</td>
+                                <td class="p-2">Rp ${p.harga.toLocaleString('id-ID')}</td>
+                                <td class="p-2">${p.tanggal}</td>
+                                <td class="p-2"><span class="px-2 py-1 rounded bg-yellow-100 text-yellow-800">${p.status}</span></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        // Tambah saldo contoh
+        function tambahSaldo() {
+            const aktif = JSON.parse(localStorage.getItem('akunAktif'));
+            if (!aktif) return;
+            aktif.saldo += 50000;
+            simpanDataPengguna(aktif);
+            tampilNotifikasi('Saldo berhasil ditambahkan Rp 50.000!');
+            muatDataDashboard();
+        }
+
+        // Menu mobile
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const nav = document.getElementById('navMenu');
+            nav.classList.toggle('hidden');
+            nav.classList.toggle('flex');
+            nav.classList.toggle('flex-col');
+            nav.classList.toggle('absolute');
+            nav.classList.toggle('top-16');
+            nav.classList.toggle('left-0');
+            nav.classList.toggle('right-0');
+            nav.classList.toggle('bg-white');
+            nav.classList.toggle('p-4');
+            nav.classList.toggle('shadow-lg');
         });
     </script>
+
 </body>
 </html>
