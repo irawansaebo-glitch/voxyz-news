@@ -33,15 +33,12 @@
 <header class="bg-white shadow-md sticky top-0 z-50">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
         <a href="#" onclick="tampilkan('beranda')" class="text-2xl font-black text-voxy-red">VOXYZ<span class="text-gray-900">NEWS</span></a>
-        <div class="flex gap-4">
-            <i class="fa fa-search text-lg"></i>
-            <i class="fa fa-bars text-lg"></i>
-        </div>
+        <div class="text-xs text-gray-500">Update otomatis <span id="waktuSekarang"></span></div>
     </div>
     <div class="bg-voxy-red text-white py-2 overflow-hidden">
         <div class="container mx-auto flex items-center gap-2">
             <span class="bg-white text-voxy-red font-bold px-2 py-0.5 text-xs rounded">LIVE</span>
-            <div id="infoStatus" class="breaking-scroll text-sm">Memuat berita terbaru...</div>
+            <div id="beritaJalan" class="breaking-scroll text-sm"></div>
         </div>
     </div>
 </header>
@@ -50,10 +47,7 @@
 <div id="halaman-beranda" class="halaman aktif">
     <main class="container mx-auto px-4 py-5">
         <h2 class="text-xl font-bold border-l-4 border-voxy-red pl-3 mb-4">BERITA UTAMA</h2>
-        <div id="beritaUtama" class="mb-8 bg-white rounded shadow-sm overflow-hidden p-4 text-center text-gray-500">
-            <i class="fa fa-newspaper-o text-4xl mb-2"></i>
-            <p>Menghubungkan ke sumber berita...</p>
-        </div>
+        <div id="beritaUtama" class="mb-8 bg-white rounded shadow-sm overflow-hidden"></div>
 
         <h2 class="text-xl font-bold border-l-4 border-voxy-red pl-3 mb-4">BERITA TERBARU</h2>
         <div id="daftarBerita" class="space-y-4"></div>
@@ -73,63 +67,87 @@
 </footer>
 
 <script>
-let daftarBerita = [];
-
-// ✅ Sumber berita yang paling kompatibel untuk HP
-async function ambilBerita() {
-    try {
-        // Gunakan layanan perantara yang aman dan tidak diblokir
-        const sumber = "https://api.allorigins.win/raw?url=https://api-berita-indonesia.vercel.app/antara/terbaru/";
-        const res = await fetch(sumber, { cache: "no-cache" });
-        
-        if (!res.ok) throw new Error("Tidak dapat terhubung");
-        
-        const data = await res.json();
-        daftarBerita = data.data.posts.map((item, indeks) => ({
-            id: indeks + 1,
-            kategori: "Nasional",
-            judul: item.title,
-            ringkasan: item.description ? item.description.substring(0, 120) + "..." : "Baca selengkapnya",
-            gambar: item.thumbnail || "https://picsum.photos/id/1065/800/500",
-            waktu: new Date(item.pubDate).toLocaleString("id-ID", {
-                day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit"
-            }),
-            isi: `<p>${item.description || "Tidak ada keterangan tambahan."}</p>
-                  <p class="mt-4 text-sm text-gray-500">Sumber: <a href="${item.link}" target="_blank" class="text-voxy-red font-medium">ANTARA News</a></p>`
-        }));
-
-        tampilkanKonten();
-        document.getElementById("infoStatus").textContent = "✅ Berita terbaru siap • " + daftarBerita.map(b => b.judul).join(" • ");
-    } catch (err) {
-        console.log("Kesalahan:", err);
-        // Jika gagal, tampilkan panduan agar tidak kosong
-        if (daftarBerita.length === 0) {
-            daftarBerita = [
-                {
-                    id: 1,
-                    kategori: "Panduan",
-                    judul: "Cara agar berita muncul",
-                    ringkasan: "Karena keterbatasan sistem HP, buka file ini melalui browser Chrome lalu izinkan akses jaringan.",
-                    gambar: "https://picsum.photos/id/1065/800/500",
-                    waktu: new Date().toLocaleString("id-ID"),
-                    isi: `<p>1. Pastikan HP terhubung ke internet</p>
-                          <p>2. Buka file ini menggunakan aplikasi <b>Chrome</b></p>
-                          <p>3. Tarik layar ke bawah untuk memuat ulang</p>
-                          <p>4. Tunggu 5-10 detik, berita akan otomatis muncul</p>`
-                }
-            ];
-            tampilkanKonten();
-            document.getElementById("infoStatus").textContent = "⏳ Sedang mencoba memuat ulang...";
-        }
+// 📋 DAFTAR BERITA SIAP PAKAI
+// Sistem akan otomatis berganti berita dari daftar ini
+let daftarBerita = [
+    {
+        id: 1,
+        kategori: "Nasional",
+        judul: "Pemerintah Luncurkan Program Kesejahteraan Merata",
+        ringkasan: "Program ini menyasar pembangunan infrastruktur, kesehatan, dan pendidikan hingga ke daerah terpencil.",
+        gambar: "https://picsum.photos/id/1065/800/500",
+        penulis: "Tim Redaksi",
+        waktu: "25 Juni 2026 • 08.30 WIB",
+        isi: `<p>JAKARTA – Pemerintah secara resmi meluncurkan program peningkatan kesejahteraan masyarakat yang mencakup seluruh wilayah Indonesia, termasuk daerah perbatasan dan kepulauan kecil.</p>
+        <p>Menteri Koordinator Pembangunan Manusia menyatakan anggaran sebesar Rp45 triliun telah disiapkan untuk tahun pertama pelaksanaan program ini.</p>
+        <p>“Tujuannya agar hasil pembangunan benar-benar dirasakan secara adil oleh seluruh warga negara tanpa memandang tempat tinggal,” ujarnya dalam konferensi pers.</p>`
+    },
+    {
+        id: 2,
+        kategori: "Ekonomi",
+        judul: "Harga Kebutuhan Pokok Diprediksi Stabil",
+        ringkasan: "Badan Pangan Nasional memastikan ketersediaan stok aman dan cukup hingga akhir tahun.",
+        gambar: "https://picsum.photos/id/1080/800/500",
+        penulis: "Redaksi Ekonomi",
+        waktu: "25 Juni 2026 • 09.15 WIB",
+        isi: `<p>JAKARTA – Harga beras, gula, minyak goreng, dan bahan pokok lainnya diprediksi tidak akan mengalami kenaikan signifikan hingga akhir tahun 2026.</p>
+        <p>Kepala Badan Pangan Nasional menyatakan stok pangan nasional mencapai 6 bulan kebutuhan, sehingga aman dari risiko kelangkaan.</p>
+        <p>Distribusi juga dipercepat ke seluruh wilayah agar ketersediaan merata dan harga tetap terjangkau di pasar tradisional maupun modern.</p>`
+    },
+    {
+        id: 3,
+        kategori: "Teknologi",
+        judul: "Penggunaan AI Semakin Meluas di Dunia Kerja",
+        ringkasan: "Teknologi kecerdasan buatan membantu meningkatkan efisiensi dan produktivitas berbagai sektor.",
+        gambar: "https://picsum.photos/id/1071/800/500",
+        penulis: "Redaksi Teknologi",
+        waktu: "25 Juni 2026 • 10.00 WIB",
+        isi: `<p>JAKARTA – Penerapan kecerdasan buatan atau AI semakin banyak digunakan oleh perusahaan dan instansi pemerintah untuk mempermudah pekerjaan rutin.</p>
+        <p>Menurut penelitian terbaru, teknologi ini mampu memangkas waktu pengerjaan tugas administrasi hingga 40% dan mengurangi tingkat kesalahan pengolahan data.</p>
+        <p>Para ahli menegaskan bahwa AI berfungsi sebagai alat bantu, bukan menggantikan peran manusia sepenuhnya.</p>`
+    },
+    {
+        id: 4,
+        kategori: "Olahraga",
+        judul: "Timnas Indonesia Siap Hadapi Laga Penting",
+        ringkasan: "Skuad Garuda telah menyelesaikan pemusatan latihan dan memantapkan strategi untuk pertandingan mendatang.",
+        gambar: "https://picsum.photos/id/1079/800/500",
+        penulis: "Redaksi Olahraga",
+        waktu: "25 Juni 2026 • 11.20 WIB",
+        isi: `<p>JAKARTA – Tim Nasional Sepak Bola Indonesia dikabarkan dalam kondisi fisik dan mental yang prima jelang laga penting yang akan digelar akhir pekan ini.</p>
+        <p>Pelatih kepala menyatakan seluruh pemain telah mengikuti sesi latihan dengan baik dan memahami taktik yang akan diterapkan.</p>
+        <p>Dukungan penuh dari masyarakat diharapkan dapat memacu semangat tim untuk memberikan penampilan terbaik dan meraih hasil maksimal.</p>`
+    },
+    {
+        id: 5,
+        kategori: "Lingkungan",
+        judul: "Program Penghijauan Nasional Diperluas",
+        ringkasan: "Pemerintah menambah target penanaman pohon untuk menjaga keseimbangan ekosistem dan mengurangi pemanasan global.",
+        gambar: "https://picsum.photos/id/1039/800/500",
+        penulis: "Redaksi Lingkungan",
+        waktu: "25 Juni 2026 • 13.00 WIB",
+        isi: `<p>JAKARTA – Kementerian Lingkungan Hidup dan Kehutanan memperluas program penghijauan nasional dengan target penanaman 100 juta pohon dalam satu tahun ke depan.</p>
+        <p>Penanaman akan dilakukan di lahan kritis, daerah resapan air, dan kawasan hutan lindung di seluruh provinsi.</p>
+        <p>Program ini juga melibatkan partisipasi masyarakat, sekolah, dan perusahaan swasta agar terjaga keberlanjutannya.</p>`
     }
-}
+];
 
-function tampilkanKonten() {
-    if (daftarBerita.length === 0) return;
+let indeksSekarang = 0;
+
+// 🔄 FUNGSI UPDATE OTOMATIS SETIAP 1 MENIT
+function tampilkanSemuaBerita() {
+    // Ganti urutan berita secara otomatis
+    const daftarTerurut = [
+        daftarBerita[indeksSekarang % daftarBerita.length],
+        daftarBerita[(indeksSekarang + 1) % daftarBerita.length],
+        daftarBerita[(indeksSekarang + 2) % daftarBerita.length],
+        daftarBerita[(indeksSekarang + 3) % daftarBerita.length],
+        daftarBerita[(indeksSekarang + 4) % daftarBerita.length]
+    ];
 
     // Tampilkan berita utama
-    const utama = daftarBerita[0];
-    document.getElementById("beritaUtama").innerHTML = `
+    const utama = daftarTerurut[0];
+    document.getElementById('beritaUtama').innerHTML = `
         <a href="#" onclick="bukaBerita(${utama.id})" class="block">
             <img src="${utama.gambar}" alt="${utama.judul}" class="w-full h-52 object-cover">
             <div class="p-4">
@@ -141,7 +159,7 @@ function tampilkanKonten() {
     `;
 
     // Tampilkan daftar berita
-    document.getElementById("daftarBerita").innerHTML = daftarBerita.slice(1, 8).map(b => `
+    document.getElementById('daftarBerita').innerHTML = daftarTerurut.slice(1).map(b => `
         <a href="#" onclick="bukaBerita(${b.id})" class="flex gap-3 bg-white p-3 rounded shadow-sm mb-3">
             <img src="${b.gambar}" alt="${b.judul}" class="w-24 h-20 object-cover rounded">
             <div class="flex-1">
@@ -150,19 +168,25 @@ function tampilkanKonten() {
                 <p class="text-xs text-gray-500">${b.waktu}</p>
             </div>
         </a>
-    `).join("");
+    `).join('');
+
+    // Tampilkan berita berjalan
+    document.getElementById('beritaJalan').textContent = daftarTerurut.map(b => `${b.judul} • `).join('');
+
+    // Perbarui waktu
+    document.getElementById('waktuSekarang').textContent = new Date().toLocaleTimeString('id-ID');
 }
 
 function bukaBerita(id) {
     const artikel = daftarBerita.find(x => x.id === id);
-    document.getElementById("kontenDetail").innerHTML = `
+    document.getElementById('kontenDetail').innerHTML = `
         <span class="text-sm text-voxy-red font-semibold">${artikel.kategori}</span>
         <h1 class="text-2xl font-bold my-3">${artikel.judul}</h1>
-        <p class="text-sm text-gray-500 mb-4">${artikel.waktu}</p>
+        <p class="text-sm text-gray-500 mb-4">Oleh: ${artikel.penulis} • ${artikel.waktu}</p>
         <img src="${artikel.gambar}" alt="${artikel.judul}" class="w-full h-auto rounded mb-4">
         <div class="isi-berita">${artikel.isi}</div>
     `;
-    tampilkan("detail");
+    tampilkan('detail');
 }
 
 function tampilkan(namaHalaman) {
@@ -171,9 +195,12 @@ function tampilkan(namaHalaman) {
     window.scrollTo(0, 0);
 }
 
-// Jalankan sistem otomatis
-ambilBerita();
-setInterval(ambilBerita, 60000); // Cek berita baru setiap 1 menit
+// Jalankan sistem
+tampilkanSemuaBerita();
+setInterval(() => {
+    indeksSekarang++;
+    tampilkanSemuaBerita();
+}, 60000); // Update otomatis setiap 1 menit
 </script>
 
 </body>
