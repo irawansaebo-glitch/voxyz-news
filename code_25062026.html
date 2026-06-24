@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOXYZ NEWS - Berita Terkini & Terpercaya</title>
-    <meta name="description" content="VOXYZ NEWS menyajikan berita terbaru, terkini, dan terpercaya seputar peristiwa dalam negeri dan internasional.">
+    <title>Detail Berita - VOXYZ NEWS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
@@ -12,233 +11,48 @@
             theme: {
                 extend: {
                     colors: {
-                        voxy: {
-                            red: '#E62129',
-                            dark: '#121217',
-                            gray: '#F5F5F7',
-                            text: '#222222'
-                        },
-                        fontFamily: {
-                            sans: ['Inter', 'system-ui', 'sans-serif'],
-                        },
+                        voxy: { red: '#E62129', dark: '#121217', gray: '#F5F5F7' }
                     }
                 }
             }
         }
     </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            .line-clamp-2 {
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-            }
-            .breaking-scroll {
-                animation: scroll 25s linear infinite;
-            }
-            @keyframes scroll {
-                from { transform: translateX(100%); }
-                to { transform: translateX(-100%); }
-            }
-        }
-    </style>
 </head>
-<body class="bg-voxy-gray text-voxy-text">
+<body class="bg-voxy-gray">
 
-<!-- Header & Navigasi -->
+<!-- Header -->
 <header class="bg-white shadow-md sticky top-0 z-50">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-        <a href="#" class="text-2xl md:text-3xl font-extrabold text-voxy-red">VOXYZ<span class="text-voxy-dark">NEWS</span></a>
-
-        <!-- Menu Desktop -->
-        <nav class="hidden md:flex space-x-6 text-sm font-medium">
-            <a href="#" class="hover:text-voxy-red transition">BERANDA</a>
-            <a href="#" class="hover:text-voxy-red transition">NASIONAL</a>
-            <a href="#" class="hover:text-voxy-red transition">INTERNASIONAL</a>
-            <a href="#" class="hover:text-voxy-red transition">EKONOMI</a>
-            <a href="#" class="hover:text-voxy-red transition">TEKNOLOGI</a>
-            <a href="#" class="hover:text-voxy-red transition">OLAHRAGA</a>
-        </nav>
-
-        <!-- Pencarian & Menu HP -->
-        <div class="flex items-center gap-4">
-            <button class="text-xl hover:text-voxy-red"><i class="fa fa-search"></i></button>
-            <button class="md:hidden text-xl hover:text-voxy-red" id="menuToggle"><i class="fa fa-bars"></i></button>
-        </div>
-    </div>
-
-    <!-- Berita Berjalan -->
-    <div class="bg-voxy-red text-white py-2 overflow-hidden">
-        <div class="container mx-auto flex items-center">
-            <span class="font-bold px-3 bg-white text-voxy-red text-sm">BREAKING</span>
-            <div class="whitespace-nowrap breaking-scroll pl-4">
-                Gempa bumi magnitudo 5,2 guncang Malang | Harga BBM naik per hari ini | Timnas Indonesia lolos ke babak berikutnya
-            </div>
-        </div>
+        <a href="index.html" class="text-2xl font-extrabold text-voxy-red">VOXYZ<span class="text-voxy-dark">NEWS</span></a>
+        <a href="index.html" class="text-sm font-medium hover:text-voxy-red">← Kembali ke Beranda</a>
     </div>
 </header>
 
-<!-- Menu Mobile -->
-<div id="mobileMenu" class="fixed inset-0 bg-black/70 z-40 hidden">
-    <div class="bg-white w-4/5 h-full p-5">
-        <div class="flex justify-between items-center mb-6">
-            <span class="text-xl font-bold text-voxy-red">VOXYZ NEWS</span>
-            <button id="closeMenu"><i class="fa fa-times text-xl"></i></button>
+<!-- Konten Detail Berita -->
+<main class="container mx-auto px-4 py-8 max-w-3xl">
+    <div class="bg-white p-6 md:p-8 rounded-lg shadow-md">
+        <span class="text-sm text-voxy-red font-semibold">NASIONAL • 25 Juni 2026</span>
+        <h1 class="text-3xl md:text-4xl font-bold my-4 text-voxy-dark">Pemerintah Luncurkan Program Baru untuk Meningkatkan Kesejahteraan Masyarakat</h1>
+        <p class="text-gray-500 text-sm mb-6">Oleh: Tim Redaksi VOXYZ NEWS</p>
+
+        <img src="https://picsum.photos/id/1065/1000/600" alt="Gambar Berita" class="w-full h-auto rounded mb-6">
+
+        <div class="text-gray-700 leading-relaxed space-y-4 text-base">
+            <p>Pemerintah secara resmi meluncurkan program peningkatan kesejahteraan masyarakat yang mencakup berbagai sektor, mulai dari pembangunan infrastruktur, akses layanan kesehatan, hingga peningkatan kualitas pendidikan.</p>
+            <p>Menteri Koordinator Bidang Pembangunan Manusia menyatakan bahwa program ini telah disusun selama dua tahun terakhir dengan melibatkan berbagai pemangku kepentingan di seluruh daerah.</p>
+            <p>"Tujuannya agar manfaat pembangunan dapat dirasakan secara merata, tidak hanya di kota besar tetapi juga di daerah terpencil dan perbatasan," ujarnya dalam acara peluncuran yang berlangsung di Jakarta.</p>
+            <p>Dalam program ini dialokasikan anggaran sebesar Rp 45 triliun untuk tahun pertama, yang akan digunakan untuk membangun jalan desa, puskesmas, serta menyediakan beasiswa bagi siswa kurang mampu.</p>
+            <p>Pemantauan dan evaluasi akan dilakukan setiap tiga bulan sekali agar pelaksanaannya berjalan sesuai rencana dan tepat sasaran.</p>
         </div>
-        <nav class="flex flex-col gap-4 font-medium">
-            <a href="#">BERANDA</a>
-            <a href="#">NASIONAL</a>
-            <a href="#">INTERNASIONAL</a>
-            <a href="#">EKONOMI</a>
-            <a href="#">TEKNOLOGI</a>
-            <a href="#">OLAHRAGA</a>
-        </nav>
-    </div>
-</div>
-
-<!-- Konten Utama -->
-<main class="container mx-auto px-4 py-6">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Kolom Kiri & Tengah -->
-        <div class="lg:col-span-2 space-y-8">
-
-            <!-- Berita Utama -->
-            <section>
-                <h2 class="text-xl font-bold border-l-4 border-voxy-red pl-3 mb-4">BERITA UTAMA</h2>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://picsum.photos/id/1065/1200/600" alt="Berita Utama" class="w-full h-72 object-cover">
-                    <div class="p-5">
-                        <span class="text-xs text-voxy-red font-semibold">NASIONAL • 25 Juni 2026</span>
-                        <h3 class="text-2xl font-bold my-3 hover:text-voxy-red cursor-pointer">Pemerintah Luncurkan Program Baru untuk Meningkatkan Kesejahteraan Masyarakat di Seluruh Daerah</h3>
-                        <p class="text-gray-600 line-clamp-2">Program ini mencakup pembangunan infrastruktur, akses kesehatan, dan pendidikan yang merata hingga ke pelosok negeri.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Berita Terbaru -->
-            <section>
-                <h2 class="text-xl font-bold border-l-4 border-voxy-red pl-3 mb-4">BERITA TERBARU</h2>
-                <div class="space-y-5">
-                    <!-- Item Berita -->
-                    <div class="flex bg-white rounded-lg shadow-sm overflow-hidden">
-                        <img src="https://picsum.photos/id/1080/150/120" alt="Berita" class="w-28 h-24 object-cover">
-                        <div class="p-3 flex-1">
-                            <span class="text-xs text-voxy-red">EKONOMI</span>
-                            <h4 class="font-semibold hover:text-voxy-red line-clamp-2">Harga komoditas utama diprediksi stabil hingga akhir tahun ini</h4>
-                            <p class="text-xs text-gray-500 mt-1">10 menit yang lalu</p>
-                        </div>
-                    </div>
-                    <div class="flex bg-white rounded-lg shadow-sm overflow-hidden">
-                        <img src="https://picsum.photos/id/1071/150/120" alt="Berita" class="w-28 h-24 object-cover">
-                        <div class="p-3 flex-1">
-                            <span class="text-xs text-voxy-red">TEKNOLOGI</span>
-                            <h4 class="font-semibold hover:text-voxy-red line-clamp-2">Perkembangan AI baru bisa mempermudah pekerjaan sehari-hari</h4>
-                            <p class="text-xs text-gray-500 mt-1">30 menit yang lalu</p>
-                        </div>
-                    </div>
-                    <div class="flex bg-white rounded-lg shadow-sm overflow-hidden">
-                        <img src="https://picsum.photos/id/1079/150/120" alt="Berita" class="w-28 h-24 object-cover">
-                        <div class="p-3 flex-1">
-                            <span class="text-xs text-voxy-red">OLAHRAGA</span>
-                            <h4 class="font-semibold hover:text-voxy-red line-clamp-2">Jadwal pertandingan tim nasional untuk pekan ini telah dirilis</h4>
-                            <p class="text-xs text-gray-500 mt-1">1 jam yang lalu</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Sidebar Kanan -->
-        <aside class="space-y-8">
-            <!-- Berita Populer -->
-            <section class="bg-white p-4 rounded-lg shadow-md">
-                <h3 class="text-lg font-bold border-b pb-2 mb-4">BERITA POPULER</h3>
-                <ol class="space-y-3">
-                    <li class="flex gap-3">
-                        <span class="text-voxy-red font-bold text-xl">1</span>
-                        <a href="#" class="text-sm hover:text-voxy-red">Cuaca ekstrem diperkirakan melanda sejumlah wilayah dalam minggu ini</a>
-                    </li>
-                    <li class="flex gap-3">
-                        <span class="text-voxy-red font-bold text-xl">2</span>
-                        <a href="#" class="text-sm hover:text-voxy-red">Biaya hidup di kota besar mulai terasa lebih ringan bagi warga</a>
-                    </li>
-                    <li class="flex gap-3">
-                        <span class="text-voxy-red font-bold text-xl">3</span>
-                        <a href="#" class="text-sm hover:text-voxy-red">Penemuan baru di bidang kesehatan memberi harapan baru bagi pasien</a>
-                    </li>
-                    <li class="flex gap-3">
-                        <span class="text-voxy-red font-bold text-xl">4</span>
-                        <a href="#" class="text-sm hover:text-voxy-red">Peraturan baru tentang transportasi umum mulai berlaku bulan depan</a>
-                    </li>
-                </ol>
-            </section>
-
-            <!-- Ikuti Kami -->
-            <section class="bg-white p-4 rounded-lg shadow-md">
-                <h3 class="text-lg font-bold border-b pb-2 mb-4">IKUTI KAMI</h3>
-                <div class="flex gap-4 text-2xl">
-                    <a href="#" class="text-blue-600 hover:text-blue-800"><i class="fa fa-facebook"></i></a>
-                    <a href="#" class="text-sky-500 hover:text-sky-700"><i class="fa fa-twitter"></i></a>
-                    <a href="#" class="text-red-600 hover:text-red-800"><i class="fa fa-youtube-play"></i></a>
-                    <a href="#" class="text-pink-600 hover:text-pink-800"><i class="fa fa-instagram"></i></a>
-                </div>
-            </section>
-        </aside>
     </div>
 </main>
 
 <!-- Footer -->
-<footer class="bg-voxy-dark text-white py-8 mt-10">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div>
-                <h4 class="text-xl font-bold text-voxy-red mb-3">VOXYZ NEWS</h4>
-                <p class="text-gray-300 text-sm">Sumber berita terpercaya yang menyajikan informasi akurat, cepat, dan berimbang untuk masyarakat Indonesia.</p>
-            </div>
-            <div>
-                <h5 class="font-semibold mb-3">KATEGORI</h5>
-                <ul class="text-gray-300 text-sm space-y-2">
-                    <li><a href="#" class="hover:text-voxy-red">Nasional</a></li>
-                    <li><a href="#" class="hover:text-voxy-red">Internasional</a></li>
-                    <li><a href="#" class="hover:text-voxy-red">Ekonomi</a></li>
-                    <li><a href="#" class="hover:text-voxy-red">Teknologi</a></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="font-semibold mb-3">TAUTAN</h5>
-                <ul class="text-gray-300 text-sm space-y-2">
-                    <li><a href="#" class="hover:text-voxy-red">Tentang Kami</a></li>
-                    <li><a href="#" class="hover:text-voxy-red">Kebijakan Privasi</a></li>
-                    <li><a href="#" class="hover:text-voxy-red">Kode Etik</a></li>
-                    <li><a href="#" class="hover:text-voxy-red">Hubungi Kami</a></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="font-semibold mb-3">HUBUNGI KAMI</h5>
-                <p class="text-gray-300 text-sm">Email: redaksi@voxynews.id<br>
-                Telepon: (031) 1234567<br>
-                Surabaya, Jawa Timur</p>
-            </div>
-        </div>
-        <div class="border-t border-gray-700 mt-6 pt-4 text-center text-gray-400 text-sm">
-            © 2026 VOXYZ NEWS. Seluruh hak cipta dilindungi undang-undang.
-        </div>
+<footer class="bg-voxy-dark text-white py-6 mt-8">
+    <div class="container mx-auto px-4 text-center text-sm">
+        © 2026 VOXYZ NEWS - Semua hak dilindungi undang-undang
     </div>
 </footer>
-
-<script>
-// Menu Mobile
-const menuToggle = document.getElementById('menuToggle');
-const closeMenu = document.getElementById('closeMenu');
-const mobileMenu = document.getElementById('mobileMenu');
-
-menuToggle.addEventListener('click', () => mobileMenu.classList.remove('hidden'));
-closeMenu.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-</script>
 
 </body>
 </html>
