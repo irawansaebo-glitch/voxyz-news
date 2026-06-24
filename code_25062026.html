@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VOXYZ MARKET | Top Up & Pembayaran Terpercaya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#0F172A',
+                        accent: '#3B82F6',
+                        dark: '#0F172A',
+                        light: '#F8FAFC',
+                        success: '#00B42A',
+                        warning: '#FF7D00',
+                        danger: '#F53F3F'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .bg-pattern {
+                background-color: #F8FAFC;
+                background-image: radial-gradient(#E2E8F0 1px, transparent 1px);
+                background-size: 20px 20px;
+            }
+            .card-hover {
+                transition: all 0.25s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(22, 93, 255, 0.15);
+            }
+            .tab-active {
+                background: #165DFF;
+                color: white;
+                box-shadow: 0 2px 8px rgba(22, 93, 255, 0.25);
+            }
+            .btn-wa {
+                background: linear-gradient(135deg, #00A884, #008F6E);
+            }
+            .btn-wa:hover {
+                background: linear-gradient(135deg, #009675, #007D60);
+            }
+        }
+    </style>
+</head>
+<body class="bg-pattern font-inter text-gray-800 antialiased">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-lg bg-primary flex items-center justify-center text-white font-bold text-base">VM</div>
+                <h1 class="text-lg md:text-xl font-bold text-primary">VOXYZ MARKET</h1>
+            </div>
+            <nav class="hidden md:flex gap-5 font-medium text-sm">
+                <a href="#beranda" class="hover:text-primary transition-colors">Beranda</a>
+                <a href="#layanan" class="hover:text-primary transition-colors">Layanan</a>
+                <a href="#pesan" class="hover:text-primary transition-colors">Pesan</a>
+                <a href="#kontak" class="hover:text-primary transition-colors">Kontak</a>
+            </nav>
+            <button class="md:hidden text-xl" id="menuToggle">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        <!-- Menu Mobile -->
+        <div id="mobileMenu" class="hidden bg-white border-t border-gray-100">
+            <div class="container mx-auto px-4 py-2 flex flex-col gap-2 text-sm font-medium">
+                <a href="#beranda" class="hover:text-primary py-2 border-b border-gray-50">Beranda</a>
+                <a href="#layanan" class="hover:text-primary py-2 border-b border-gray-50">Layanan</a>
+                <a href="#pesan" class="hover:text-primary py-2 border-b border-gray-50">Pesan Sekarang</a>
+                <a href="#kontak" class="hover:text-primary py-2">Kontak</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="bg-gradient-to-br from-primary via-accent to-primary text-white py-10 md:py-14">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-3">Top Up & Pembayaran Terlengkap</h2>
+            <p class="text-base md:text-lg opacity-95 max-w-xl mx-auto mb-5">Proses Otomatis ⚡ Aman ✅ Cepat ✅ Terpercaya ✅ 24 Jam Nonstop</p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="#pesan" class="bg-white text-primary font-semibold px-6 py-2.5 rounded-lg shadow-lg hover:shadow-xl transition-shadow text-sm">Pesan Sekarang</a>
+                <a href="#kontak" class="bg-white/15 backdrop-blur border border-white/30 font-semibold px-6 py-2.5 rounded-lg hover:bg-white/25 transition-colors text-sm">Hubungi Kami</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keunggulan -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <h3 class="text-xl md:text-2xl font-bold text-center mb-6">Kenapa Memilih VOXYZ MARKET?</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="text-center p-3">
+                    <div class="w-12 h-12 bg-blue-50 text-primary rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
+                        <i class="fa fa-bolt"></i>
+                    </div>
+                    <h4 class="font-semibold text-sm mb-1">Proses Otomatis</h4>
+                    <p class="text-xs text-gray-500">Masuk seketika</p>
+                </div>
+                <div class="text-center p-3">
+                    <div class="w-12 h-12 bg-green-50 text-success rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
+                        <i class="fa fa-shield"></i>
+                    </div>
+                    <h4 class="font-semibold text-sm mb-1">Aman & Terjamin</h4>
+                    <p class="text-xs text-gray-500">Data terjaga</p>
+                </div>
+                <div class="text-center p-3">
+                    <div class="w-12 h-12 bg-orange-50 text-warning rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
+                        <i class="fa fa-money"></i>
+                    </div>
+                    <h4 class="font-semibold text-sm mb-1">Harga Bersaing</h4>
+                    <p class="text-xs text-gray-500">Termurah & terjangkau</p>
+                </div>
+                <div class="text-center p-3">
+                    <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
+                        <i class="fa fa-clock-o"></i>
+                    </div>
+                    <h4 class="font-semibold text-sm mb-1">Layanan 24 Jam</h4>
+                    <p class="text-xs text-gray-500">Bisa pesan kapan saja</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daftar Layanan -->
+    <section id="layanan" class="py-8">
+        <div class="container mx-auto px-4">
+            <h3 class="text-xl md:text-2xl font-bold text-center mb-6">Kategori Layanan Kami</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                <div class="bg-white rounded-lg shadow p-3 text-center card-hover cursor-pointer" onclick="scrollToForm()">
+                    <div class="w-12 h-12 mx-auto mb-2 flex items-center justify-center text-2xl text-primary">
+                        <i class="fa fa-gamepad"></i>
+                    </div>
+                    <h4 class="font-semibold text-sm">Top Up Game</h4>
+                    <p class="text-xs text-gray-500">ML, FF, PUBG, dll</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-3 text-center card-hover cursor-pointer" onclick="scrollToForm()">
+                    <div class="w-12 h-12 mx-auto mb-2 flex items-center justify-center text-2xl text-green-600">
+                        <i class="fa fa-mobile"></i>
+                    </div>
+                    <h4 class="font-semibold text-sm">Pulsa & Data</h4>
+                    <p class="text-xs text-gray-500">Semua Operator</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-3 text-center card-hover cursor-pointer" onclick="scrollToForm()">
+                    <div class="w-12 h-12 mx-auto mb-2 flex items-center justify-center text-2xl text-blue-500">
+                        <i class="fa fa-wallet"></i>
+                    </div>
+                    <h4 class="font-semibold text-sm">E-Wallet</h4>
+                    <p class="text-xs text-gray-500">DANA, OVO, GoPay</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-3 text-center card-hover cursor-pointer" onclick="scrollToForm()">
+                    <div class="w-12 h-12 mx-auto mb-2 flex items-center justify-center text-2xl text-red-500">
+                        <i class="fa fa-ticket"></i>
+                    </div>
+                    <h4 class="font-semibold text-sm">Voucher</h4>
+                    <p class="text-xs text-gray-500">Google, Steam, dll</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-3 text-center card-hover cursor-pointer" onclick="scrollToForm()">
+                    <div class="w-12 h-12 mx-auto mb-2 flex items-center justify-center text-2xl text-yellow-600">
+                        <i class="fa fa-bolt"></i>
+                    </div>
+                    <h4 class="font-semibold text-sm">Token Listrik</h4>
+                    <p class="text-xs text-gray-500">PLN & Tagihan</p>
+                </div>
+            </div>
+
+            <!-- Daftar Harga -->
+            <div class="mt-6 bg-white rounded-lg shadow p-4">
+                <h4 class="text-lg font-semibold mb-3 text-center">💲 Daftar Harga Umum</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-sm">
+                    <div class="p-2 bg-gray-50 rounded">✅ Mobile Legends: 100 DM = Rp 14.500</div>
+                    <div class="p-2 bg-gray-50 rounded">✅ Free Fire: 100 DM = Rp 13.500</div>
+                    <div class="p-2 bg-gray-50 rounded">✅ Pulsa Telkomsel 50K = Rp 51.200</div>
+                    <div class="p-2 bg-gray-50 rounded">✅ Saldo DANA 50K = Rp 50.300</div>
+                    <div class="p-2 bg-gray-50 rounded">✅ Token Listrik 20K = Rp 20.800</div>
+                    <div class="p-2 bg-gray-50 rounded">✅ Google Play 50K = Rp 51.500</div>
+                </div>
+                <p class="text-center text-gray-500 mt-2 text-xs">*Harga dapat berubah sewaktu-waktu tanpa pemberitahuan</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Pemesanan -->
+    <section id="pesan" class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <h3 class="text-xl md:text-2xl font-bold text-center mb-5">📝 Formulir Pemesanan</h3>
+            <div class="max-w-lg mx-auto bg-gray-50 rounded-lg shadow p-4">
+                <form id="formPesan" action="https://wa.me/6287769370995" method="get" target="_blank">
+                    <input type="hidden" name="text" id="pesanWa">
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block mb-1 text-sm font-medium">Nama Lengkap</label>
+                            <input type="text" id="nama" class="w-full border border-gray-200 rounded p-2.5 text-sm" placeholder="Contoh: Budi Santoso" required>
+                        </div>
+                        <div>
+                            <label class="block mb-1 text-sm font-medium">Pilih Layanan</label>
+                            <select id="layananPilih" class="w-full border border-gray-200 rounded p-2.5 text-sm" required>
+                                <option value="">-- Pilih Layanan --</option>
+                                <option value="Mobile Legends">Mobile Legends</option>
+                                <option value="Free Fire">Free Fire</option>
+                                <option value="PUBG Mobile">PUBG Mobile</option>
+                                <option value="Telkomsel">Pulsa Telkomsel</option>
+                                <option value="XL / Axis">Pulsa XL / Axis</option>
+                                <option value="Indosat">Pulsa Indosat</option>
+                                <option value="DANA">Saldo DANA</option>
+                                <option value="GOPAY">Saldo GOPAY</option>
+                                <option value="Token Listrik">Token Listrik PLN</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block mb-1 text-sm font-medium">Data Pengisian</label>
+                            <input type="text" id="data" class="w-full border border-gray-200 rounded p-2.5 text-sm" placeholder="Contoh: ID Game / Nomor HP / No Meter" required>
+                        </div>
+                        <div>
+                            <label class="block mb-1 text-sm font-medium">Nominal / Jumlah</label>
+                            <select id="nominal" class="w-full border border-gray-200 rounded p-2.5 text-sm" required>
+                                <option value="">-- Pilih Nominal --</option>
+                                <option value="Rp 10.000">Rp 10.000</option>
+                                <option value="Rp 20.000">Rp 20.000</option>
+                                <option value="Rp 50.000">Rp 50.000</option>
+                                <option value="Rp 100.000">Rp 100.000</option>
+                                <option value="Rp 200.000">Rp 200.000</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block mb-1 text-sm font-medium">Metode Pembayaran</label>
+                            <select id="metode" class="w-full border border-gray-200 rounded p-2.5 text-sm" required>
+                                <option value="Transfer BCA">Transfer BCA</option>
+                                <option value="Transfer Mandiri">Transfer Mandiri</option>
+                                <option value="DANA">DANA</option>
+                                <option value="GOPAY">GOPAY</option>
+                                <option value="OVO">OVO</option>
+                            </select>
+                        </div>
+                        <button type="button" onclick="kirimPesan()" class="w-full btn-wa text-white font-semibold py-3 rounded-lg mt-2 text-sm">
+                            <i class="fa fa-whatsapp mr-1"></i> Kirim Pesanan ke WhatsApp
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cara Pesan -->
+    <section id="cara-pesan" class="py-6 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h3 class="text-lg md:text-xl font-bold text-center mb-4">📋 Cara Pemesanan</h3>
+            <div class="max-w-xl mx-auto space-y-3 text-sm">
+                <div class="flex gap-3 items-start">
+                    <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold flex-shrink-0">1</div>
+                    <div>Pilih layanan yang ingin dibeli</div>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold flex-shrink-0">2</div>
+                    <div>Isi formulir dengan data yang benar</div>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold flex-shrink-0">3</div>
+                    <div>Kirim pesanan otomatis ke WhatsApp</div>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold flex-shrink-0">4</div>
+                    <div>Lakukan pembayaran, pesanan langsung diproses</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak -->
+    <section id="kontak" class="py-6">
+        <div class="container mx-auto px-4">
+            <h3 class="text-lg md:text-xl font-bold text-center mb-4">📞 Kontak Kami</h3>
+            <div class="max-w-md mx-auto bg-white rounded-lg shadow p-4">
+                <div class="space-y-3 text-sm">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-green-50 text-green-600 flex items-center justify-center">
+                            <i class="fa fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">WhatsApp</p>
+                            <p class="text-gray-600">+62 877-6937-0995</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Email</p>
+                            <p class="text-gray-600">voxyzmarket@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center">
+                            <i class="fa fa-instagram"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Instagram</p>
+                            <p class="text-gray-600">@voxyzzz_</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 text-center text-xs">
+        <p>&copy; 2026 VOXYZ MARKET | Semua Hak Dilindungi</p>
+        <p class="text-gray-400 mt-1">Layanan Top Up & Pembayaran Terpercaya</p>
+    </footer>
+
+    <!-- Script -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuToggle.innerHTML = mobileMenu.classList.contains('hidden') ? 
+                '<i class="fa fa-bars"></i>' : 
+                '<i class="fa fa-times"></i>';
+        });
+
+        function scrollToForm() {
+            document.getElementById('pesan').scrollIntoView({behavior: 'smooth'});
+        }
+
+        function kirimPesan() {
+            const nama = document.getElementById('nama').value.trim();
+            const layanan = document.getElementById('layananPilih').value;
+            const data = document.getElementById('data').value.trim();
+            const nominal = document.getElementById('nominal').value;
+            const metode = document.getElementById('metode').value;
+
+            if(!nama || !layanan || !data || !nominal || !metode) {
+                alert('⚠️ Lengkapi semua data terlebih dahulu!');
+                return;
+            }
+
+            const teks = `Halo VOXYZ MARKET 👋\n\n📝 *Data Pesanan:*\nNama: ${nama}\n🛒 Layanan: ${layanan}\n📌 Data: ${data}\n💵 Nominal: ${nominal}\n💳 Pembayaran: ${metode}\n\nMohon diproses ya, terima kasih 🙏`;
+
+            document.getElementById('pesanWa').value = encodeURIComponent(teks);
+            document.getElementById('formPesan').submit();
+        }
+    </script>
+
+</body>
+</html>
