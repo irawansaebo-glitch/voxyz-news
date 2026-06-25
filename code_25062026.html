@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUGAS MARKET | Konversi & Transaksi Saldo Elektronik</title>
+    <meta name="description" content="Layanan konversi, pembelian, dan penjualan saldo E-Wallet terpercaya, aman, dan cepat.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mainBlue: '#0F4C81',
+                        darkBlue: '#082F49',
+                        lightBlue: '#1E40AF',
+                        accentGreen: '#10B981',
+                        accentRed: '#EF4444',
+                        darkBg: '#0A0A0F',
+                        darkCard: '#12121F',
+                        darkBorder: '#1F1F2E',
+                        textWhite: '#F8FAFC',
+                        textMuted: '#94A3B8',
+                        dana: '#0087CD',
+                        gopay: '#00A99D',
+                        ovo: '#4B0082',
+                        shopeepay: '#EE4D2D',
+                        linkaja: '#E61E25',
+                        jenius: '#007A8D',
+                        sakuku: '#E71D36',
+                        doku: '#F15A22',
+                        blu: '#0094D9',
+                        neobank: '#00B493'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: #F8FAFC; 
+            background: #0A0A0F;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 50%, rgba(15, 76, 129, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 30%, rgba(16, 185, 129, 0.12) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            animation: bgShift 20s ease infinite alternate;
+        }
+        @keyframes bgShift {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-2%, 2%) scale(1.05); }
+            100% { transform: translate(2%, -2%) scale(1); }
+        }
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+        }
+        .btn-main { 
+            background: linear-gradient(135deg, #0F4C81, #082F49); 
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(15, 76, 129, 0.3);
+            cursor: pointer;
+        }
+        .btn-main:hover { 
+            background: linear-gradient(135deg, #1E40AF, #0F4C81); 
+            transform: translateY(-2px);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #10B981, #059669);
+            cursor: pointer;
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #EF4444, #DC2626);
+            cursor: pointer;
+        }
+        .btn-warning {
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            cursor: pointer;
+        }
+        .card-service { 
+            transition: all 0.3s ease; 
+            border: 1px solid #1F1F2E;
+            background: #12121F;
+            cursor: pointer;
+        }
+        .card-service:hover { 
+            border-color: #0F4C81; 
+            box-shadow: 0 8px 25px rgba(15, 76, 129, 0.2);
+            transform: translateY(-3px);
+        }
+        .input-focus { 
+            outline: none; 
+            border: 1px solid #CBD5E1;
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            font-weight: 500;
+        }
+        .input-focus:focus { 
+            border-color: #0F4C81; 
+            box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.2);
+        }
+        .input-focus::placeholder {
+            color: #6B7280 !important;
+        }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(15px); } to { opacity:1; transform:translateY(0); } }
+        .sticky-nav {
+            backdrop-filter: blur(12px);
+            background: rgba(10, 10, 15, 0.85);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        .tab-active {
+            background: #0F4C81;
+            color: white;
+            cursor: pointer;
+        }
+        .kontak-item {
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .kontak-item:hover {
+            background: #1A2436;
+        }
+        a { cursor: pointer; text-decoration: none; }
+        button { cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="bg-animation"></div>
+<div class="bg-grid"></div>
+
+<!-- HEADER & MENU -->
+<header class="sticky-nav">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-mainBlue flex items-center justify-center text-white font-bold text-xl shadow-lg">S</div>
+            <h1 class="text-2xl md:text-3xl font-bold text-textWhite">SUGAS<span class="text-accentGreen">MARKET</span></h1>
+        </div>
+        <div class="hidden md:flex gap-6 font-medium">
+            <a href="#beranda" onclick="gantiHalaman('beranda')" class="nav-link text-textMuted hover:text-textWhite transition">Beranda</a>
+            <a href="#layanan" onclick="gantiHalaman('layanan')" class="nav-link text-textMuted hover:text-textWhite transition">Layanan</a>
+            <a href="#konversi" onclick="gantiHalaman('konversi')" class="nav-link text-accentGreen font-semibold hover:text-textWhite transition">Konversi Saldo</a>
+            <a href="#carakerja" onclick="gantiHalaman('carakerja')" class="nav-link text-textMuted hover:text-textWhite transition">Cara Kerja</a>
+            <a href="#kontak" onclick="gantiHalaman('kontak')" class="nav-link text-textMuted hover:text-textWhite transition">Kontak Kami</a>
+            <a href="#syarat" onclick="gantiHalaman('syarat')" class="nav-link text-textMuted hover:text-textWhite transition">Syarat & Ketentuan</a>
+            <button onclick="bukaLogin()" class="btn-main px-4 py-2 rounded-lg text-white font-medium">Login Panel</button>
+        </div>
+        <button class="md:hidden text-2xl text-textWhite" id="menuToggle"><i class="fa fa-bars"></i></button>
+    </div>
+    <div id="mobileMenu" class="hidden bg-darkBg/95 backdrop-blur-lg border-t border-darkBorder">
+        <div class="container mx-auto px-4 py-4 flex flex-col gap-3">
+            <a href="#beranda" onclick="gantiHalaman('beranda'); tutupMenuMobile()" class="py-2 hover:text-accentGreen">Beranda</a>
+            <a href="#layanan" onclick="gantiHalaman('layanan'); tutupMenuMobile()" class="py-2 hover:text-accentGreen">Layanan</a>
+            <a href="#konversi" onclick="gantiHalaman('konversi'); tutupMenuMobile()" class="py-2 text-accentGreen font-semibold">Konversi Saldo</a>
+            <a href="#carakerja" onclick="gantiHalaman('carakerja'); tutupMenuMobile()" class="py-2 hover:text-accentGreen">Cara Kerja</a>
+            <a href="#kontak" onclick="gantiHalaman('kontak'); tutupMenuMobile()" class="py-2 hover:text-accentGreen">Kontak Kami</a>
+            <a href="#syarat" onclick="gantiHalaman('syarat'); tutupMenuMobile()" class="py-2 hover:text-accentGreen">Syarat & Ketentuan</a>
+            <button onclick="bukaLogin()" class="btn-main w-full py-2 rounded-lg mt-2">Login Panel</button>
+        </div>
+    </div>
+</header>
+
+<!-- HALAMAN BERANDA -->
+<section id="beranda" class="section active py-12 md:py-20">
+    <div class="container mx-auto px-4 text-center">
+        <h2 id="teksJudulUtama" class="text-3xl md:text-5xl lg:text-6xl font-bold text-textWhite mb-4">Layanan Keuangan & Pembayaran</h2>
+        <p id="teksDeskripsiUtama" class="text-lg md:text-xl text-textMuted max-w-3xl mx-auto mb-8">Menyediakan layanan konversi, pembelian, dan penjualan saldo elektronik dengan standar keamanan dan transparansi sesuai ketentuan yang berlaku.</p>
+        <div class="inline-flex items-center gap-3 bg-accentGreen/10 border border-accentGreen/30 px-5 py-2 rounded-full">
+            <i class="fa fa-check-circle text-accentGreen"></i>
+            <span id="teksStatus" class="font-medium">Beroperasi sejak 2019 | Terpercaya & Terdaftar</span>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mt-16">
+            <div class="bg-darkCard border border-darkBorder p-6 rounded-xl shadow-lg">
+                <i class="fa fa-shield text-4xl text-mainBlue mb-4"></i>
+                <h3 class="text-xl font-semibold mb-3">Keamanan Terjamin</h3>
+                <p id="teksKeamanan" class="text-textMuted">Sistem terenkripsi dan data pelanggan dijaga kerahasiaannya sesuai peraturan perlindungan data.</p>
+            </div>
+            <div class="bg-darkCard border border-darkBorder p-6 rounded-xl shadow-lg">
+                <i class="fa fa-clock-o text-4xl text-accentGreen mb-4"></i>
+                <h3 class="text-xl font-semibold mb-3">Proses Cepat</h3>
+                <p id="teksProses" class="text-textMuted">Transaksi diproses dalam waktu 1-5 menit pada jam operasional.</p>
+            </div>
+            <div class="bg-darkCard border border-darkBorder p-6 rounded-xl shadow-lg">
+                <i class="fa fa-balance-scale text-4xl text-lightBlue mb-4"></i>
+                <h3 class="text-xl font-semibold mb-3">Transparan & Jelas</h3>
+                <p id="teksTransparan" class="text-textMuted">Semua biaya dan kurs tertera terbuka, tidak ada biaya tersembunyi.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HALAMAN LAYANAN -->
+<section id="layanan" class="section py-12">
+    <div class="container mx-auto px-4">
+        <h3 class="text-2xl md:text-4xl font-bold text-center mb-12">Daftar Layanan Kami</h3>
+        <h4 class="text-xl font-semibold mb-5 text-textWhite">📱 Dompet Elektronik Lengkap</h4>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 mb-12">
+            <div class="card-service p-5 rounded-lg text-center" onclick="pilihLayanan('dana')">
+                <i class="fa fa-wallet text-3xl text-dana mb-3"></i>
+                <p class="font-medium">DANA</p>
+                <p class="text-xs text-textMuted">Biasa / Premium</p>
+            </div>
+            <div class="card-service p-5 rounded-lg text-center" onclick="pilihLayanan('gopay')">
+                <i class="fa fa-wallet text-3xl text-gopay mb-3"></i>
+                <p class="font-medium">GoPay</p>
+                <p class="text-xs text-textMuted">Reguler / Plus</p>
+            </div>
+            <div class="card-service p-5 rounded-lg text-center" onclick="pilihLayanan('ovo')">
+                <i class="fa fa-wallet text-3xl text-ovo mb-3"></i>
+                <p class="font-medium">OVO</p>
+                <p class="text-xs text-textMuted">Club / Premier</p>
+            </div>
+            <div class="card-service p-5 rounded-lg text-center" onclick="pilihLayanan('shopeepay')">
+                <i class="fa fa-wallet text-3xl text-shopeepay mb-3"></i>
+                <p class="font-medium">ShopeePay</p>
+                <p class="text-xs text-textMuted">Reguler / Premium</p>
+            </div>
+            <div class="card-service p-5 rounded-lg text-center" onclick="pilihLayanan('linkaja')">
+                <i class="fa fa-wallet text-3xl text-linkaja mb-3"></i>
+                <p class="font-medium">LinkAja</p>
+                <p class="text-xs text-textMuted">Biasa / Full</p>
+            </div>
+            <div class="card-service p-5 rounded-lg text-center" onclick="pilihLayanan('jenius')">
+                <i class="fa fa-wallet text-3xl text-jenius mb-3"></i>
+                <p class="font-medium">Jenius</p>
+            </div>
+            <div class="card-service p-5 rounded-lg text-center" onclick="pilihLayanan('sakuku')">
+                <i class="fa fa-wallet text-3xl text-sakuku mb-3"></i>
+                <p class="font-medium">Sakuku</p>
+            </div>
+            <div class="card-service p-5 rounded-lg text-center" onclick="pilihLayanan('doku')">
+                <i class="fa fa-wallet text-3xl text-doku mb-3"></i>
+                <p class="font-medium">DOKU</p>
+            </div>
+            <div class="card-service p-5 rounded-lg text-center" onclick="pilihLayanan('blu')">
+                <i class="fa fa-wallet text-3xl text-blu mb-3"></i>
+                <p class="font-medium">Blu BCA</p>
+            </div>
+            <div class="card-service p-5 rounded-lg text-center" onclick="pilihLayanan('neobank')">
+                <i class="fa fa-wallet text-3xl text-neobank mb-3"></i>
+                <p class="font-medium">Neo Bank</p>
+            </div>
+        </div>
+
+        <div class="max-w-3xl mx-auto bg-darkCard border border-darkBorder rounded-xl p-6 md:p-8">
+            <h4 class="text-xl font-bold mb-6 text-center">Formulir Transaksi</h4>
+            <div class="space-y-5">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Jenis Transaksi</label>
+                    <select id="jenisTransaksi" class="w-full input-focus rounded-lg p-3" onchange="hitungEstimasi()">
+                        <option value="beli">Pembelian Saldo</option>
+                        <option value="jual">Penjualan Saldo</option>
+                    </select>
+                </div>
+                <div class="grid md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Nominal Transaksi</label>
+                        <input type="number" id="nominalBeli" min="10000" class="w-full input-focus rounded-lg p-3" placeholder="Masukkan jumlah" oninput="hitungEstimasi()">
+                        <p class="text-xs text-textMuted mt-1">Satuan: Rupiah</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Estimasi Nilai (Rp)</label>
+                        <input type="text" id="hasilBeli" readonly class="w-full input-focus rounded-lg p-3 font-semibold text-accentGreen" placeholder="Rp 0">
+                        <p class="text-xs text-textMuted mt-1">Nilai mengikuti kurs hari ini</p>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Nomor / ID Akun</label>
+                    <input type="text" class="w-full input-focus rounded-lg p-3" placeholder="Contoh: 0812xxxx / email">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Nama Pemilik Akun</label>
+                    <input type="text" class="w-full input-focus rounded-lg p-3" placeholder="Nama sesuai identitas">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Nomor WhatsApp</label>
+                    <div class="flex gap-3">
+                        <select class="w-28 input-focus rounded-lg p-3">
+                            <option>+62 ID</option>
+                        </select>
+                        <input type="tel" class="flex-1 input-focus rounded-lg p-3" placeholder="8123456789">
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <input type="checkbox" id="setujuTransaksi" class="mt-1 w-5 h-5">
+                    <label class="text-sm text-textMuted">Saya menyatakan telah membaca dan menyetujui syarat & ketentuan.</label>
+                </div>
+                <button onclick="kirimTransaksi()" class="btn-main w-full py-3 rounded-lg text-white font-semibold">Kirim Permintaan</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HALAMAN KONVERSI SALDO -->
+<section id="konversi" class="section py-12">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <h3 class="text-2xl md:text-4xl font-bold text-center mb-4">🔄 Konversi Saldo</h3>
+        <p class="text-center text-textMuted mb-12">Ubah saldo biasa ke premium atau tukar antar E-Wallet</p>
+        <div class="bg-darkCard border border-darkBorder rounded-xl p-6 md:p-8 shadow-xl">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <label class="block text-sm font-medium mb-3">Dari Saldo</label>
+                    <select id="dariSaldo" class="w-full input-focus rounded-lg p-4" onchange="hitungKonversi()">
+                        <optgroup label="DANA">
+                            <option value="dana_biasa">DANA Biasa</option>
+                            <option value="dana_premium">DANA Premium</option>
+                        </optgroup>
+                        <optgroup label="GoPay">
+                            <option value="gopay_reguler">GoPay Reguler</option>
+                            <option value="gopay_plus">GoPay Plus</option>
+                        </optgroup>
+                        <optgroup label="OVO">
+                            <option value="ovo_club">OVO Club</option>
+                            <option value="ovo_premier">OVO Premier</option>
+                        </optgroup>
+                        <optgroup label="ShopeePay">
+                            <option value="shopeepay_reguler">ShopeePay Reguler</option>
+                            <option value="shopeepay_premium">ShopeePay Premium</option>
+                        </optgroup>
+                        <optgroup label="LinkAja">
+                            <option value="linkaja_biasa">LinkAja Biasa</option>
+                            <option value="linkaja_full">LinkAja Full</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-3">Ke Saldo</label>
+                    <select id="keSaldo" class="w-full input-focus rounded-lg p-4" onchange="hitungKonversi()">
+                        <optgroup label="DANA">
+                            <option value="dana_biasa">DANA Biasa</option>
+                            <option value="dana_premium">DANA Premium</option>
+                        </optgroup>
+                        <optgroup label="GoPay">
+                            <option value="gopay_reguler">GoPay Reguler</option>
+                            <option value="gopay_plus">GoPay Plus</option>
+                        </optgroup>
+                        <optgroup label="OVO">
+                            <option value="ovo_club">OVO Club</option>
+                            <option value="ovo_premier">OVO Premier</option>
+                        </optgroup>
+                        <optgroup label="ShopeePay">
+                            <option value="shopeepay_reguler">ShopeePay Reguler</option>
+                            <option value="shopeepay_premium">ShopeePay Premium</option>
+                        </optgroup>
+                        <optgroup label="LinkAja">
+                            <option value="linkaja_biasa">LinkAja Biasa</option>
+                            <option value="linkaja_full">LinkAja Full</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6 mt-8">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Nominal Dikonversi</label>
+                    <input type="number" id="nominalKonversi" min="10000" class="w-full input-focus rounded-lg p-4" placeholder="Min Rp10.000" oninput="hitungKonversi()">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Estimasi Diterima</label>
+                    <input type="text" id="hasilKonversi" readonly class="w-full input-focus rounded-lg p-4 font-semibold text-accentGreen" placeholder="Otomatis terhitung">
+                </div>
+            </div>
+            <div class="space-y-4 mt-6">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Nomor Tujuan</label>
+                    <input type="text" class="w-full input-focus rounded-lg p-4" placeholder="0812xxxx">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Nama Pemilik Tujuan</label>
+                    <input type="text" class="w-full input-focus rounded-lg p-4" placeholder="Nama sesuai identitas">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Nomor WhatsApp</label>
+                    <input type="tel" class="w-full input-focus rounded-lg p-4" placeholder="08123456789">
+                </div>
+            </div>
+            <div class="flex items-start gap-3 mt-6">
+                <input type="checkbox" id="setujuKonversi" class="mt-1 w-5 h-5">
+                <label class="text-sm text-textMuted">Saya menyetujui biaya dan ketentuan konversi.</label>
+            </div>
+            <button onclick="kirimKonversi()" class="btn-main w-full py-4 rounded-lg text-white font-semibold text-lg mt-6">Kirim Permintaan Konversi</button>
+        </div>
+    </div>
+</section>
+
+<!-- HALAMAN KONTAK KAMI -->
+<section id="kontak" class="section py-12">
+    <div class="container mx-auto px-4 max-w-3xl">
+        <h3 class="text-2xl md:text-4xl font-bold text-center mb-6">📞 Kontak Kami</h3>
+        <p class="text-center text-textMuted mb-10">Hubungi kami melalui saluran di bawah ini untuk bantuan dan informasi</p>
+        
+        <div class="bg-darkCard border border-darkBorder rounded-xl p-6 md:p-8">
+            <div id="daftarKontak" class="space-y-4">
+                <!-- Kontak akan dimuat otomatis di sini -->
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-darkBorder text-center">
+                <p class="text-textMuted mb-2">Jam Operasional</p>
+                <p id="jamOperasionalTampilan" class="text-lg font-medium text-accentGreen">08.00 - 22.00 WIB Setiap Hari</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HALAMAN CARA KERJA -->
+<section id="carakerja" class="section py-12">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <h3 class="text-2xl md:text-4xl font-bold text-center mb-12">Cara Kerja Layanan</h3>
+        <div class="space-y-6">
+            <div class="flex gap-5 items-start bg-darkCard border border-darkBorder p-6 rounded-xl">
+                <div class="w-12 h-12 rounded-full bg-mainBlue flex items-center justify-center text-xl font-bold">1</div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-2">Isi Data</h4>
+                    <p id="langkah1" class="text-textMuted">Pilih layanan, masukkan nominal, dan lengkapi data akun tujuan.</p>
+                </div>
+            </div>
+            <div class="flex gap-5 items-start bg-darkCard border border-darkBorder p-6 rounded-xl">
+                <div class="w-12 h-12 rounded-full bg-mainBlue flex items-center justify-center text-xl font-bold">2</div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-2">Konfirmasi</h4>
+                    <p id="langkah2" class="text-textMuted">Dapatkan rincian pembayaran via WhatsApp, lalu lakukan transfer.</p>
+                </div>
+            </div>
+            <div class="flex gap-5 items-start bg-darkCard border border-darkBorder p-6 rounded-xl">
+                <div class="w-12 h-12 rounded-full bg-mainBlue flex items-center justify-center text-xl font-bold">3</div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-2">Proses</h4>
+                    <p id="langkah3" class="text-textMuted">Bukti pembayaran diverifikasi, saldo langsung dikirim ke akun tujuan.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HALAMAN SYARAT & KETENTUAN -->
+<section id="syarat" class="section py-12">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <h3 class="text-2xl md:text-4xl font-bold text-center mb-10">Syarat & Ketentuan</h3>
+        <div class="bg-darkCard border border-darkBorder p-7 rounded-xl space-y-4 text-textMuted">
+            <p id="syarat1">1. Layanan hanya untuk kebutuhan pribadi dan usaha yang sah.</p>
+            <p id="syarat2">2. Pastikan data akun dan nominal sudah benar sebelum mengirim permintaan.</p>
+            <p id="syarat3">3. Nilai tukar dapat berubah sewaktu-waktu mengikuti kondisi pasar.</p>
+            <p id="syarat4">4. Waktu operasional: 08.00 - 22.00 WIB setiap hari.</p>
+            <p id="syarat5">5. Kami tidak bertanggung jawab atas kesalahan data yang dimasukkan pengguna.</p>
+        </div>
+    </div>
+</section>
+
+<!-- MODAL LOGIN ADMIN -->
+<div id="modalLogin" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-xl w-full max-w-md p-7 mx-4 shadow-2xl">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold text-gray-800">🔐 Login Panel Admin</h3>
+            <button onclick="tutupModal('modalLogin')" class="text-gray-500 hover:text-red-500 text-2xl">&times;</button>
+        </div>
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                <input type="text" id="usernameInput" class="w-full border border-gray-300 rounded-lg p-3" placeholder="Masukkan username">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Kata Sandi</label>
+                <input type="password" id="passwordInput" class="w-full border border-gray-300 rounded-lg p-3" placeholder="Masukkan kata sandi">
+            </div>
+            <button onclick="prosesLogin()" class="btn-main w-full py-3 rounded-lg text-white font-semibold">Masuk</button>
+        </div>
+    </div>
+</div>
+
+<!-- PANEL ADMIN LENGKAP -->
+<div id="modalAdmin" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center hidden overflow-y-auto py-10">
+    <div class="bg-white rounded-xl w-full max-w-4xl p-6 mx-4 shadow-2xl">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-800">⚙️ Panel Pengaturan Lengkap</h3>
+            <button onclick="tutupModal('modalAdmin')" class="text-gray-500 hover:text-red-500 text-2xl">&times;</button>
+        </div>
+
+        <!-- Tab Menu -->
+        <div class="flex flex-wrap gap-2 mb-6 border-b border-gray-200 pb-3">
+            <button onclick="gantiTab('kurs')" id="btnKurs" class="px-4 py-2 rounded-md tab-active">💱 Kurs & Biaya</button>
+            <button onclick="gantiTab('teks')" id="btnTeks" class="px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200">📝 Teks Halaman</button>
+            <button onclick="gantiTab('kontak')" id="btnKontak" class="px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200">📞 Kelola Kontak</button>
+            <button onclick="gantiTab('akun')" id="btnAkun" class="px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200">🔑 Akun Admin</button>
+        </div>
+
+        <!-- Tab 1: Kurs & Biaya -->
+        <div id="tabKurs" class="tab-content space-y-5">
+            <h4 class="text-lg font-semibold text-gray-800 mb-3">Pengaturan Nilai Tukar & Biaya</h4>
+            <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Kurs Beli Saldo (Rp per 1000)</label>
+                    <input type="number" id="kursBeli" step="0.1" class="w-full border border-gray-300 rounded-lg p-3" placeholder="Contoh: 990">
+                    <p class="text-xs text-gray-500 mt-1">1000 saldo = Rp ini</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Kurs Jual Saldo (Rp per 1000)</label>
+                    <input type="number" id="kursJual" step="0.1" class="w-full border border-gray-300 rounded-lg p-3" placeholder="Contoh: 970">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Biaya Konversi Biasa → Premium (%)</label>
+                    <input type="number" id="biayaPremium" step="0.1" class="w-full border border-gray-300 rounded-lg p-3" placeholder="Contoh: 2.5">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Biaya Konversi Antar E-Wallet (%)</label>
+                    <input type="number" id="biayaLain" step="0.1" class="w-full border border-gray-300 rounded-lg p-3" placeholder="Contoh: 1.9">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Biaya Layanan Pembelian (%)</label>
+                    <input type="number" id="biayaBeli" step="0.1" class="w-full border border-gray-300 rounded-lg p-3" placeholder="Contoh: 1.5">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Biaya Layanan Penjualan (%)</label>
+                    <input type="number" id="biayaJual" step="0.1" class="w-full border border-gray-300 rounded-lg p-3" placeholder="Contoh: 1.2">
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Teks Halaman -->
+        <div id="tabTeks" class="tab-content space-y-5 hidden">
+            <h4 class="text-lg font-semibold text-gray-800 mb-3">Ubah Teks Tampilan Website</h4>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Judul Utama Beranda</label>
+                    <input type="text" id="editJudulUtama" class="w-full border border-gray-300 rounded-lg p-3">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Deskripsi Utama</label>
+                    <textarea id="editDeskripsiUtama" rows="2" class="w-full border border-gray-300 rounded-lg p-3"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Teks Status</label>
+                    <input type="text" id="editStatus" class="w-full border border-gray-300 rounded-lg p-3">
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Kelola Kontak -->
+        <div id="tabKontak" class="tab-content space-y-5 hidden">
+            <h4 class="text-lg font-semibold text-gray-800 mb-3">Tambah / Ubah / Hapus Kontak</h4>
+            
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <h5 class="font-medium text-gray-700 mb-3">Tambah Kontak Baru</h5>
+                <div class="grid md:grid-cols-4 gap-3">
+                    <div>
+                        <label class="text-xs text-gray-500">Jenis</label>
+                        <select id="jenisKontak" class="w-full border border-gray-300 rounded p-2">
+                            <option value="wa">WhatsApp</option>
+                            <option value="telp">Telepon</option>
+                            <option value="email">Email</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-500">Nama / Keterangan</label>
+                        <input type="text" id="namaKontak" class="w-full border border-gray-300 rounded p-2" placeholder="Contoh: CS Utama">
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-500">Nomor / Alamat</label>
+                        <input type="text" id="nilaiKontak" class="w-full border border-gray-300 rounded p-2" placeholder="628123456789">
+                    </div>
+                    <div class="flex items-end">
+                        <button onclick="tambahKontak()" class="btn-success w-full text-white px-3 py-2 rounded">Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h5 class="font-medium text-gray-700 mb-2">Daftar Kontak Aktif</h5>
+                <div id="daftarKontakPanel" class="space-y-2 max-h-64 overflow-y-auto border border-gray-200 rounded p-3">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Jam Operasional</label>
+                <input type="text" id="jamOperasional" class="w-full border border-gray-300 rounded-lg p-3" placeholder="08.00 - 22.00 WIB">
+            </div>
+        </div>
+
+        <!-- Tab 4: Akun Admin -->
+        <div id="tabAkun" class="tab-content space-y-5 hidden">
+            <h4 class="text-lg font-semibold text-gray-800 mb-3">Ubah Data Login Admin</h4>
+            <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Username Baru</label>
+                    <input type="text" id="newUsername" class="w-full border border-gray-300 rounded-lg p-3">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Kata Sandi Baru</label>
+                    <input type="password" id="newPassword" class="w-full border border-gray-300 rounded-lg p-3">
+                </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-1">⚠️ Simpan baik-baik data baru, jika lupa harus edit kode lagi</p>
+        </div>
+
+        <div class="flex gap-3 mt-8 pt-4 border-t border-gray-200">
+            <button onclick="simpanSemuaPengaturan()" class="btn-success px-6 py-3 rounded-lg text-white font-semibold">💾 Simpan Semua Perubahan</button>
+            <button onclick="resetPengaturan()" class="btn-danger px-6 py-3 rounded-lg text-white font-semibold">🔄 Kembalikan Awal</button>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="bg-darkBg/90 border-t border-darkBorder py-8 mt-12">
+    <div class="container mx-auto px-4 text-center">
+        <h4 class="text-2xl font-bold mb-3">SUGAS MARKET</h4>
+        <p class="text-textMuted max-w-xl mx-auto mb-4">Layanan konversi saldo elektronik terpercaya & aman.</p>
+        <p class="text-xs text-textMuted">&copy; 2026 SUGAS MARKET</p>
+    </div>
+</footer>
+
+<!-- ✅ JAVASCRIPT LENGKAP & TIDAK TERPOTONG -->
+<script>
+// Data Default
+const AKUN_ADMIN = { username: "admin_sugas", password: "sugas2026" };
+let pengaturan = JSON.parse(localStorage.getItem('sugasMarketConfig')) || {
+    kursBeli: 990,
+    kursJual: 970,
+    biayaPremium: 2.5,
+    biayaLain: 1.9,
+    biayaBeli: 1.5,
+    biayaJual: 1.2,
+    jamOperasional: "08.00 - 22.00 WIB Setiap Hari",
+    kontak: [
+        { id: 1, jenis: "wa", nama: "WhatsApp Utama", nilai: "6281234567890" },
+        { id: 2, jenis: "telp", nama: "Telepon", nilai: "081234567890" }
+    ],
+    teks: {
+        judulUtama: "Layanan Keuangan & Pembayaran",
+        deskripsiUtama: "Menyediakan layanan konversi, pembelian, dan penjualan saldo elektronik dengan standar keamanan dan transparansi sesuai ketentuan yang berlaku.",
+        status: "Beroperasi sejak 2019 | Terpercaya & Terdaftar",
+        keamanan: "Sistem terenkripsi dan data pelanggan dijaga kerahasiaannya sesuai peraturan perlindungan data.",
+        proses: "Transaksi diproses dalam waktu 1-5 menit pada jam operasional.",
+        transparan: "Semua biaya dan kurs tertera terbuka, tidak ada biaya tersembunyi."
+    }
+};
+
+// Jalankan saat halaman dimuat
+window.onload = function() {
+    terapkanPengaturanKeTampilan();
+    muatKontakKeTampilan();
+    hitungEstimasi();
+    hitungKonversi();
+};
+
+// Navigasi Halaman
+function gantiHalaman(id) {
+    document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Menu Mobile
+document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+});
+function tutupMenuMobile() {
+    document.getElementById('mobileMenu').classList.add('hidden');
+}
+
+// Tab Panel Admin
+function gantiTab(nama) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    document.getElementById('tab' + nama.charAt(0).toUpperCase() + nama.slice(1)).classList.remove('hidden');
+    document.querySelectorAll('button[id^="btn"]').forEach(btn => {
+        btn.classList.remove('tab-active');
+        btn.classList.add('bg-gray-100', 'hover:bg-gray-200');
+    });
+    document.getElementById('btn' + nama.charAt(0).toUpperCase() + nama.slice(1)).classList.remove('bg-gray-100', 'hover:bg-gray-200');
+    document.getElementById('btn' + nama.charAt(0).toUpperCase() + nama.slice(1)).classList.add('tab-active');
+}
+
+// Login & Panel
+function bukaLogin() { document.getElementById('modalLogin').classList.remove('hidden'); }
+function tutupModal(id) { document.getElementById(id).classList.add('hidden'); }
+function prosesLogin() {
+    const user = document.getElementById('usernameInput').value.trim();
+    const pass = document.getElementById('passwordInput').value.trim();
+    if(user === AKUN_ADMIN.username && pass === AKUN_ADMIN.password) {
+        tutupModal('modalLogin');
+        muatDataKePanel();
+        document.getElementById('modalAdmin').classList.remove('hidden');
+    } else { alert("❌ Username atau sandi salah!"); }
+}
+
+// Muat daftar kontak ke halaman depan
+function muatKontakKeTampilan() {
+    const wadah = document.getElementById('daftarKontak');
+    wadah.innerHTML = '';
+    pengaturan.kontak.forEach(item => {
+        let ikon, tautan;
+        if(item.jenis === 'wa') {
+            ikon = 'fa-whatsapp text-green-500';
+            tautan = `https://wa.me/${item.nilai}`;
+        } else if(item.jenis === 'telp') {
+            ikon = 'fa-phone text-blue-400';
+            tautan = `tel:${item.nilai}`;
+        } else if(item.jenis === 'email') {
+            ikon = 'fa-envelope text-red-400';
+            tautan = `mailto:${item.nilai}`;
+        }
+        wadah.innerHTML += `
+            <a href="${tautan}" target="_blank" class="kontak-item flex items-center justify-between p-4 rounded-lg border border-darkBorder hover:border-accentGreen">
+                <div class="flex items-center gap-3">
+                    <i class="fa ${ikon} text-2xl"></i>
+                    <div>
+                        <p class="font-medium">${item.nama}</p>
+                        <p class="text-textMuted text-sm">${item.nilai}</p>
+                    </div>
+                </div>
+                <i class="fa fa-external-link text-textMuted"></i>
+            </a>
+        `;
+    });
+    document.getElementById('jamOperasionalTampilan').textContent = pengaturan.jamOperasional;
+}
+
+// Tambah kontak baru
+function tambahKontak() {
+    const jenis = document.getElementById('jenisKontak').value;
+    const nama = document.getElementById('namaKontak').value.trim();
+    const nilai = document.getElementById('nilaiKontak').value.trim();
+    if(!nama || !nilai) return alert("Isi nama dan nomor/alamat terlebih dahulu!");
+    const id = Date.now();
+    pengaturan.kontak.push({id, jenis, nama, nilai});
+    muatDaftarKontakPanel();
+    document.getElementById('namaKontak').value = '';
+    document.getElementById('nilaiKontak').value = '';
+}
+
+// Hapus kontak
+function hapusKontak(id) {
+    if(confirm("Yakin ingin menghapus kontak ini?")) {
+        pengaturan.kontak = pengaturan.kontak.filter(k => k.id !== id);
+       
