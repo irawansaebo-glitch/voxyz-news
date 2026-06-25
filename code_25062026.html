@@ -758,4 +758,151 @@ function tambahKontak() {
 function hapusKontak(id) {
     if(confirm("Yakin ingin menghapus kontak ini?")) {
         pengaturan.kontak = pengaturan.kontak.filter(k => k.id !== id);
+        // ✅ LANJUTAN & PENYELESAIAN BAGIAN JAVASCRIPT
+function hapusKontak(id) {
+    if(confirm("Yakin ingin menghapus kontak ini?")) {
+        pengaturan.kontak = pengaturan.kontak.filter(k => k.id !== id);
+        muatDaftarKontakPanel();
+    }
+}
+
+// Tampilkan daftar kontak di panel admin
+function muatDaftarKontakPanel() {
+    const wadah = document.getElementById('daftarKontakPanel');
+    wadah.innerHTML = '';
+    pengaturan.kontak.forEach(item => {
+        wadah.innerHTML += `
+            <div class="flex items-center justify-between p-3 border rounded-lg bg-gray-50">
+                <div>
+                    <p class="font-medium">${item.nama}</p>
+                    <p class="text-sm text-gray-600">${item.jenis.toUpperCase()}: ${item.nilai}</p>
+                </div>
+                <button onclick="hapusKontak(${item.id})" class="btn-danger text-white px-3 py-1 rounded text-sm">Hapus</button>
+            </div>
+        `;
+    });
+}
+
+// Hitung estimasi nilai transaksi beli/jual
+function hitungEstimasi() {
+    const jenis = document.getElementById('jenisTransaksi').value;
+    const nominal = parseInt(document.getElementById('nominalBeli').value) || 0;
+    let hasil = 0;
+
+    if(jenis === 'beli') {
+        const biaya = nominal * (pengaturan.biayaBeli / 100);
+        hasil = nominal - biaya;
+    } else {
+        const biaya = nominal * (pengaturan.biayaJual / 100);
+        hasil = nominal - biaya;
+    }
+
+    document.getElementById('hasilBeli').value = 'Rp ' + hasil.toLocaleString('id-ID');
+}
+
+// Hitung estimasi konversi saldo
+function hitungKonversi() {
+    const dari = document.getElementById('dariSaldo').value;
+    const ke = document.getElementById('keSaldo').value;
+    const nominal = parseInt(document.getElementById('nominalKonversi').value) || 0;
+    let biayaPersen = 0;
+
+    if(nominal < 10000) {
+        document.getElementById('hasilKonversi').value = 'Min Rp 10.000';
+        return;
+    }
+
+    if(dari.includes('biasa') && ke.includes('premium')) {
+        biayaPersen = pengaturan.biayaPremium;
+    } else if(dari !== ke) {
+        biayaPersen = pengaturan.biayaLain;
+    }
+
+    const hasil = nominal - (nominal * (biayaPersen / 100));
+    document.getElementById('hasilKonversi').value = 'Rp ' + hasil.toLocaleString('id-ID');
+}
+
+// Pilih layanan dari daftar
+function pilihLayanan(nama) {
+    gantiHalaman('layanan');
+    document.getElementById('nominalBeli').focus();
+}
+
+// Kirim permintaan transaksi
+function kirimTransaksi() {
+    const setuju = document.getElementById('setujuTransaksi').checked;
+    const nominal = document.getElementById('nominalBeli').value;
+    if(!nominal || nominal < 10000) return alert("Masukkan nominal minimal Rp 10.000!");
+    if(!setuju) return alert("Centang persetujuan syarat & ketentuan terlebih dahulu!");
+    alert("✅ Permintaan terkirim! Kami akan hubungi Anda segera via WhatsApp.");
+}
+
+// Kirim permintaan konversi
+function kirimKonversi() {
+    const setuju = document.getElementById('setujuKonversi').checked;
+    const nominal = document.getElementById('nominalKonversi').value;
+    if(!nominal || nominal < 10000) return alert("Masukkan nominal minimal Rp 10.000!");
+    if(!setuju) return alert("Centang persetujuan ketentuan konversi terlebih dahulu!");
+    alert("✅ Permintaan konversi terkirim! Kami proses secepatnya.");
+}
+
+// Muat data pengaturan ke dalam panel admin
+function muatDataKePanel() {
+    document.getElementById('kursBeli').value = pengaturan.kursBeli;
+    document.getElementById('kursJual').value = pengaturan.kursJual;
+    document.getElementById('biayaPremium').value = pengaturan.biayaPremium;
+    document.getElementById('biayaLain').value = pengaturan.biayaLain;
+    document.getElementById('biayaBeli').value = pengaturan.biayaBeli;
+    document.getElementById('biayaJual').value = pengaturan.biayaJual;
+    document.getElementById('jamOperasional').value = pengaturan.jamOperasional;
+    document.getElementById('editJudulUtama').value = pengaturan.teks.judulUtama;
+    document.getElementById('editDeskripsiUtama').value = pengaturan.teks.deskripsiUtama;
+    document.getElementById('editStatus').value = pengaturan.teks.status;
+    muatDaftarKontakPanel();
+}
+
+// Terapkan pengaturan ke tampilan halaman depan
+function terapkanPengaturanKeTampilan() {
+    document.getElementById('teksJudulUtama').textContent = pengaturan.teks.judulUtama;
+    document.getElementById('teksDeskripsiUtama').textContent = pengaturan.teks.deskripsiUtama;
+    document.getElementById('teksStatus').textContent = pengaturan.teks.status;
+    document.getElementById('teksKeamanan').textContent = pengaturan.teks.keamanan;
+    document.getElementById('teksProses').textContent = pengaturan.teks.proses;
+    document.getElementById('teksTransparan').textContent = pengaturan.teks.transparan;
+}
+
+// Simpan semua perubahan pengaturan
+function simpanSemuaPengaturan() {
+    pengaturan.kursBeli = parseFloat(document.getElementById('kursBeli').value) || 990;
+    pengaturan.kursJual = parseFloat(document.getElementById('kursJual').value) || 970;
+    pengaturan.biayaPremium = parseFloat(document.getElementById('biayaPremium').value) || 2.5;
+    pengaturan.biayaLain = parseFloat(document.getElementById('biayaLain').value) || 1.9;
+    pengaturan.biayaBeli = parseFloat(document.getElementById('biayaBeli').value) || 1.5;
+    pengaturan.biayaJual = parseFloat(document.getElementById('biayaJual').value) || 1.2;
+    pengaturan.jamOperasional = document.getElementById('jamOperasional').value;
+    pengaturan.teks.judulUtama = document.getElementById('editJudulUtama').value;
+    pengaturan.teks.deskripsiUtama = document.getElementById('editDeskripsiUtama').value;
+    pengaturan.teks.status = document.getElementById('editStatus').value;
+
+    // Simpan ke penyimpanan lokal
+    localStorage.setItem('sugasMarketConfig', JSON.stringify(pengaturan));
+    terapkanPengaturanKeTampilan();
+    muatKontakKeTampilan();
+    hitungEstimasi();
+    hitungKonversi();
+    alert("✅ Semua perubahan berhasil disimpan!");
+}
+
+// Kembalikan pengaturan ke kondisi awal
+function resetPengaturan() {
+    if(confirm("Yakin ingin mengembalikan semua pengaturan ke kondisi awal?")) {
+        localStorage.removeItem('sugasMarketConfig');
+        location.reload();
+    }
+}
+</script>
+
+</body>
+</html>
+
        
