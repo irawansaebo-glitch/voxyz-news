@@ -764,3 +764,282 @@ function tambahKontak() {
 
 // Hapus kontak
 function hapusK
+
+    // Data Default
+const AKUN_ADMIN = { username: "admin_sugas", password: "sugas2026" };
+let pengaturan = JSON.parse(localStorage.getItem('sugasMarketConfig')) || {
+    kursBeli: 990,
+    kursJual: 970,
+    biayaPremium: 2.5,
+    biayaLain: 1.9,
+    biayaBeli: 1.5,
+    biayaJual: 1.2,
+    jamOperasional: "08.00 - 22.00 WIB Setiap Hari",
+    kontak: [
+        { id: 1, jenis: "wa", nama: "WhatsApp Utama", nilai: "6281234567890" },
+        { id: 2, jenis: "telp", nama: "Telepon", nilai: "081234567890" }
+    ],
+    teks: {
+        judulUtama: "Layanan Keuangan & Pembayaran",
+        deskripsiUtama: "Menyediakan layanan konversi, pembelian, dan penjualan saldo elektronik dengan standar keamanan dan transparansi sesuai ketentuan yang berlaku.",
+        status: "Beroperasi sejak 2019 | Terpercaya & Terdaftar",
+        keamanan: "Sistem terenkripsi dan data pelanggan dijaga kerahasiaannya sesuai peraturan perlindungan data.",
+        proses: "Transaksi diproses dalam waktu 1-5 menit pada jam operasional.",
+        transparan: "Semua biaya dan kurs tertera terbuka, tidak ada biaya tersembunyi."
+    }
+};
+
+// Jalankan saat halaman dibuka
+window.onload = function() {
+    terapkanPengaturanKeTampilan();
+    muatKontakKeTampilan();
+    muatDaftarKontakPanel();
+    hitungEstimasi();
+    hitungKonversi();
+};
+
+// Pindah halaman
+function gantiHalaman(id) {
+    document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Menu HP
+document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+});
+function tutupMenuMobile() {
+    document.getElementById('mobileMenu').classList.add('hidden');
+}
+
+// Ganti tab panel admin
+function gantiTab(nama) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    document.getElementById('tab' + nama.charAt(0).toUpperCase() + nama.slice(1)).classList.remove('hidden');
+    document.querySelectorAll('button[id^="btn"]').forEach(btn => {
+        btn.classList.remove('tab-active');
+        btn.classList.add('bg-gray-100', 'hover:bg-gray-200');
+    });
+    document.getElementById('btn' + nama.charAt(0).toUpperCase() + nama.slice(1)).classList.remove('bg-gray-100', 'hover:bg-gray-200');
+    document.getElementById('btn' + nama.charAt(0).toUpperCase() + nama.slice(1)).classList.add('tab-active');
+}
+
+// Buka tutup modal
+function bukaLogin() { document.getElementById('modalLogin').classList.remove('hidden'); }
+function tutupModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+// Proses login
+function prosesLogin() {
+    const user = document.getElementById('usernameInput').value.trim();
+    const pass = document.getElementById('passwordInput').value.trim();
+    if(user === AKUN_ADMIN.username && pass === AKUN_ADMIN.password) {
+        tutupModal('modalLogin');
+        muatDataKePanel();
+        document.getElementById('modalAdmin').classList.remove('hidden');
+    } else {
+        alert("❌ Username atau kata sandi salah!");
+    }
+}
+
+// Tampilkan kontak ke halaman depan
+function muatKontakKeTampilan() {
+    const wadah = document.getElementById('daftarKontak');
+    wadah.innerHTML = '';
+    pengaturan.kontak.forEach(item => {
+        let ikon, tautan;
+        if(item.jenis === 'wa') {
+            ikon = 'fa-whatsapp text-green-500';
+            tautan = `https://wa.me/${item.nilai}`;
+        } else if(item.jenis === 'telp') {
+            ikon = 'fa-phone text-blue-400';
+            tautan = `tel:${item.nilai}`;
+        } else if(item.jenis === 'email') {
+            ikon = 'fa-envelope text-red-400';
+            tautan = `mailto:${item.nilai}`;
+        }
+        wadah.innerHTML += `
+            <a href="${tautan}" target="_blank" class="kontak-item flex items-center justify-between p-4 rounded-lg border border-darkBorder hover:border-accentGreen">
+                <div class="flex items-center gap-3">
+                    <i class="fa ${ikon} text-2xl"></i>
+                    <div>
+                        <p class="font-medium">${item.nama}</p>
+                        <p class="text-textMuted text-sm">${item.nilai}</p>
+                    </div>
+                </div>
+                <i class="fa fa-external-link text-textMuted"></i>
+            </a>
+        `;
+    });
+    document.getElementById('jamOperasionalTampilan').textContent = pengaturan.jamOperasional;
+}
+
+// Tambah kontak baru
+function tambahKontak() {
+    const jenis = document.getElementById('jenisKontak').value;
+    const nama = document.getElementById('namaKontak').value.trim();
+    const nilai = document.getElementById('nilaiKontak').value.trim();
+    if(!nama || !nilai) return alert("Harap isi nama dan nomor/alamat kontak!");
+    const id = Date.now();
+    pengaturan.kontak.push({id, jenis, nama, nilai});
+    muatDaftarKontakPanel();
+    document.getElementById('namaKontak').value = '';
+    document.getElementById('nilaiKontak').value = '';
+}
+
+// Hapus kontak
+function hapusKontak(id) {
+    pengaturan.kontak = pengaturan.kontak.filter(item => item.id !== id);
+    muatDaftarKontakPanel();
+}
+
+// Tampilkan daftar kontak di panel admin
+function muatDaftarKontakPanel() {
+    const wadah = document.getElementById('daftarKontakPanel');
+    wadah.innerHTML = '';
+    pengaturan.kontak.forEach(item => {
+        wadah.innerHTML += `
+            <div class="flex items-center justify-between p-2 bg-gray-50 rounded border">
+                <div>
+                    <span class="font-medium">${item.nama}</span>
+                    <span class="text-xs text-gray-500 ml-2">(${item.jenis.toUpperCase()})</span>
+                    <span class="text-sm text-gray-600 ml-2">${item.nilai}</span>
+                </div>
+                <button onclick="hapusKontak(${item.id})" class="btn-danger text-white px-2 py-1 rounded text-xs">Hapus</button>
+            </div>
+        `;
+    });
+}
+
+// Pilih layanan dan buka formulir
+function pilihLayanan(namaLayanan) {
+    gantiHalaman('layanan');
+    const input = document.querySelector('#layanan input[placeholder*="nomor"]');
+    if(input) input.placeholder = `Masukkan nomor ${namaLayanan} Anda`;
+    window.scrollTo({top: 300, behavior: 'smooth'});
+}
+
+// Hitung estimasi beli/jual saldo
+function hitungEstimasi() {
+    const nominal = parseFloat(document.getElementById('nominalBeli').value) || 0;
+    const jenis = document.getElementById('jenisTransaksi').value;
+    let hasil = 0;
+
+    if(nominal < 10000) {
+        document.getElementById('hasilBeli').value = "Min Rp 10.000";
+        return;
+    }
+
+    if(jenis === 'beli') {
+        const kurs = pengaturan.kursBeli;
+        const biaya = pengaturan.biayaBeli / 100;
+        hasil = nominal * (kurs / 1000) * (1 - biaya);
+    } else {
+        const kurs = pengaturan.kursJual;
+        const biaya = pengaturan.biayaJual / 100;
+        hasil = nominal * (kurs / 1000) * (1 - biaya);
+    }
+
+    document.getElementById('hasilBeli').value = "Rp " + hasil.toLocaleString('id-ID', {maximumFractionDigits: 0});
+}
+
+// Hitung konversi saldo
+function hitungKonversi() {
+    const nominal = parseFloat(document.getElementById('nominalKonversi').value) || 0;
+    const dari = document.getElementById('dariSaldo').value;
+    const ke = document.getElementById('keSaldo').value;
+    let hasil = 0;
+
+    if(nominal < 10000) {
+        document.getElementById('hasilKonversi').value = "Min Rp 10.000";
+        return;
+    }
+
+    if(dari === ke) {
+        hasil = nominal;
+    } else if(dari.includes('biasa') && ke.includes('premium')) {
+        const biaya = pengaturan.biayaPremium / 100;
+        hasil = nominal * (1 - biaya);
+    } else {
+        const biaya = pengaturan.biayaLain / 100;
+        hasil = nominal * (1 - biaya);
+    }
+
+    document.getElementById('hasilKonversi').value = "Rp " + hasil.toLocaleString('id-ID', {maximumFractionDigits: 0});
+}
+
+// Kirim permintaan transaksi
+function kirimTransaksi() {
+    const setuju = document.getElementById('setujuTransaksi').checked;
+    if(!setuju) return alert("Centang persetujuan terlebih dahulu!");
+    alert("✅ Permintaan terkirim! Kami akan hubungi Anda segera via WhatsApp.");
+}
+
+// Kirim permintaan konversi
+function kirimKonversi() {
+    const setuju = document.getElementById('setujuKonversi').checked;
+    if(!setuju) return alert("Centang persetujuan terlebih dahulu!");
+    alert("✅ Permintaan konversi terkirim! Kami akan proses secepatnya.");
+}
+
+// Masukkan data ke panel pengaturan
+function muatDataKePanel() {
+    document.getElementById('kursBeli').value = pengaturan.kursBeli;
+    document.getElementById('kursJual').value = pengaturan.kursJual;
+    document.getElementById('biayaPremium').value = pengaturan.biayaPremium;
+    document.getElementById('biayaLain').value = pengaturan.biayaLain;
+    document.getElementById('biayaBeli').value = pengaturan.biayaBeli;
+    document.getElementById('biayaJual').value = pengaturan.biayaJual;
+    document.getElementById('jamOperasional').value = pengaturan.jamOperasional;
+    document.getElementById('editJudulUtama').value = pengaturan.teks.judulUtama;
+    document.getElementById('editDeskripsiUtama').value = pengaturan.teks.deskripsiUtama;
+    document.getElementById('editStatus').value = pengaturan.teks.status;
+    document.getElementById('newUsername').value = AKUN_ADMIN.username;
+    document.getElementById('newPassword').value = AKUN_ADMIN.password;
+}
+
+// Terapkan pengaturan ke tampilan depan
+function terapkanPengaturanKeTampilan() {
+    document.getElementById('teksJudulUtama').textContent = pengaturan.teks.judulUtama;
+    document.getElementById('teksDeskripsiUtama').textContent = pengaturan.teks.deskripsiUtama;
+    document.getElementById('teksStatus').textContent = pengaturan.teks.status;
+    document.getElementById('teksKeamanan').textContent = pengaturan.teks.keamanan;
+    document.getElementById('teksProses').textContent = pengaturan.teks.proses;
+    document.getElementById('teksTransparan').textContent = pengaturan.teks.transparan;
+}
+
+// Simpan semua perubahan
+function simpanSemuaPengaturan() {
+    pengaturan.kursBeli = parseFloat(document.getElementById('kursBeli').value) || 990;
+    pengaturan.kursJual = parseFloat(document.getElementById('kursJual').value) || 970;
+    pengaturan.biayaPremium = parseFloat(document.getElementById('biayaPremium').value) || 2.5;
+    pengaturan.biayaLain = parseFloat(document.getElementById('biayaLain').value) || 1.9;
+    pengaturan.biayaBeli = parseFloat(document.getElementById('biayaBeli').value) || 1.5;
+    pengaturan.biayaJual = parseFloat(document.getElementById('biayaJual').value) || 1.2;
+    pengaturan.jamOperasional = document.getElementById('jamOperasional').value;
+    pengaturan.teks.judulUtama = document.getElementById('editJudulUtama').value;
+    pengaturan.teks.deskripsiUtama = document.getElementById('editDeskripsiUtama').value;
+    pengaturan.teks.status = document.getElementById('editStatus').value;
+
+    const userBaru = document.getElementById('newUsername').value.trim();
+    const passBaru = document.getElementById('newPassword').value.trim();
+    if(userBaru && passBaru) {
+        AKUN_ADMIN.username = userBaru;
+        AKUN_ADMIN.password = passBaru;
+    }
+
+    localStorage.setItem('sugasMarketConfig', JSON.stringify(pengaturan));
+    terapkanPengaturanKeTampilan();
+    muatKontakKeTampilan();
+    hitungEstimasi();
+    hitungKonversi();
+    alert("✅ Semua perubahan berhasil disimpan!");
+}
+
+// Kembalikan ke pengaturan awal
+function resetPengaturan() {
+    if(!confirm("Yakin ingin mengembalikan semua ke pengaturan awal?")) return;
+    localStorage.removeItem('sugasMarketConfig');
+    location.reload();
+}
+
