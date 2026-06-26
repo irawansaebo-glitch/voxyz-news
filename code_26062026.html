@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUGAS MARKET | Jasa Convert Saldo E-Wallet Terpercaya</title>
+    <meta name="description" content="SUGAS MARKET - Jasa convert saldo DANA, GoPay, OVO, ShopeePay, SeaBank, LinkAja, DANA Premium & lainnya. Proses cepat 1-5 menit, aman, terpercaya sejak 2019.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0B0B1A',
+                        darkCard: '#121229',
+                        primary: '#D4AF37',
+                        primaryLight: '#FFD700',
+                        textWhite: '#F8FAFC',
+                        textMuted: '#B4B4C7',
+                        borderColor: '#2A2A4A'
+                    },
+                    fontFamily: { inter: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0B0B1A; color: #F8FAFC; min-height: 100vh; }
+        .bg-pattern { position: fixed; inset: 0; z-index: -1; background-image: radial-gradient(rgba(212, 175, 55, 0.1) 1px, transparent 1px); background-size: 25px 25px; opacity: 0.5; }
+        .card { background: #121229; border: 1px solid #2A2A4A; border-radius: 16px; transition: all 0.3s ease; }
+        .card:hover { border-color: rgba(212, 175, 55, 0.5); box-shadow: 0 8px 24px rgba(212, 175, 55, 0.12); }
+        .input-custom { background: #0F0F23; border: 1px solid #2A2A4A; border-radius: 8px; color: #fff; padding: 14px; width: 100%; outline: none; transition: 0.2s; }
+        .input-custom:focus { border-color: #D4AF37; box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2); }
+        .btn-primary { background: linear-gradient(90deg, #D4AF37, #FFD700); color: #000; font-weight: 700; border-radius: 8px; padding: 14px; width: 100%; border: none; cursor: pointer; transition: 0.3s; }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3); }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; align-items: center; justify-content: center; padding: 1rem; }
+        .modal-content { background: #121229; border: 2px solid #D4AF37; border-radius: 16px; width: 100%; max-width: 450px; padding: 2rem; animation: modalIn 0.3s ease; }
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .tab-active { background: #D4AF37; color: #000; font-weight: 600; }
+        .tab-inactive { background: #1E1E3F; color: #ccc; }
+    </style>
+</head>
+<body>
+<div class="bg-pattern"></div>
+
+<!-- Header -->
+<header class="sticky top-0 z-50 backdrop-blur-md bg-darkBg/90 border-b border-borderColor shadow-lg">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primaryLight flex items-center justify-center text-black font-bold text-xl">S</div>
+            <h1 class="text-2xl md:text-3xl font-bold">SUGAS<span class="text-primary">MARKET</span></h1>
+        </div>
+        <div class="hidden md:flex gap-6 font-medium">
+            <a href="#beranda" class="nav-link hover:text-primary transition">Beranda</a>
+            <a href="#layanan" class="nav-link hover:text-primary transition">Layanan</a>
+            <a href="#cara" class="nav-link hover:text-primary transition">Cara Kerja</a>
+            <a href="#syarat" class="nav-link hover:text-primary transition">Syarat</a>
+            <a href="#kontak" class="nav-link hover:text-primary transition">Kontak</a>
+            <button onclick="bukaLoginAdmin()" class="text-primary font-semibold">🔧 Admin</button>
+        </div>
+        <button id="menuToggle" class="md:hidden text-2xl"><i class="fa fa-bars"></i></button>
+    </div>
+    <div id="menuMobile" class="hidden bg-darkDeep/95 border-t border-primary/20">
+        <div class="container mx-auto px-4 py-3 flex flex-col gap-3">
+            <a href="#beranda" class="py-2 hover:text-primary">Beranda</a>
+            <a href="#layanan" class="py-2 hover:text-primary">Layanan</a>
+            <a href="#cara" class="py-2 hover:text-primary">Cara Kerja</a>
+            <a href="#syarat" class="py-2 hover:text-primary">Syarat</a>
+            <a href="#kontak" class="py-2 hover:text-primary">Kontak</a>
+            <button onclick="bukaLoginAdmin()" class="text-left py-2 text-primary">🔧 Panel Admin</button>
+        </div>
+    </div>
+</header>
+
+<!-- Notifikasi -->
+<div id="notif" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-[10000] w-[92%] max-w-md rounded-lg p-3 text-center font-medium hidden"></div>
+
+<!-- Hero Section -->
+<section id="beranda" class="py-12 md:py-16 text-center">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 text-glow">Jasa Convert Saldo E-Wallet</h2>
+        <p class="text-lg md:text-xl text-textMuted max-w-3xl mx-auto mb-6">
+            SUGAS MARKET penyedia jasa convert saldo DANA, GoPay, OVO, ShopeePay, SeaBank, LinkAja & E-Wallet lainnya. Proses cepat 1–5 menit, aman, terpercaya sejak 2019 🚀
+        </p>
+        <div class="inline-flex items-center gap-2 bg-primary/15 border border-primary/30 px-5 py-2 rounded-full mb-10">
+            <i class="fa fa-check-circle text-primary"></i>
+            <span>Dipercaya lebih dari <strong class="text-primary">70.000+ Pengguna Aktif</strong></span>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div class="card p-6">
+                <i class="fa fa-bolt text-3xl text-primary mb-4"></i>
+                <h3 class="text-xl font-semibold mb-2">Proses Cepat</h3>
+                <p class="text-textMuted">Diproses otomatis setelah pembayaran dikonfirmasi</p>
+            </div>
+            <div class="card p-6">
+                <i class="fa fa-shield text-3xl text-blue-400 mb-4"></i>
+                <h3 class="text-xl font-semibold mb-2">100% Aman</h3>
+                <p class="text-textMuted">Data rahasia, transaksi terenkripsi, bebas risiko</p>
+            </div>
+            <div class="card p-6">
+                <i class="fa fa-star text-3xl text-yellow-400 mb-4"></i>
+                <h3 class="text-xl font-semibold mb-2">Rating 5.0/5</h3>
+                <p class="text-textMuted">Ulasan positif dari ribuan pelanggan setia</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Form Konversi -->
+<section id="layanan" class="py-10 px-4">
+    <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-8 text-primary">Formulir Convert Saldo</h2>
+        <div class="card p-6 md:p-8">
+            <!-- Tab Jenis Layanan -->
+            <div class="flex gap-2 mb-6">
+                <button onclick="gantiTabForm('convert')" id="tabConvert" class="tab-active flex-1 py-2 rounded-lg font-medium">Convert Saldo</button>
+                <button onclick="gantiTabForm('topup')" id="tabTopup" class="tab-inactive flex-1 py-2 rounded-lg font-medium">Top Up Saldo</button>
+            </div>
+
+            <!-- Form Convert -->
+            <div id="formConvert" class="space-y-5">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Dari Saldo</label>
+                        <select id="dari" class="input-custom" onchange="hitungOtomatis()">
+                            <option value="dana_biasa">DANA Biasa / Non Premium</option>
+                            <option value="dana_premium">DANA Premium</option>
+                            <option value="gopay_reguler">GoPay Reguler</option>
+                            <option value="gopay_plus">GoPay Plus</option>
+                            <option value="ovo_club">OVO Club</option>
+                            <option value="ovo_premier">OVO Premier</option>
+                            <option value="shopeepay_reguler">ShopeePay Reguler</option>
+                            <option value="shopeepay_premium">ShopeePay Premium</option>
+                            <option value="seabank">SeaBank</option>
+                            <option value="linkaja">LinkAja</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Ke Saldo</label>
+                        <select id="ke" class="input-custom" onchange="aturMinimal(); hitungOtomatis()">
+                            <option value="dana_premium">DANA Premium</option>
+                            <option value="dana_biasa">DANA Biasa / Non Premium</option>
+                            <option value="gopay_plus">GoPay Plus</option>
+                            <option value="gopay_reguler">GoPay Reguler</option>
+                            <option value="ovo_premier">OVO Premier</option>
+                            <option value="ovo_club">OVO Club</option>
+                            <option value="shopeepay_premium">ShopeePay Premium</option>
+                            <option value="shopeepay_reguler">ShopeePay Reguler</option>
+                            <option value="seabank">SeaBank</option>
+                            <option value="linkaja">LinkAja</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Nominal Convert (Rp)</label>
+                    <input type="number" id="nominal" class="input-custom" min="5000" value="5000" oninput="hitungOtomatis()" placeholder="Masukkan jumlah">
+                </div>
+
+                <div class="bg-darkBg border border-primary/40 rounded-xl p-5 text-center">
+                    <p class="text-textMuted mb-2">Total Bayar via QRIS</p>
+                    <p id="totalTeks" class="text-3xl font-bold text-white mb-3">Rp 5.000</p>
+                    <p class="text-textMuted mb-2">Saldo Diterima</p>
+                    <p id="diterimaTeks" class="text-2xl font-bold text-primary mb-2">Rp 4.750</p>
+                    <p id="rincianTeks" class="text-sm text-textMuted">Biaya 5% = Rp 250</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Nomor Tujuan</label>
+                        <input type="text" id="nomorTujuan" class="input-custom" placeholder="Contoh: 0812xxxxxxx">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Nama Pemilik Akun</label>
+                        <input type="text" id="namaTujuan" class="input-custom" placeholder="Sesuai nama di aplikasi">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Kode Promo (Jika Ada)</label>
+                    <input type="text" id="kodePromo" class="input-custom" placeholder="Masukkan kode diskon">
+                </div>
+
+                <div class="flex items-center gap-2 mt-2">
+                    <input type="checkbox" id="setuju" class="w-4 h-4">
+                    <label for="setuju" class="text-sm text-textMuted">Saya telah membaca dan setuju dengan <a href="#syarat" class="text-primary underline">Syarat & Ketentuan</a></label>
+                </div>
+
+                <button onclick="lanjutPembayaran()" class="btn-primary mt-4">Proses & Bayar QRIS</button>
+            </div>
+
+            <!-- Form Top Up -->
+            <div id="formTopup" class="space-y-5 hidden">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Pilih E-Wallet</label>
+                    <select class="input-custom">
+                        <option value="dana">DANA Premium</option>
+                        <option value="gopay">GoPay Plus</option>
+                        <option value="ovo">OVO Premier</option>
+                        <option value="shopeepay">ShopeePay Premium</option>
+                        <option value="seabank">SeaBank</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Nominal Top Up (Rp)</label>
+                    <input type="number" class="input-custom" min="20000" value="50000" placeholder="Masukkan jumlah">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Nomor Tujuan</label>
+                    <input type="text" class="input-custom" placeholder="Contoh: 0812xxxxxxx">
+                </div>
+                <button class="btn-primary mt-4">Proses Top Up</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Cara Kerja -->
+<section id="cara" class="py-12 px-4">
+    <div class="max-w-3xl mx-auto">
+        <h3 class="text-3xl font-bold text-center mb-8 text-primary">Cara Convert Saldo</h3>
+        <div class="space-y-4">
+            <div class="card p-5 flex gap-4 items-center">
+                <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl">1</div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-1">Isi Formulir</h4>
+                    <p class="text-textMuted">Pilih asal & tujuan saldo, masukkan nominal dan data akun tujuan.</p>
+                </div>
+            </div>
+            <div class="card p-5 flex gap-4 items-center">
+                <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl">2</div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-1">Bayar via QRIS</h4>
+                    <p class="text-textMuted">Scan kode QRIS yang muncul dan bayar sesuai nominal total.</p>
+                </div>
+            </div>
+            <div class="card p-5 flex gap-4 items-center">
+                <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl">3</div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-1">Konfirmasi & Selesai</h4>
+                    <p class="text-textMuted">Kirim bukti pembayaran ke WhatsApp, saldo masuk dalam 1–5 menit.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Syarat & Ketentuan -->
+<section id="syarat" class="py-12 px-4">
+    <div class="max-w-2xl mx-auto">
+        <h3 class="text-3xl font-bold text-center mb-8 text-primary">Syarat & Ketentuan</h3>
+        <div class="card p-6 text-textMuted space-y-3 text-sm" id="isiSyarat">
+            <p>1. Layanan untuk kebutuhan pribadi yang sah dan tidak melanggar hukum.</p>
+            <p>2. Minimal transaksi Rp5.000, khusus ke SeaBank minimal Rp10.000.</p>
+            <p>3. Biaya layanan dihitung otomatis sesuai persentase yang berlaku.</p>
+            <p>4. Pastikan nomor dan nama tujuan benar sebelum membayar.</p>
+            <p>5. Jam operasional: 08.00 – 22.00 WIB setiap hari.</p>
+            <p>6. Kami tidak bertanggung jawab atas kesalahan data yang dimasukkan pengguna.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Kontak -->
+<section id="kontak" class="py-12 px-4 text-center">
+    <h3 class="text-3xl font-bold mb-6 text-primary">Hubungi Kami</h3>
+    <p class="text-textMuted mb-8 max-w-xl mx-auto">Ada pertanyaan atau kendala? Hubungi kami kapan saja selama jam operasional.</p>
+    <a id="linkWA" href="https://wa.me/6287769370995" target="_blank" class="inline-flex items-center gap-3 bg-primary/15 border border-primary/40 px-6 py-3 rounded-lg text-primary font-semibold text-lg hover:bg-primary/20 transition">
+        <i class="fa fa-whatsapp text-2xl"></i>
+        <span id="nomorWA">+62 877-6937-0995</span>
+    </a>
+</section>
+
+<!-- Modal Login Admin -->
+<div id="modalLogin" class="modal">
+    <div class="modal-content">
+        <h3 class="text-xl font-bold text-center mb-5 text-primary">🔐 Login Panel Admin</h3>
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm mb-1">Username</label>
+                <input type="text" id="userAdmin" class="input-custom" value="admin">
+            </div>
+            <div>
+                <label class="block text-sm mb-1">Kata Sandi</label>
+                <input type="password" id="passAdmin" class="input-custom" value="sugas2026">
+            </div>
+            <button onclick="cekLogin()" class="btn-primary">Masuk</button>
+            <button onclick="tutupModal('modalLogin')" class="w-full bg-gray-700 py-2.5 rounded mt-2 hover:bg-gray-600">Batal</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Panel Admin -->
+<div id="modalPanel" class="modal">
+    <div class="modal-content max-w-lg w-full">
+        <h3 class="text-xl font-bold text-center mb-5 text-primary">⚙️ Panel Pengaturan SUGAS MARKET</h3>
+        <div class="flex gap-2 mb-4 border-b border-primary/20 pb-3">
+            <button onclick="gantiTab('umum')" class="tab-btn active px-3 py-1.5 rounded bg-primary text-black font-medium">Umum</button>
+            <button onclick="gantiTab('biaya')" class="tab-btn px-3 py-1.5 rounded bg-gray-700 hover:bg-gray-600">Biaya & Minimal</button>
+            <button onclick="gantiTab('pembayaran')" class="tab-btn px-3 py-1.5 rounded bg-gray-700 hover:bg-gray-600">QRIS & Kontak</button>
+        </div>
+        <div id="tabUmum" class="tab-content space-y-4">
+            <div>
+                <label class="block text-sm mb-1">Judul Utama</label>
+                <input type="text" id="setJudul" class="input-custom" value="Jasa Convert Saldo E-Wallet">
+            </div>
+            <div>
+                <label class="block text-sm mb-1">Deskripsi Singkat</label>
+                <textarea id="setDeskripsi" rows="2" class="input-custom">SUGAS MARKET penyedia jasa convert saldo DANA, GoPay, OVO, ShopeePay, SeaBank & lainnya. Proses cepat 1–5 menit, aman, terpercaya sejak 2019.</textarea>
+            </div>
+            <div>
+                <label class="block text-sm mb-1">Syarat & Ketentuan</label>
+                <textarea id="setSyarat" rows="4" class="input-custom">1. Layanan untuk kebutuhan pribadi yang sah dan tidak melanggar hukum.\n2. Minimal transaksi Rp5.000, khusus ke SeaBank minimal Rp10.000.\n3. Biaya layanan dihitung otomatis sesuai persentase yang berlaku.\n4. Pastikan nomor dan nama tujuan benar sebelum membayar.\n5. Jam operasional: 08.00 – 22.00 WIB setiap hari.</textarea>
+            </div>
+        </div>
+        <div id="tabBiaya" class="tab-content space-y-4 hidden">
+            <div>
+                <label class="block text-sm mb-1">Biaya Convert (%)</label>
+                <input type="number" step="0.1" id="setPersen" class="input-custom" value="5">
+            </div>
+            <div>
+                <label class="block text-sm mb-1">Minimal Umum (Rp)</label>
+                <input type="number" id="setMin" class="input-custom" value="5000">
+            </div>
+            <div>
+                <label class="block text-sm mb-1">Minimal SeaBank (Rp)</label>
+                <input type="number" id="setMinSea" class="input-custom" value="10000">
+            </div>
+        </div>
+        <div id="tabPembayaran" class="tab-content space-y-4 hidden">
+            <div>
+                <label class="block text-sm mb-1">Link Gambar QRIS</label>
+                <input type="text" id="setQris" class="input-custom" placeholder="Masukkan URL gambar QRIS">
+            </div>
+            <div>
+                <label class="block text-sm mb-1">Nomor WhatsApp (awali 62)</label>
+                <input type="text" id="setWa" class="input-custom" value="6287769370995">
+            </div>
+        </div>
+        <div class="flex gap-3 mt-6">
+            <button onclick="simpanPengaturan()" class="btn-primary">💾 SIMPAN</button>
+            <button onclick="tutupModal('modalPanel')" class="w-full bg-gray-700 py-2.5 rounded hover:bg-gray-600">Tutup</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal QRIS Pembayaran -->
+<div id="modalQris" class="modal">
+    <div class="modal-content text-center">
+        <h3 class="text-xl font-bold mb-4 text-primary">Pembayaran QRIS</h3>
+        <p class="mb-2">Total Bayar:</p>
+        <p id="modalTotal" class="text-2xl font-bold text-white mb-5">Rp 5.000</p>
+        <div class="bg-white p-3 rounded-lg mx-auto w-64 h-64 flex items-center justify-center mb-4">
+            <img id="gambarQris" src="" alt="QRIS" class="max-w-full max-h-full">
+        </div>
+        <a id="linkKonfirmasi" href="https://wa.me/6287769370995" target="_blank" class="block bg-primary text-black font-bold py-2.5 rounded mb-3 hover:brightness-110">Konfirmasi Pembayaran</a>
+        <button onclick="tutupModal('modalQris')" class="w-full bg-gray-700 py-2.5 rounded hover:bg-gray-600">Tutup</button>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="border-t border-primary/20 py-5 mt-8 text-center text-textMuted text-sm">
+    <p>&copy; 2026 SUGAS MARKET. Semua Hak Dilindungi.</p>
+</footer>
+
+<script>
+// Data Pengaturan
+const DEFAULT = {
+    persen: 5,
+    minUmum: 5000,
+    minSea: 10000,
+    qris: "",
+    wa: "6287769370995",
+    judul: "Jasa Convert Saldo E-Wallet",
+    deskripsi: "SUGAS MARKET penyedia jasa convert saldo DANA, GoPay, OVO, ShopeePay, SeaBank & lainnya. Proses cepat 1–5 menit, aman, terpercaya sejak 2019.",
+    syarat: "1. Layanan untuk kebutuhan pribadi yang sah dan tidak melanggar hukum.\n2. Minimal transaksi Rp5.000, khusus ke SeaBank minimal Rp10.000.\n3. Biaya layanan dihitung otomatis sesuai persentase yang berlaku.\n4. Pastikan nomor dan nama tujuan benar sebelum membayar.\n5. Jam operasional: 08.00 – 22.00 WIB setiap hari.",
+    adminUser: "admin",
+    adminPass: "sugas2026"
+};
+
+let pengaturan = { ...DEFAULT };
+
+// Muat data tersimpan
+function muatPengaturan() {
+    const simpan = localStorage.getItem('sugasMarket_v3');
+    if (simpan) pengaturan = { ...DEFAULT, ...JSON.parse(simpan) };
+    terapkanTampilan();
+    aturMinimal();
+    hitungOtomatis();
+}
+
+// Simpan pengaturan
+function simpanPengaturan() {
+    pengaturan = {
+        persen: Number(document.getElementById('setPersen').value) || 5,
+        minUmum: Number(document.getElementById('setMin').value) || 5000,
+        minSea: Number(document.getElementById('setMinSea').value) || 10000,
+        qris: document.getElementById('setQris').value.trim(),
+        wa: document.getElementById('setWa').value.replace(/\D/g, '') || '6287769370995',
+        judul: document.getElementById('setJudul').value,
+        deskripsi: document.getElementById('setDeskripsi').value,
+        syarat: document.getElementById('setSyarat').value,
+        adminUser: document.getElementById('setUser')?.value.trim() || 'admin',
+        adminPass: document.getElementById('setPass')?.value.trim() || 'sugas2026'
+    };
+    localStorage.setItem('sugasMarket_v3', JSON.stringify(pengaturan));
+    terapkanTampilan();
+    tutupModal('modalPanel');
+    tampilNotif("✅ Berhasil disimpan! Semua pelanggan melihat perubahan", "success");
+}
+
+// Terapkan ke tampilan
+function terapkanTampilan() {
+    document.getElementById('isiSyarat').innerHTML = pengaturan.syarat.replace(/\n/g, '<br>');
+    document.getElementById('linkWA').href = `https://wa.me/${pengaturan.wa}`;
+    document.getElementById('nomorWA').textContent = `+${pengaturan.wa.replace('62', '62 ')}`;
+    document.getElementById('gambarQris').src = pengaturan.qris;
+}
+
+window.onload = () => {
+    muatPengaturan();
+    document.getElementById('menuToggle').addEventListener('click', () => document.getElementById('menuMobile').classList.toggle('hidden'));
+};
+
+// Ganti tab form
+function gantiTabForm(nama) {
+    if (nama === 'convert') {
+        document.getElementById('formConvert').classList.remove('hidden');
+        document.getElementById('formTopup').classList.add('hidden');
+        document.getElementById('tabConvert').classList.add('tab-active');
+        document.getElementById('tabConvert').classList.remove('tab-inactive');
+        document.getElementById('tabTopup').classList.add('tab-inactive');
+        document.getElementById('tabTopup').classList.remove('tab-active');
+    } else {
+        document.getElementById('formConvert').classList.add('hidden');
+        document.getElementById('formTopup').classList.remove('hidden');
+        document.getElementById('tabTopup').classList.add('tab-active');
+        document.getElementById('tabTopup').classList.remove('tab-inactive');
+        document.getElementById('tabConvert').classList.add('tab-inactive');
+        document.getElementById('tabConvert').classList.remove('tab-active');
+    }
+}
+
+// Hitung otomatis
+function aturMinimal() {
+    const ke = document.getElementById('ke').value;
+    const input = document.getElementById('nominal');
+    const min = ke === 'seabank' ? pengaturan.minSea : pengaturan.minUmum;
+    input.min = min;
+    if (parseInt(input.value) < min) input.value = min;
+}
+
+function hitungOtomatis() {
+    const nominal = parseInt(document.getElementById('nominal').value) || 0;
+    const dari = document.getElementById('dari').value;
+    const ke = document.getElementById('ke').value;
+    const biaya = dari === ke ? 0 : Math.round(nominal * pengaturan.persen / 100);
+    const diterima = nominal - biaya;
+    document.getElementById('totalTeks').textContent = `Rp ${nominal.toLocaleString('id-ID')}`;
+    document.getElementById('diterimaTeks').textContent = `Rp ${diterima.toLocaleString('id-ID')}`;
+    document.getElementById('rincianTeks').textContent = dari === ke ? "Tanpa biaya tambahan" : `Biaya ${pengaturan.persen}% = Rp ${biaya.toLocaleString('id-ID')}`;
+}
+
+// Proses pembayaran
+function lanjutPembayaran() {
+    const setuju = document.getElementById('setuju').checked;
+    const nominal = parseInt(document.getElementById('nominal').value);
+    const nomor = document.getElementById('nomorTujuan').value.trim();
+    const nama = document.getElementById('namaTujuan').value.trim();
+    const ke = document.getElementById('ke').value;
+    const min = ke === 'seabank' ? pengaturan.minSea : pengaturan.minUmum;
+
+    if (!setuju) return tampilNotif("⚠️ Centang syarat & ketentuan dulu!", "error");
+    if (!nomor) return tampilNotif("⚠️ Isi nomor tujuan!", "error");
+    if (!nama) return tampilNotif("⚠️ Isi nama pemilik akun!", "error");
+    if (nominal < min) return tampilNotif(`⚠️ Minimal Rp${min.toLocaleString('id-ID')}!`, "error");
+    if (!pengaturan.qris) return tampilNotif("⚠️ Masukkan QRIS di Panel Admin!", "error");
+
+    const biaya = Math.round(nominal * pengaturan.persen / 100);
+    const diterima = nominal - biaya;
+    document.getElementById('modalTotal').textContent = `Rp ${nominal.toLocaleString('id-ID')}`;
+    document.getElementById('gambarQris').src = pengaturan.qris;
+
+    const teks = `Halo Admin SUGAS MARKET!%0ASaya Convert:%0ADari: ${document.getElementById('dari').value.replace('_',' ').toUpperCase()}%0AKe: ${document.getElementById('ke').value.replace('_',' ').toUpperCase()}%0ANominal: Rp ${nominal.toLocaleString('id-ID')}%0ABiaya: Rp ${biaya.toLocaleString('id-ID')}%0ADiterima: Rp ${diterima.toLocaleString('id-ID')}%0ATujuan: ${nomor} a/n ${nama}`;
+    document.getElementById('linkKonfirmasi').href = `https://wa.me/${pengaturan.wa}?text=${teks}`;
+
+    bukaModal('modalQris');
+}
+
+// Admin
+function bukaLoginAdmin() { bukaModal('modalLogin'); }
+function cekLogin() {
+    const u = document.getElementById('userAdmin').value.trim();
+    const p = document.getElementById('passAdmin').value.trim();
+    if (u === pengaturan.adminUser && p === pengaturan.adminPass) {
+        tutupModal('modalLogin');
+        bukaModal('modalPanel');
+        muatKePanel();
+    } else {
+        tampilNotif("❌ Username atau sandi salah!", "error");
+    }
+}
+function muatKePanel() {
+    document.getElementById('setPersen').value = pengaturan.persen;
+    document.getElementById('setMin').value = pengaturan.minUmum;
+    document.getElementById('setMinSea').value = pengaturan.minSea;
+    document.getElementById('setQris').value = pengaturan.qris;
+    document.getElementById('setWa').value = pengaturan.wa;
+}
+function gantiTab(nama) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    document.getElementById('tab' + nama.charAt(0).toUpperCase() + nama.slice(1)).classList.remove('hidden');
+    document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active','bg-primary','text-black');
+        b.classList.add('bg-gray-700');
+    });
+    event.target.classList.add('active','bg-primary','text-black');
+    event.target.classList.remove('bg-gray-700');
+}
+
+// Bantuan
+function bukaModal(id) { document.getElementById(id).style.display = 'flex'; }
+function tutupModal(id) { document.getElementById(id).style.display = 'none'; }
+function tampilNotif(pesan, jenis = "success") {
+    const el = document.getElementById('notif');
+    el.textContent = pesan;
+    el.className = `fixed top-4 left-1/2 transform -translate-x-1/2 z-[10000] w-[92%] max-w-md rounded-lg p-3 text-center font-medium ${jenis === 'success' ? 'bg-green-800/90 border border-green-500' : 'bg-red-800/90 border border-red-500'}`;
+    el.classList.remove('hidden');
+    setTimeout(() => el.classList.add('hidden'), 3500);
+}
+</script>
+</body>
+</html>
