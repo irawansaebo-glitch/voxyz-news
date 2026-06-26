@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUGAS MARKET | Jasa Convert Saldo E-Wallet Terpercaya</title>
-    <meta name="description" content="SUGAS MARKET - Jasa convert saldo DANA, GoPay, OVO, ShopeePay, SeaBank, LinkAja, DANA Premium & lainnya. Proses cepat 1-5 menit, aman, terpercaya sejak 2019.">
+    <meta name="description" content="SUGAS MARKET - Jasa convert saldo DANA, GoPay, OVO, ShopeePay, SeaBank, LinkAja & E-Wallet lainnya. Proses cepat 1-5 menit, aman dan terpercaya sejak 2019.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -80,7 +80,7 @@
 <!-- Hero Section -->
 <section id="beranda" class="py-12 md:py-16 text-center">
     <div class="container mx-auto px-4">
-        <h2 class="text-4xl md:text-5xl font-bold mb-4 text-glow">Jasa Convert Saldo E-Wallet</h2>
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Jasa Convert Saldo E-Wallet</h2>
         <p class="text-lg md:text-xl text-textMuted max-w-3xl mx-auto mb-6">
             SUGAS MARKET penyedia jasa convert saldo DANA, GoPay, OVO, ShopeePay, SeaBank, LinkAja & E-Wallet lainnya. Proses cepat 1–5 menit, aman, terpercaya sejak 2019 🚀
         </p>
@@ -114,10 +114,11 @@
         <h2 class="text-3xl font-bold text-center mb-8 text-primary">Formulir Convert Saldo</h2>
         <div class="card p-6 md:p-8">
             <!-- Tab Jenis Layanan -->
-            <div class="flex gap-2 mb-6">
-                <button onclick="gantiTabForm('convert')" id="tabConvert" class="tab-active flex-1 py-2 rounded-lg font-medium">Convert Saldo</button>
-                <button onclick="gantiTabForm('topup')" id="tabTopup" class="tab-inactive flex-1 py-2 rounded-lg font-medium">Top Up Saldo</button>
-            </div>
+<!-- Tab Jenis Layanan -->
+<div class="flex gap-2 mb-6">
+    <button class="tab-active w-full py-2 rounded-lg font-medium text-center">Convert Saldo</button>
+</div>
+
 
             <!-- Form Convert -->
             <div id="formConvert" class="space-y-5">
@@ -299,6 +300,7 @@
             <button onclick="gantiTab('umum')" class="tab-btn active px-3 py-1.5 rounded bg-primary text-black font-medium">Umum</button>
             <button onclick="gantiTab('biaya')" class="tab-btn px-3 py-1.5 rounded bg-gray-700 hover:bg-gray-600">Biaya & Minimal</button>
             <button onclick="gantiTab('pembayaran')" class="tab-btn px-3 py-1.5 rounded bg-gray-700 hover:bg-gray-600">QRIS & Kontak</button>
+            <button onclick="gantiTab('akun')" class="tab-btn px-3 py-1.5 rounded bg-gray-700 hover:bg-gray-600">Akun Admin</button>
         </div>
         <div id="tabUmum" class="tab-content space-y-4">
             <div>
@@ -338,6 +340,16 @@
                 <input type="text" id="setWa" class="input-custom" value="6287769370995">
             </div>
         </div>
+        <div id="tabAkun" class="tab-content space-y-4 hidden">
+            <div>
+                <label class="block text-sm mb-1">Username Admin</label>
+                <input type="text" id="setUser" class="input-custom" value="admin">
+            </div>
+            <div>
+                <label class="block text-sm mb-1">Kata Sandi Admin</label>
+                <input type="password" id="setPass" class="input-custom" value="sugas2026">
+            </div>
+        </div>
         <div class="flex gap-3 mt-6">
             <button onclick="simpanPengaturan()" class="btn-primary">💾 SIMPAN</button>
             <button onclick="tutupModal('modalPanel')" class="w-full bg-gray-700 py-2.5 rounded hover:bg-gray-600">Tutup</button>
@@ -370,7 +382,7 @@ const DEFAULT = {
     persen: 5,
     minUmum: 5000,
     minSea: 10000,
-    qris: https://cdn.phototourl.com/free/2026-06-26-2f491561-0a2f-47e6-af6b-76987dad5e1e.jpg",
+    qris: "https://cdn.phototourl.com/free/2026-06-26-8398a694-0389-4892-8670-064f39d6aeeb.jpg",
     wa: "6287769370995",
     judul: "Jasa Convert Saldo E-Wallet",
     deskripsi: "SUGAS MARKET penyedia jasa convert saldo DANA, GoPay, OVO, ShopeePay, SeaBank & lainnya. Proses cepat 1–5 menit, aman, terpercaya sejak 2019.",
@@ -401,13 +413,13 @@ function simpanPengaturan() {
         judul: document.getElementById('setJudul').value,
         deskripsi: document.getElementById('setDeskripsi').value,
         syarat: document.getElementById('setSyarat').value,
-        adminUser: document.getElementById('setUser')?.value.trim() || 'admin',
-        adminPass: document.getElementById('setPass')?.value.trim() || 'sugas2026'
+        adminUser: document.getElementById('setUser').value.trim() || 'admin',
+        adminPass: document.getElementById('setPass').value.trim() || 'sugas2026'
     };
     localStorage.setItem('sugasMarket_v3', JSON.stringify(pengaturan));
     terapkanTampilan();
     tutupModal('modalPanel');
-    tampilNotif("✅ Berhasil disimpan! Semua pelanggan melihat perubahan", "success");
+    tampilNotif("✅ Berhasil disimpan! Semua perubahan langsung terlihat oleh pelanggan", "success");
 }
 
 // Terapkan ke tampilan
@@ -475,7 +487,7 @@ function lanjutPembayaran() {
     if (!nomor) return tampilNotif("⚠️ Isi nomor tujuan!", "error");
     if (!nama) return tampilNotif("⚠️ Isi nama pemilik akun!", "error");
     if (nominal < min) return tampilNotif(`⚠️ Minimal Rp${min.toLocaleString('id-ID')}!`, "error");
-    if (!pengaturan.qris) return tampilNotif("⚠️ Masukkan QRIS di Panel Admin!", "error");
+    if (!pengaturan.qris) return tampilNotif("⚠️ Masukkan QRIS di Panel Admin dulu!", "error");
 
     const biaya = Math.round(nominal * pengaturan.persen / 100);
     const diterima = nominal - biaya;
@@ -507,6 +519,8 @@ function muatKePanel() {
     document.getElementById('setMinSea').value = pengaturan.minSea;
     document.getElementById('setQris').value = pengaturan.qris;
     document.getElementById('setWa').value = pengaturan.wa;
+    document.getElementById('setUser').value = pengaturan.adminUser;
+    document.getElementById('setPass').value = pengaturan.adminPass;
 }
 function gantiTab(nama) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
